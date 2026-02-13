@@ -12,7 +12,7 @@
     "section_hero_banner_kj8xai": {
       "type": "section-hero-banner",
       "settings": {
-        "content_position": "center",
+        "content_position": "left",
         "textColor": "white",
         "image_width": "full_width",
         "image_height": "full_height",
