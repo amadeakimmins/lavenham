@@ -24,7 +24,8 @@
         "button_label": "Shop jackets",
         "button_link": "shopify://collections/mens-jackets",
         "mediaType": "image",
-        "image": "shopify://shop_images/home-hero.jpg"
+        "image": "shopify://shop_images/hero-image.jpg",
+        "mobile_image": "shopify://shop_images/hero-image-mob.jpg"
       }
     },
     "section_featured_collection_qkj9gj": {
