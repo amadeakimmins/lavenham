@@ -46,12 +46,13 @@
         "email_address_EGpJhK",
         "email_address_Q3kjif"
       ],
+      "disabled": true,
       "name": "Contact",
       "settings": {
         "subheading": "Contact us",
         "title": "Have any questions?",
         "body": "<p>You've come to the right place! For Customer Service, send us an email or chat and a team member will respond shortly or check out the FAQ page, the answer might be there already!</p>",
-        "image": "shopify://shop_images/bfcd429b00e4c30f02b6b5eefc87dbb6b3c9ec83.png"
+        "mediaType": "image"
       }
     }
   },
