@@ -1,0 +1,83 @@
+<section class="customer-account account container">
+  {% render 'account-nav' %}
+
+  <div id="account-dashboard" class="account-section">
+    <div class="form__intro-wrapper reveal">
+      <h2 class="h2">Welcome back {{ customer.first_name }}</h2>
+      <p>View your past orders, subscriptions and saved addresses.</p>
+    </div>
+    
+    <div class="account-section__dashboard">
+      <div class="account-section__latest-order">
+        <p class="account-section__title caption reveal">Latest Order</p>
+  
+        <div>
+          <a href="{{ customer.orders.first.customer_url }}" class="h6 reveal" aria-label="View order">
+            Order #{{ customer.orders.first.order_number }}
+          </a>
+          <div class="account-section__date-fulfillment reveal">
+            <span class="text-italic">{{ customer.orders.first.created_at | date: '%d.%m.%y' }}</span>
+            {% render 'icon-circle-shape' %}
+            <span class="text-italic">{{ customer.orders.first.financial_status_label }} & {{ customer.orders.first.fulfillment_status_label }}</span>
+          </div>
+          <ul class="account-section__order-items reveal">
+            {% for line_item in customer.orders.first.line_items limit: 3 %}
+              <li class="account-section__order-item">
+                {%- render 'media-img', media: line_item.image -%}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+  
+        <div class="account-section__button-wrapper reveal">
+          <a href="{{ customer.orders.first.customer_url }}" class="button button--secondary" aria-label="View order">View order</a>
+          <a href="{{ routes.account_url }}#orders" class="button button--primary" aria-label="Orders">View all orders</a>
+        </div>
+      </div>
+  
+      <div class="account-section__default-address">
+        <p class="account-section__title caption reveal">Default Address</p>
+        
+        <div class="account-section__address reveal">
+          {{ customer.default_address | format_address }}
+        </div>
+  
+        <div class="account-section__button-wrapper reveal">
+          <a href="{{ routes.account_addresses_url }}#edit-address" aria-label="Edit address" class="button button--secondary">Edit address</a>
+          <a href="{{ routes.account_addresses_url }}" aria-label="View all addresses" class="button button--primary">View all addresses</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="account-orders" class="account-section hidden">
+    <div class="form__intro-wrapper reveal">
+      <h2 class="h3">Orders</h2>
+      <p>View your past orders.</p>
+    </div>
+
+    <table class="account__orders-table reveal">
+      <thead>
+        <tr>
+          <th class="caption">Order</th>
+          <th class="caption">Date</th>
+          <th class="caption">Items</th>
+          <th class="caption desktop">Status</th>
+          <th class="caption">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for order in customer.orders %}
+        <tr>
+          <td><a href="{{ order.customer_url }}" aria-label="View order">#{{ order.order_number }}</a></td>
+          <td>{{ order.created_at | date: '%d.%m.%y' }}</td>
+          <td>{{ order.item_count }}</td>
+          <td class="desktop">{{ order.financial_status_label }} & {{ order.fulfillment_status_label }}</td>
+          <td>{{ order.total_price | money }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+

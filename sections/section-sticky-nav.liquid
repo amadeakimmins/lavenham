@@ -1,0 +1,91 @@
+<section class="sticky-nav" id="sticky-nav">
+  {% for block in section.blocks %}
+    <a href="#{{ block.settings.anchor_id }}" class="sticky-nav__link caption{% if forloop.first %} active{% endif %}" aria-label="{{ block.settings.title }}" data-anchor="{{ block.settings.anchor_id }}">{{ block.settings.title }}</a>
+  {% endfor %}
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.getElementById('sticky-nav');
+    const links = document.querySelectorAll('.sticky-nav__link');
+    const linkMap = {};
+    let navIsVisible = false;
+    const visibilityThreshold = 75;
+
+    links.forEach(link => {
+      const anchorId = link.getAttribute('data-anchor');
+      if (anchorId) linkMap[anchorId] = link;
+    });
+
+    const handleNavVisibility = () => {
+      const top = nav.getBoundingClientRect().top;
+      if (top <= visibilityThreshold && !navIsVisible) {
+        nav.classList.add('visible');
+        navIsVisible = true;
+      } else if (top > visibilityThreshold + 10 && navIsVisible) {
+        nav.classList.remove('visible');
+        navIsVisible = false;
+      }
+    };
+
+    window.addEventListener('scroll', handleNavVisibility);
+    handleNavVisibility();
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const highlightActiveLink = (entries) => {
+      entries.forEach(entry => {
+        const sectionId = entry.target.getAttribute('id');
+        const link = linkMap[sectionId];
+        if (entry.isIntersecting && link) {
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    };
+
+    const sectionObserver = new IntersectionObserver(highlightActiveLink, observerOptions);
+
+    Object.keys(linkMap).forEach(id => {
+      const section = document.getElementById(id);
+      if (section) sectionObserver.observe(section);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Sticky Nav",
+  "class": "sticky-nav-wrapper",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "anchor_id",
+          "label": "Anchor ID",
+          "info": "Needs to match anchor ids given on relevant sections",
+          "default": "our-story"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sticky Nav"
+    }
+  ]
+}
+{% endschema %}

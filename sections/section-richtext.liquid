@@ -1,0 +1,149 @@
+<section class="richtext container background--{{ section.settings.bgColor }} text--{{ section.settings.textColor }}" id="{{ section.settings.anchor_id }}">
+  <div class="richtext__content-wrapper ">
+    {%- if section.settings.subheading != blank -%}
+      <p class="richtext__subheading caption reveal">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+  
+    {%- if section.settings.title != blank -%}
+      <h2 class="richtext__title {{ section.settings.title_font_size }} richtext__title--{{ section.settings.titleWidth }} reveal">{{ section.settings.title }}</h2>
+    {%- endif -%}
+  
+    {%- if section.settings.body != blank -%}
+      <div class="richtext__body text-base reveal">{{- section.settings.body -}}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Richtext",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "select",
+      "id": "bgColor",
+      "label": "Background Color",
+      "default": "none",
+      "options": [
+        {
+          "value": "secondary",
+          "label": "Yellow"
+        },
+        {
+          "value": "primary",
+          "label": "Orange"
+        }, {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "textColor",
+      "label": "Text Color",
+      "default": "orange",
+      "options": [
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "black",
+          "label": "Black"
+        },
+        {
+          "value": "orange",
+          "label": "Orange"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "titleWidth",
+      "label": "Title Width",
+      "default": "full",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full Width"
+        },
+        {
+          "value": "medium",
+          "label": "Medium Width"
+        },
+        {
+          "value": "narrow",
+          "label": "Narrow"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Only used on pages with sticky navigation"
+    }, 
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Subheading"
+    }, 
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "select",
+      "id": "title_font_size",
+      "label": "Title Font Size",
+      "default": "h2",
+      "options": [
+        {
+          "value": "h1",
+          "label": "X-Large"
+        },
+        {
+          "value": "h2",
+          "label": "Large"
+        },
+        {
+          "value": "h3",
+          "label": "Medium"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body Copy"
+    },
+    {
+      "type": "text",
+      "label": "Button Label",
+      "id": "button_label",
+      "default": "Button"     
+    },
+    {
+      "type": "url",
+      "label": "Button Link",
+      "id": "button_link"      
+    }
+  ],
+  "presets": [
+    {
+      "name": "Richtext"
+    }
+  ]
+}
+{% endschema %}

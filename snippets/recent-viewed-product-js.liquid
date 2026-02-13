@@ -1,0 +1,143 @@
+<script>
+    const pdpData = {
+        productTitle:"{{ product.title }}",
+        productImg: "{%- assign media = product.featured_image -%}{%- if media != blank -%}{% assign m = 'master' %}<div class='aspectholder'><img srcset='{{ media | image_url: m }}' data-srcset='{{ media | image_url: m }}' src='{{ media | image_url: m }}' data-src='{{ media | image_url: m }}' loading='lazy' alt='{{ product.title }}' class='lazy'></div>{%- endif -%}",
+        productImg2: "{%- assign media =product.metafields.my_fields.front_image -%}{%- if media != blank -%}{% assign m = 'master' %}<div class='aspectholder'><img srcset='{{ media | image_url: m }}' data-srcset='{{ media | image_url: m }}' src='{{ media | image_url: m }}' data-src='{{ media | image_url: m }}' loading='lazy' alt='{{ product.title }}' class='lazy'></div>{%- endif -%}",
+        productPrice:"{% if product.first_available_variant %}{% if product.first_available_variant.compare_at_price > product.first_available_variant.price %}<span style='text-decoration: line-through;''>{{ product.first_available_variant.compare_at_price | money }}</span> &nbsp;{% endif %}{{ product.first_available_variant.price | money }}{% else %}Sold Out{% endif %}",
+        productUrl:"{{ product.url | within:collection }}",
+        productId:"{{ product.id }}",
+        productTags: "{% for variant in product.variants %}{% if variant.available %}{{ variant.title | handleize | downcase }} {% endif %}{% endfor %}",
+        productArchive: "{% if product.tags contains 'Archived' or product.tags contains 'archived' %}<p class='product__archive'>Archived</p>{% endif %}",
+        productColour: "{{ product.metafields.my_fields.colour_name }}",
+        productOther: "{% if product.metafields.my_fields.related_colours != blank %}<span class='font_grey'>or {% assign t = product.metafields.my_fields.related_colours | split: ','  %}{{ t.size }} other colour{% if t.size > 1 %}s{% endif %}</span>{% endif %}",
+        productVariants: "{% for variant in product.variants %}{% unless variant.title contains 'Default' %}<span {% unless variant.available %}style='text-decoration: line-through;'{% endunless %}>{{- variant.title }}</span>{% endunless %}{% endfor%}"
+    }
+
+    // First Block
+    function setRecentlyViewedPdp() {
+        const pdpData = {
+            productTitle:"{{ product.title }}",
+            productImg: "{%- assign media = product.featured_image -%}{%- if media != blank -%}{% assign m = 'master' %}<div class='aspectholder'><img srcset='{{ media | image_url: m }}' data-srcset='{{ media | image_url: m }}' src='{{ media | image_url: m }}' data-src='{{ media | image_url: m }}' loading='lazy' alt='{{ product.title }}' class='lazy'></div>{%- endif -%}",
+            productImg2: "{%- assign media =product.metafields.my_fields.front_image -%}{%- if media != blank -%}{% assign m = 'master' %}<div class='aspectholder'><img srcset='{{ media | image_url: m }}' data-srcset='{{ media | image_url: m }}' src='{{ media | image_url: m }}' data-src='{{ media | image_url: m }}' loading='lazy' alt='{{ product.title }}' class='lazy'></div>{%- endif -%}",
+            productPrice:"{% if product.first_available_variant %}{% if product.first_available_variant.compare_at_price > product.first_available_variant.price %}<span style='text-decoration: line-through;''>{{ product.first_available_variant.compare_at_price | money }}</span> &nbsp;{% endif %}{{ product.first_available_variant.price | money }}{% else %}Sold Out{% endif %}",
+            productUrl:"{{ product.url }}",
+            productId:"{{ product.id }}",
+            productTags: "{% for variant in product.variants %}{% if variant.available %}{{ variant.title | handleize | downcase }} {% endif %}{% endfor %}",
+            productArchive: "{% if product.tags contains 'Archived' or product.tags contains 'archived' %}<p class='product__archive'>Archived</p>{% endif %}",
+            productColour: "{{ product.metafields.my_fields.colour_name }}",
+            productOther: "{% if product.metafields.my_fields.related_colours != blank %}<span class='font_grey'>or {% assign t = product.metafields.my_fields.related_colours | split: ','  %}{{ t.size }} other colour{% if t.size > 1 %}s{% endif %}</span>{% endif %}",
+            productVariants: "{% for variant in product.variants %}{% unless variant.title contains 'Default' %}<span {% unless variant.available %}style='text-decoration: line-through;'{% endunless %}>{{- variant.title }}</span>{% endunless %}{% endfor%}"
+        };
+        
+        // Init Empty Array to push data
+        const productArr = [];
+        // Create a couple of variables 
+        let jsonResp,
+            jasonRespArr, 
+            jsonRespArrStr; 
+        // Set the number how many products you want to capture 
+        const numberOfProduct = 2;
+        // Now push the pdpData into Array so that we can use it 
+        productArr.push(pdpData);
+        // Get the product ID from pdpData 
+        const currPdpId = pdpData.productId;
+        // Now Convert current page data into Strings which we already pushed in Array 
+        const pdpDataString = JSON.stringify(productArr);
+        // Set the variable for localStorage 
+        const localData = localStorage.getItem('SJD_recently_viewedPDP');
+        //  console.log(localData);
+
+
+
+        // Second Block
+        // first we need to check data if data is not there then store right // away 
+        if (localData == null) {
+            localStorage.setItem('SJD_recently_viewedPDP', pdpDataString);
+        }
+        // If data is there then we need to check couple of other conditions 
+        else {
+            // Create Variable for oldData or Previous page 
+            const oldPdpData = localStorage.getItem('SJD_recently_viewedPDP');
+            // Count the amount of data stored in strings so that we can remove // old products from the stack 
+            const countPdpData = (oldPdpData.match(/productId/g) || []).length;
+            // we also need to check if user is not visiting page again 
+            const reVisitPdp =  oldPdpData.includes(currPdpId);
+            // Get old data, merged it with new data and store merged data
+            if (countPdpData < numberOfProduct && reVisitPdp == false) {
+                jsonResp = JSON.parse(oldPdpData);
+                jsonRespArr = jsonResp.concat(productArr);
+                jsonRespArrStr = JSON.stringify(jsonRespArr);
+                localStorage.setItem('SJD_recently_viewedPDP', jsonRespArrStr);
+            }
+            // If User visited more the 4 pages delete first page data 
+            else if (countPdpData >= numberOfProduct && reVisitPdp == false) {
+                jsonResp = JSON.parse(oldPdpData);
+                jsonResp.shift();
+                jsonRespArr = jsonResp.concat(productArr);
+                jsonRespArr =  JSON.stringify(jsonRespArr);
+                localStorage.setItem('SJD_recently_viewedPDP', jsonRespArr);
+            }
+        }
+    }
+
+    // Now we write all our function and it's time to execute it 
+    setRecentlyViewedPdp();
+    // Set Variable for Local Storage Data 
+    const localViewed = localStorage.SJD_recently_viewedPDP;
+    // console.log to verify the data 
+    // console.log(localViewed);
+
+
+
+    // Third Block
+    function getRecentPdp () {
+        // First let's convert localStorage data into object again
+        const pdpData = JSON.parse(localStorage.getItem('SJD_recently_viewedPDP'));
+        // Create a empty Array
+        const recentViewHtml = []
+        // Loop through all the data and inject into HTML using ES6
+        pdpData.forEach(function(item){ 
+        recentViewHtml.push(`
+            <div class="card" ${item.productTags}>  
+                <a href="${item.productUrl}" aria-label=" ${item.productTitle}">
+                    ${item.productArchive}
+
+                    <div class="card__image">
+                        ${item.productImg}
+                        ${item.productImg2}
+                    </div>
+
+                    <div class="card__text">
+                        <h3>${item.productTitle}</h3>
+                        <h4>${item.productColour}
+                            ${item.productOther}
+                        </h4>
+
+                        <div class="card__info">
+                            <p>${item.productPrice}</p>
+
+                            <p class="card__variants">${item.productVariants}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        `)
+        })
+        // Now consolidate the data 
+        const recentBlock = `${recentViewHtml.join('')}`
+        // console.log() to check data is correct 
+        //  console.log(recentBlock);
+        // Inject into PDP page
+        const contentBlock = document.querySelector('.recently-viewed-grid');
+        // Push the data
+
+        if (contentBlock) {
+            contentBlock.innerHTML = recentBlock;
+        }
+    }
+    
+    // Execute this function on DOM content load 
+    document.addEventListener("DOMContentLoaded", function(event) {
+        getRecentPdp();
+    });
+</script>

@@ -1,0 +1,335 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "size": "size_screen"
+      }
+    },
+    "section_richtext_hQDBHt": {
+      "type": "section-richtext",
+      "name": "Richtext",
+      "settings": {
+        "show_wave": false,
+        "bgColor": "none",
+        "textColor": "orange",
+        "titleWidth": "full",
+        "wave_colour": "#ffffff",
+        "subheading": "FAQS",
+        "title": "Have questions?",
+        "title_font_size": "h1",
+        "body": "<p>Below are some of the most common questions our customers have asked us.</p>",
+        "button_label": "Button",
+        "button_link": ""
+      }
+    },
+    "section_faqs_links_36pbix": {
+      "type": "section-faqs-links",
+      "blocks": {
+        "link_Dt8YTY": {
+          "type": "link",
+          "settings": {
+            "title": "General",
+            "anchor_id": "general"
+          }
+        },
+        "link_qkBQfM": {
+          "type": "link",
+          "settings": {
+            "title": "Orders & Shipping",
+            "anchor_id": "orders-shipping"
+          }
+        },
+        "link_cz8MCL": {
+          "type": "link",
+          "settings": {
+            "title": "Ingredients",
+            "anchor_id": "ingredients"
+          }
+        },
+        "link_ethhn7": {
+          "type": "link",
+          "settings": {
+            "title": "Subscriptions",
+            "anchor_id": "subscriptions"
+          }
+        }
+      },
+      "block_order": [
+        "link_Dt8YTY",
+        "link_qkBQfM",
+        "link_cz8MCL",
+        "link_ethhn7"
+      ],
+      "name": "FAQ Links",
+      "settings": {}
+    },
+    "section_faqs_pKRnNk": {
+      "type": "section-faqs",
+      "blocks": {
+        "question_XCJwrY": {
+          "type": "question",
+          "settings": {
+            "title": "Sed aliquet lorem quis risus",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_Wf3AWC": {
+          "type": "question",
+          "settings": {
+            "title": "Maecenas nec neque ut sapien malesuada",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_ejKwe6": {
+          "type": "question",
+          "settings": {
+            "title": "Cras condimentum id metus quis laoreet",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_Bw7prb": {
+          "type": "question",
+          "settings": {
+            "title": "Sed aliquet lorem quis risus",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_RMyeM7": {
+          "type": "question",
+          "settings": {
+            "title": "Donec neque nunc imperdiet dapibus",
+            "answer": "",
+            "filter_tags": ""
+          }
+        }
+      },
+      "block_order": [
+        "question_XCJwrY",
+        "question_Wf3AWC",
+        "question_ejKwe6",
+        "question_Bw7prb",
+        "question_RMyeM7"
+      ],
+      "name": "FAQs",
+      "settings": {
+        "bgColor": "none",
+        "anchor_id": "general",
+        "subheading": "",
+        "title": "",
+        "body": "",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "section_faqs_qbbBtB": {
+      "type": "section-faqs",
+      "blocks": {
+        "question_Jtg9p8": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_BGt4MR": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_YiFDB4": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_kiHAtj": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_kJbTFn": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        }
+      },
+      "block_order": [
+        "question_Jtg9p8",
+        "question_BGt4MR",
+        "question_YiFDB4",
+        "question_kiHAtj",
+        "question_kJbTFn"
+      ],
+      "name": "FAQs",
+      "settings": {
+        "bgColor": "none",
+        "anchor_id": "orders-shipping",
+        "subheading": "",
+        "title": "",
+        "body": "",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "section_faqs_7hWjQP": {
+      "type": "section-faqs",
+      "blocks": {
+        "question_Hwejqy": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_efcUF4": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_Lrct6t": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_p6HVMg": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_Ygxw8N": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        }
+      },
+      "block_order": [
+        "question_Hwejqy",
+        "question_efcUF4",
+        "question_Lrct6t",
+        "question_p6HVMg",
+        "question_Ygxw8N"
+      ],
+      "name": "FAQs",
+      "settings": {
+        "bgColor": "none",
+        "anchor_id": "ingredients",
+        "subheading": "",
+        "title": "",
+        "body": "",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "section_faqs_JDapjP": {
+      "type": "section-faqs",
+      "blocks": {
+        "question_CPEgqw": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_9KpPd3": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_QxCR3R": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_QcAPDw": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_XJR7jQ": {
+          "type": "question",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Answer</p>",
+            "filter_tags": ""
+          }
+        }
+      },
+      "block_order": [
+        "question_CPEgqw",
+        "question_9KpPd3",
+        "question_QxCR3R",
+        "question_QcAPDw",
+        "question_XJR7jQ"
+      ],
+      "name": "FAQs",
+      "settings": {
+        "bgColor": "none",
+        "anchor_id": "subscriptions",
+        "subheading": "",
+        "title": "",
+        "body": "",
+        "button_label": "",
+        "button_link": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_richtext_hQDBHt",
+    "section_faqs_links_36pbix",
+    "section_faqs_pKRnNk",
+    "section_faqs_qbbBtB",
+    "section_faqs_7hWjQP",
+    "section_faqs_JDapjP"
+  ]
+}

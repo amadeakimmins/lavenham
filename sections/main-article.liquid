@@ -1,0 +1,38 @@
+<section class="article">
+  <div class="article__meta">
+    {% if article.title contains " - " %}
+      {% assign aTitle = article.title | escape | split: " - " %}
+      <h2 class="">
+        <span class="">{{- aTitle | first -}}</span>
+        <br>
+        <br>
+        <span class="">{{- aTitle | last -}}</span>
+      </h2>
+    {% else %}
+      <h2 class="">{{- article.title | escape -}}</h2>
+    {% endif %}
+
+    <div class="article__meta-description">
+      <p class="">{{- article.published_at | date: "%d %B %Y" -}}</p>
+      <div class="richtext">
+        {{- article.content -}}
+      </div>
+    </div>
+  </div>
+
+  <div class="article__image">
+    {%- assign img = article.image -%}
+    {%- render "media-img", media: img -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Article",
+  "enabled_on": { 
+    "templates": ["article"]
+  },
+  "limit": 1,
+  "settings": []
+}
+{% endschema %}

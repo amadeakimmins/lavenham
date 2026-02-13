@@ -1,0 +1,110 @@
+<section class="login account form-container">
+  <div class="login__wrapper form_wrapper">
+    <div class="login__form active">
+      <div class="form__intro-wrapper reveal">
+        <h2 class="h4">Sign in</h2>
+        <p>Sign in below to access your account.</p>
+      </div>
+
+      {%- form 'customer_login', novalidate: 'novalidate', class: 'form_form reveal' -%}
+        <div class="form_fields">
+          <div class="form_field">
+            <label class="caption" for="customer[email]">Email Address</label>
+            <input
+              class="caption"
+              type="email"
+              name="customer[email]"
+              autocomplete="email"
+              autocorrect="off"
+              autocapitalize="off"
+              placeholder="jane.smith@gmail.com"
+              {% if form.errors contains 'form' %}
+                aria-invalid="true"
+              {% endif %}
+            >
+          </div>
+          <div class="form_field">
+            <label class="caption" for="customer[password]">Password</label>
+            <input
+              class="caption"
+              type="password"
+              value=""
+              name="customer[password]"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              {% if form.errors contains 'form' %}
+                aria-invalid="true"
+              {% endif %}
+            >
+          </div>
+        </div>
+
+        <div class="form_buttons reveal">
+          <button type="submit" class="button button--primary" aria-label="Sign in">Sign in</button>
+  
+          <button type="button" class="login__forgot-password-button button button--link" aria-label="Forgot Password">Forgot your password</button>
+        </div>
+
+        {%- if form.errors -%}
+          <div class="richtext reveal">
+            {{- form.errors | default_errors -}}
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+
+      <div class="form_alternate_login reveal">
+        <p class="caption">Don’t have an account with us?</p>
+        <a href="{{ routes.account_register_url }}" class="button button--secondary" aria-label="Create an account">
+          Create Account
+        </a>
+      </div>
+    </div>
+
+    <div class="forgot-password-form reveal">
+      <div class="form__intro-wrapper">
+        <h2 class="h4">Forgot your password</h2>
+        <p>Enter your email address and we’ll send you a link to reset your password.</p>
+      </div>
+
+      {%- form 'recover_customer_password', id: 'account-recover', class: 'login__recovery form_form' -%}
+        {% assign recover_success = form.posted_successfully? %}
+
+        {%- if recover_success == true -%}
+          <p class="form_message" tabindex="-1" autofocus>We've sent you an email with a link to update your password.</p>
+        {%- endif -%}
+
+        <div class="form_fields">
+          <div class="form_field">
+            <label class="caption" for="email">Email Address</label>
+            <input class="caption" placeholder="jane.smith@gmail.com" type="email" value="" name="email" autocorrect="off" autocapitalize="off" autocomplete="email" {% if form.errors %} aria-invalid="true" aria-describedby="RecoverEmail-email-error" autofocus {% endif %}>
+          </div>
+        </div>
+
+        <button aria-label="Send password reset request" class="form__primary-button button button--primary" type="submit">
+          Reset your password
+        </button>
+
+        {%- if form.errors -%}
+          <div class="richtext">
+            {{ form.errors.messages.form }}
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+
+      <div class="form_alternate_login">
+        <p class="caption">Don’t need to reset your password?</p>
+        <div class="form_buttons">
+          <button
+            class="login__forgot-password-button button button--secondary"
+            aria-label="Forgot Password"
+          >
+            Sign in
+          </button>
+          <a href="{{ routes.account_register_url }}" class="button button--secondary" aria-label="Create an account">
+            Create an account
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

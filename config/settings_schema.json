@@ -1,0 +1,74 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Journée",
+    "theme_version": "1.0.0",
+    "theme_author": "amadea-kimmins",
+    "theme_support_email": "amadea@templestudios.co",
+    "theme_documentation_url": "https://amadeakimmins.com"
+  },
+  {
+    "name": "t:settings_schema.custom_settings.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.custom_settings.settings.header"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.custom_settings.settings.paragraph"
+      }
+    ]
+  },
+  {
+    "name": "Google Tag Manager",
+    "settings": [
+      {
+        "type": "html",
+        "label": "GTM Head Tag",
+        "id": "gtmHeadTag"
+      },
+      {
+        "type": "html",
+        "label": "GTM Body Tag",
+        "id": "gtmBodyTag"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Icon",
+        "info": "32x32"
+      }
+    ]
+  },
+  {
+    "name": "Socials",
+    "settings": [
+      {
+        "type": "text",
+        "id": "instagram_handle",
+        "label": "Instagram Handle"
+      },
+      {
+        "type": "text",
+        "id": "spotify_url",
+        "label": "Spotify URL"
+      },
+      {
+        "type": "text",
+        "id": "facebook_url",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "linkedIn_url",
+        "label": "LinkedIn URL"
+      }
+    ]
+  }
+]

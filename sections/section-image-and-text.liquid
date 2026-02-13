@@ -1,0 +1,234 @@
+
+{%- style -%}
+  #image-and-text__container--{{ section.id }} {
+    --padding-top: {{ section.settings.padding_top }}px;
+    --padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
+
+<section class="image-and-text background--{{ section.settings.bgColor }} text--{{ section.settings.textColor }}" id="{{ section.settings.anchor_id }}">
+  <div class="image-and-text__container image-and-text__container--{{ section.settings.image_placement }}" id="image-and-text__container--{{ section.id }}">
+    <div class="image-and-text__image-wrapper reveal">
+      {% if section.settings.mediaType == 'image' %}
+        {% render 'media-img', media: section.settings.image %}
+      {% else %}
+        <div class="aspectholder">
+          {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '400x' }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="image-and-text__content-wrapper">
+      <div class="image-and-text__content-inner reveal">
+        {%- if section.settings.subheading != blank -%}
+          <p class="image-and-text__subheading caption">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        
+        <div class="image-and-text__text-content">
+          {%- if section.settings.title != blank -%}
+            <h2 class="image-and-text__title {{ section.settings.title_font_size }}">{{ section.settings.title }}</h2>
+          {%- endif -%}
+        
+          {%- if section.settings.body != blank -%}
+            <div class="image-and-text__body text-base">{{- section.settings.body -}}</div>
+          {%- endif -%}
+        </div>
+        
+        {% if section.settings.button_label != blank %}
+          <div class="generic__button-wrapper">
+            <a href="{{ section.settings.button_link | default: '#' }}" class="button button--{{ section.settings.button_style | default: 'white' }} button--large" aria-label="{{ section.settings.button_label }}">
+              <span>{{- section.settings.button_label | escape -}}</span>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image & Text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "select",
+      "id": "image_placement",
+      "label": "Image Placement",
+      "default": "image_left",
+      "options": [
+        {
+          "value": "image_left",
+          "label": "Image Left"
+        },
+        {
+          "value": "image_right",
+          "label": "Image Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "bgColor",
+      "label": "Background Color",
+      "default": "none",
+      "options": [
+        {
+          "value": "secondary",
+          "label": "Yellow"
+        },
+        {
+          "value": "primary",
+          "label": "Orange"
+        }, {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "textColor",
+      "label": "Text Color",
+      "default": "orange",
+      "options": [
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "black",
+          "label": "Black"
+        },
+        {
+          "value": "orange",
+          "label": "Orange"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "title_font_size",
+      "label": "Title Font Size",
+      "default": "h3",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Large"
+        },
+        {
+          "value": "h3",
+          "label": "Medium"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 20,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 20,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Only used on pages with sticky navigation"
+    }, 
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Subheading"
+    }, 
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body Copy"
+    },
+    {
+      "type": "text",
+      "label": "Button Label",
+      "id": "button_label",
+      "default": "ABOUT US"     
+    },
+    {
+      "type": "url",
+      "label": "Button Link",
+      "id": "button_link"      
+    },
+    {
+      "type": "select",
+      "label": "Media Type",
+      "id": "mediaType",
+      "default": "image",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        }, {
+          "value": "video",
+          "label": "Video"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video File"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image & Text"
+    }
+  ]
+}
+{% endschema %}

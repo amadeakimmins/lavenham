@@ -1,0 +1,48 @@
+<section class="login">
+  <div class="login__form">
+    <h2 class="">Activate Account</h2>
+
+    {%- form 'activate_customer_password', novalidate: 'novalidate', class: 'form_form' -%}
+      <div class="form_fields">
+        <div class="form_field">
+          <label class="" for="customer[password]">Password</label>
+          <input
+            type="password"
+            name="customer[password]"
+            id="password"
+            autocomplete="new-password"
+            {% if form.errors contains 'password' %}
+              aria-invalid="true" aria-describedby="password-error"
+            {% endif %}
+          >
+        </div>
+        <div class="form_field">
+          <label class="" for="password_confirmation[last_name]">Confirm Password</label>
+          <input
+            type="password"
+            name="customer[password_confirmation]"
+            autocomplete="new-password"
+            {% if form.errors contains 'password' %}
+              aria-invalid="true" aria-describedby="password_confirmation-error"
+            {% endif %}
+          >
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="button"
+        aria-label="Activate account"
+      >
+        Activate Account
+
+      </button>
+
+      {%- if form.errors -%}
+        <div class="richtext">
+          {{ form.errors.messages.form }}
+        </div>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>

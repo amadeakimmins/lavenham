@@ -1,0 +1,214 @@
+<section class="banner reveal" id="{{ section.settings.anchor_id }}">
+  <div class="banner__inner{% if section.settings.stack_content_mobile %} banner__inner--stacked{% endif %}">
+    {% if section.settings.heading != blank or section.settings.button_label != blank %}
+      <div class="banner__content-container banner__content-container--{{ section.settings.content_position }}">
+        <div class="banner__content text--{{ section.settings.textColor }}">
+          {%- if section.settings.subheading != blank -%}
+            <p class="image-and-text__subheading caption">{{ section.settings.subheading }}</p>
+          {%- endif -%}
+          {% if section.settings.heading != blank %}
+            <h2 class="banner__title {% if section.settings.content_position == 'left' %} h3{% else%} h1{% endif %}">
+              {{- section.settings.heading | newline_to_br -}}
+            </h2>
+          {% endif %}
+        </div>
+
+        <div class="banner__content text--{{ section.settings.textColor }}">
+          {% if section.settings.body != blank %}
+            <div class="banner__body">{{ section.settings.body }}</div>
+          {% endif %}
+          {% if section.settings.button_label != blank %}
+            <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary button--large" aria-label="{{ section.settings.button_label }}"><span>{{- section.settings.button_label | escape -}}</span></a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if section.settings.image != blank or section.settings.video != blank %}
+      <div class="banner__media banner__media--{{ section.settings.image_width }} banner__media--{{ section.settings.image_height }}">
+        {% if section.settings.mediaType == 'image' %}
+          <div class="banner__media-desktop {% if section.settings.mobile_image != blank %} banner__media-desktop--has-mobile {% endif %}">
+            {%- render "media-img", media: section.settings.image -%}
+          </div>
+          {% if section.settings.mobile_image != blank %}
+            <div class="banner__media-mobile">
+              {%- render "media-img", media: section.settings.mobile_image -%}
+            </div>
+          {% endif %}
+        {% elsif section.settings.mediaType == 'video' %}
+          <div class="banner__media-desktop video-desktop {% if section.settings.mobile_video != blank %} banner__media-desktop--has-mobile {% endif %} ">
+            <div class="aspectholder">
+              {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '400x' }}
+            </div>
+          </div>
+          {% if section.settings.mobile_video != blank %}
+            <div class="banner__media-mobile video-mobile">
+              <div class="aspectholder">
+                {{ section.settings.mobile_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '400x' }}
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Hero Banner",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Settings"
+      }, 
+      {
+        "type": "select",
+        "id": "content_position",
+        "label": "Content Position",
+        "default": "left",
+        "options": [
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "left",
+            "label": "Left Aligned"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "textColor",
+        "label": "Text Color",
+        "default": "orange",
+        "options": [
+          {
+            "value": "white",
+            "label": "White"
+          },
+          {
+            "value": "black",
+            "label": "Black"
+          },
+          {
+            "value": "orange",
+            "label": "Orange"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "label": "Image Width",
+        "id": "image_width",
+        "default": "inset",
+        "options": [
+          {
+            "value": "full_width",
+            "label": "Full Width"
+          }, {
+            "value": "inset",
+            "label": "Inset"
+          }
+        ]
+      }, {
+        "type": "select",
+        "label": "Image Height",
+        "id": "image_height",
+        "default": "two_thirds",
+        "options": [
+          {
+            "value": "full_height",
+            "label": "Full Height"
+          }, {
+            "value": "two_thirds",
+            "label": "Two Thirds"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "stack_content_mobile",
+        "label": "Stack content on mobile",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      }, 
+      {
+        "type": "text",
+        "id": "anchor_id",
+        "label": "Anchor ID",
+        "info": "Only used on pages with sticky navigation"
+      }, 
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Subheading"
+      }, {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "body",
+        "label": "Body"
+      }, {
+        "type": "text",
+        "id": "button_label",
+        "label": "CTA Label"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "CTA Link"
+      }, {
+        "type": "header",
+        "content": "Media"
+      }, {
+        "type": "select",
+        "label": "Media Type",
+        "id": "mediaType",
+        "default": "image",
+        "options": [
+          {
+            "value": "image",
+            "label": "Image"
+          }, {
+            "value": "video",
+            "label": "Video"
+          }
+        ]
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image Selector"
+      }, {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Image Selector Mobile",
+        "info": "Optional"
+      }, {
+        "type": "video",
+        "id": "video",
+        "label": "Video File"
+      }, {
+        "type": "video",
+        "id": "mobile_video",
+        "label": "Video File Mobile",
+        "info": "Opitonal"
+
+      }
+    ],
+    "blocks": [],
+    "presets": [
+      {
+        "name": "Hero Banner"
+      }
+    ]
+  }
+{% endschema %}

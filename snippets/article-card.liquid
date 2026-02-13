@@ -1,0 +1,21 @@
+<a href="{{ article.url }}" aria-label="{{ article.title }} Article Link" class="article-card">
+  <div class="article-card__image">
+    {% render 'media-img', media: article.image %}
+  </div>
+
+
+  <div class="article-card__details">
+    {% if article.tags.size > 0 %}
+    <p>
+      {{- article.tags.first -}}
+    </p>
+    •
+    {% endif%}
+    <p>
+      {{ article.published_at | date: "%b %d, %Y" }}
+    </p>
+  </div>
+  <p class="article-card__title">
+  {{ article.title }}
+  </p>
+  </a>

@@ -1,0 +1,82 @@
+<section class="marquee" id="marquee">
+  <div class="marquee__wrapper">
+    {% if section.settings.subheading != blank or section.settings.title != blank or section.settings.body != blank %}
+      <div class="heading__content-wrapper reveal">
+        {% if section.settings.subheading != blank %}
+          <p class="caption reveal">{{ section.settings.subheading }}</p>
+        {% endif %}
+
+        {% if section.settings.title != blank %}
+          <h2 class="heading__title reveal">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        {% if section.settings.body != blank %}
+          <p class="heading__body reveal">{{ section.settings.body }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      <div class="marquee__track-container reveal">
+        <div class="marquee__track">
+          {% for i in (1..3) %}
+            {% for block in section.blocks %}
+              <div class="marquee__item">
+                <p class="marquee__text h6 text-italic">{{ block.settings.text }}</p>
+                {% render 'icon-circle-shape' %}
+              </div>
+            {% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Marquee",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "sip today, expand tomorrow"
+    }, 
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Brain and body's best friend"
+    },
+    {
+      "type": "text",
+      "id": "body",
+      "label": "Body Copy"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee"
+    }
+  ]
+}
+{% endschema %}

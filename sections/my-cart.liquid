@@ -1,0 +1,123 @@
+<button aria-label="Close Cart" class="cart-modal__bg" data-ajax-cart-toggle-class-button="js-my-cart-open | remove"></button>
+
+<div class="cart-modal__inner">
+  <div class="cart-modal__top-level">
+    <a href="/cart" aria-label="Cart Page" class="caption">Cart (<span class="caption" data-ajax-cart-bind-state="cart.item_count">{{- cart.item_count -}}</span>)</a>
+    <button class="cart-modal__close" aria-label="Close Cart" data-ajax-cart-toggle-class-button="js-my-cart-open | remove">
+      {% render 'icon-cross' %}
+    </button>
+  </div>
+
+  {% if cart.items.size > 0 %}
+    <form action="{{ routes.cart_url }}" method="post" class="cart-modal__form" data-ajax-cart-section>
+      <div>
+        <ul class="cart-modal__items my-cart__items" data-ajax-cart-section-scroll>
+          {% for item in cart.items %}
+            <li class="cart-modal__item">
+
+              {%- render 'media-img', media: item.product.featured_media -%}
+
+              <div class="cart-modal__item-meta">
+                <div class="cart-modal__item-top">
+                  <div>
+                  {% assign pTitle = item.product.title | escape | split: ' - ' | first %}
+                    <a href="{{ item.url }}" class="caption" aria-label="{{ item.title }}">
+                      {{ pTitle }}
+                    </a>
+                    {%- unless item.product.has_only_default_variant %}
+                      {% for option in item.options_with_values -%}
+                        <p class="caption">{{ option.name }}: {{ option.value }}</p>
+                      {%- endfor %}
+                    {% endunless %}
+                    <p class="caption">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                  </div>
+
+                  <div class="cart-modal__item-price">
+                    <p class="caption">{{ item.final_line_price | money }}</p>
+                  </div>
+                </div>
+                
+                <div class="cart-modal__item-lower">
+                  <div class="product__quantity product__quantity--cart">
+                    <a data-ajax-cart-request-button class="cart__quantity-btns caption" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" aria-label="Minus Quantity">{% render 'icon-minus' %}</a>
+                    <input data-ajax-cart-quantity-input="{{ forloop.index }}" class="cart__input caption" name="updates[]" value="{{ item.quantity }}" type="number" readonly>
+                    <a data-ajax-cart-request-button class="cart__quantity-btns caption" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" aria-label="Add Quantity">{% render 'icon-plus' %}</a>
+                  </div>
+
+                  <a data-ajax-cart-request-button href="{{ item.url_to_remove }}" class="cart-modal__item-lower--remove caption" aria-label="Remove Item">Remove</a>
+                </div>
+              </div>
+              <div data-ajax-cart-messages="{{ item.key }}" class="cart-modal__item-errors"></div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="cart-modal__footer">
+        <button aria-label="Checkout" class="button button--primary button--full-width" name="checkout" type="submit">
+          Checkout - {{ cart.total_price | money }}
+        </button>
+
+          <p class="caption">Shipping & taxes calculated at checkout</p>
+      </div>
+    </form>
+    
+    {% else %}
+      <div class="cart-modal__empty-container" data-ajax-cart-section>
+        <p class="cart-modal__empty-text caption">Your cart is empty</p>
+        <a class="button button--primary button--full-width" href="/collections/all">Continue Shopping</a>
+      </div>
+    {% endif %}
+
+    {%- comment -%}
+      Recommended Product (random, excluding cart items)
+    {%- endcomment -%}
+
+    {% assign cart_product_handles = '' %}
+    {% for item in cart.items %}
+      {% assign cart_product_handles = cart_product_handles | append: item.product.handle | append: ',' %}
+    {% endfor %}
+    {% assign cart_product_handles = cart_product_handles | split: ',' | uniq %}
+
+    {% assign filtered_handles = '' %}
+    {% for product in section.settings.upsell_collection.products %}
+      {% unless cart_product_handles contains product.handle %}
+        {% assign filtered_handles = filtered_handles | append: product.handle | append: ',' %}
+      {% endunless %}
+    {% endfor %}
+
+    {% assign filtered_array = filtered_handles | split: ',' | uniq | compact %}
+    {% assign random_handle = filtered_array | sample: 1 | first %}
+    {% assign random_product = all_products[random_handle] %}
+
+    {% if random_product %}
+      <div class="cart-modal__recommendation">
+        <p class="caption">You may also like</p>
+        {% render 'product-card-cart', product: random_product %}
+      </div>
+    {% endif %}
+</div>
+
+{% schema %}
+
+{
+  "name": "Cart Drawer",
+  "limit": 1,
+  "tag": "div",
+  "class": "cart-modal",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "upsell_collection",
+      "label": "Recommended Products"
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Cart Drawer"
+    }
+  ]
+}
+
+{% endschema %}

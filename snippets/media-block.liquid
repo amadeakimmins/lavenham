@@ -1,0 +1,16 @@
+{% if block.settings.type == "img" %}
+  {%- assign img = block.settings.image -%}
+  {%- render "media-img", media: img -%}
+{% elsif block.settings.type == "video" %}
+  <div class="aspectholder">
+    <video class="lazy" data-src="{{ block.settings.video }}" preload playsinline
+      {% if block.settings.enable_controls == true %}
+        controls
+      {% else %}
+        autoplay loop muted
+      {% endif %}
+    >
+      <source type="video/mp4" data-src="{{ block.settings.video }}">
+    </video>
+  </div>
+{% endif %}

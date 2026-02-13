@@ -1,0 +1,100 @@
+<section class="cart">
+  <div class="cart__top-level">
+    <h2 class="h3">Cart</h2>
+    <p><span class="" data-ajax-cart-bind-state="cart.item_count">{{- cart.item_count -}}</span> items</p>
+  </div>
+
+  <form action="{{ routes.cart_url }}" method="post" class="cart__form container" data-ajax-cart-section>
+    <div class="cart__left">
+      <div class="cart__price">
+        <p class="caption">{{ cart.total_price | money }} <span class="text-fade caption">+ shipping & taxes</span></p>
+      </div>
+
+      <button aria-label="Checkout" class="button button--primary button--full-width" name="checkout" type="submit">
+        Check out
+      </button>
+
+      <div class="cart__checkout-note">
+        <p>Add a note to your order</p>
+        <div class="textareawrapper">
+          <textarea placeholder="Eg. Delivery instructions" id="note" name="note" rows="4" class="caption">{{ cart.note }}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart__right">
+      <p>Items in the cart</p>
+      <ul class="cart__items my-cart__items" data-ajax-cart-section-scroll>
+        {% for item in cart.items %}
+          <li class="cart__item">
+            {% assign item_index = forloop.index %}
+
+            <div class="cart__wrapper">
+              {% if item.variant.featured_media or item.product.featured_media %}
+                <div class="cart__image">
+                  {% if item.variant.featured_media %}
+                    {%- render 'media-img', media: item.variant.featured_media -%}
+                  {% else %}
+                    {%- render 'media-img', media: item.product.featured_media -%}
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              <div class="cart__item-meta">
+                {% assign pTitle = item.product.title | escape | split: ' - ' | first %}
+
+                <div>
+                  <a href="{{ item.url }}" class="caption" aria-label="{{ item.title }}">
+                    {{ pTitle }}
+                  </a>
+                  {%- unless item.product.has_only_default_variant %}
+                    {% for option in item.options_with_values -%}
+                      <p class="caption">{{ option.name }}: {{ option.value }}</p>
+                    {%- endfor %}
+                  {% endunless %}
+                  <p class="caption">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                  <div class="cart-modal__item-price">
+                    <p class="caption">{{ item.final_line_price | money }}</p>
+                  </div>
+                </div>
+
+                <div class="cart__item-bottom-meta">
+                  <div class="product__quantity product__quantity--cart">
+                    <a data-ajax-cart-request-button class="caption link-anchor" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" aria-label="Minus Quantity">-</a>
+                    <input data-ajax-cart-quantity-input="{{ forloop.index }}" class="cart__input caption" name="updates[]" value="{{ item.quantity }}" type="number" readonly>
+                    <a data-ajax-cart-request-button class="caption link-anchor" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" aria-label="Add Quantity">+</a>
+                  </div>
+                  <a data-ajax-cart-request-button href="{{ item.url_to_remove }}" class="text-fade text-small" aria-label="Remove Item">
+                    Remove
+                  </a>
+                </div>
+
+                <div data-ajax-cart-messages="{{ item.key }}" class="cart-modal__item-errors "></div>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    
+  </form>
+
+  {%- comment -%} {% render 'cart-recommendations', cart: cart, limit: 1, section_id: 'main-cart-recommendations', fallback_product: section.settings.product %} {%- endcomment -%}
+
+</section>
+
+{% schema %}
+  {
+    "name": "Main Cart",
+    "templates": ["cart"],
+    "limit": 1,
+    "settings": [
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Featured Product",
+        "info": "Will show products similar to this in the cart when no items in cart"
+      }
+    ]
+  }
+{% endschema %}

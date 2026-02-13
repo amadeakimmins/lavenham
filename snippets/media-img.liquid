@@ -1,0 +1,14 @@
+{%- if media != blank -%}
+
+  {% if loading == blank %}
+    {% assign loading = 'lazy' %}
+  {% endif %}
+
+  {% if alt == blank %}
+    {%- assign alt = media.alt | escape | default: 'Display Image' -%}
+  {% endif %}
+
+  <div class="aspectholder">
+    <img srcset="{% if media.width >= 350 %}{{ media | image_url: width: 350 }} 350w,{% endif %} {% if media.width >= 700 %}{{ media | image_url: width: 700 }} 700w,{% endif %} {% if media.width >= 749 %}{{ media | image_url: width: 749 }} 749w,{% endif %} {% if media.width >= 1498 %}{{ media | image_url: width: 1498 }} 1498w,{% endif %} {% if media.width >= 1100 %}{{ media | image_url: width: 1100 }} 1100w,{% endif %} {% if media.width >= 2200 %}{{ media | image_url: width: 2200 }} 2200w,{% endif %}" src="{{ media | image_url: 'master' }}" loading="{{ loading }}" width="{{ media.width }}" height="{{ media.height }}" alt="{{ alt }}">
+  </div>
+{%- endif -%}

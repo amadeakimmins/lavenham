@@ -1,0 +1,94 @@
+<section class="collection">
+  <div class="heading__content-wrapper">
+    {% if collection.metafields.custom.subheading != blank %}
+      <p class="heading__subheading caption reveal">{{ collection.metafields.custom.subheading }}</p>
+    {% endif %}
+    
+    {%- if collection.metafields.custom.title != blank -%}
+      <h2 class="heading__title h2 reveal">{{ collection.metafields.custom.title }}</h2>
+    {%- endif -%}
+  
+    {%- if collection.metafields.custom.body != blank -%}
+      <p class="heading__body reveal">{{ collection.metafields.custom.body }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="collection__container">
+    {%- paginate collection.products by section.settings.limit -%}
+      <div id="collection" class="collection__grid">
+        {% for product in collection.products %}
+          {% render "product-card", product: product %}
+        {% endfor %}
+      </div>
+
+      <div class="collection__paginate pagination">
+        {% if paginate.previous.is_link %}
+          <a href="{{ paginate.previous.url }}" class="" aria-label="Previous Page">
+            Previous
+          </a>
+        {% endif %}
+
+        <div class="pagination__pages">
+          {% if paginate.parts != blank %}
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                {{- part.title | link_to: part.url | replace: "<a", "<a class=''" -}}
+              {% else %}
+                {{- part.title | link_to: part.url | replace: "<a", "<a class=''" -}}
+              {% endif %}
+
+              {% unless forloop.last %}<span class="">&nbsp; — &nbsp;</span>{% endunless %}
+            {% endfor %}
+          {% else %}
+            <a href="{{ blog.url }}" class="" aria-label="First Page">1</a>
+          {% endif %}
+        </div>
+
+        {% if paginate.next.is_link %}
+          <a href="{{ paginate.next.url }}" class="" aria-label="Next Page">Next</a>
+        {% endif %}
+      </div>
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Collection",
+  "enabled_on": { 
+    "templates": ["collection"]
+  },
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Defaults to collection title."
+    },
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 1,
+      "max": 96,
+      "step": 1,
+      "default": 10,
+      "label": "Products to Show"
+    },
+    {
+      "type": "color",
+      "id": "tag_colour",
+      "label": "Selected Tag Colour",
+      "default": "#1C1C1C"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,8 @@
+<nav aria-label="accounts nav" class="customer-account__nav reveal">
+  <div class="customer-account__button-wrapper">
+    <a href="{{ routes.account_url }}#dashboard" class="account-nav-link button" aria-label="Dashboard">Dashboard</a>
+    <a href="{{ routes.account_url }}#orders" class="account-nav-link button" aria-label="Orders">Orders</a>
+    <a href="{{ routes.account_addresses_url }}" class="account-nav-link button" id="addresses-link" aria-label="Profile">Addresses</a>
+  </div>
+  <a href="{{ routes.account_logout_url }}" class="button button--primary" aria-label="Logout">Logout</a>
+</nav>

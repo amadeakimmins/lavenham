@@ -1,0 +1,215 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "loop_subscriptions_loop_widget_wHQMtA": {
+          "type": "shopify://apps/loop-subscriptions/blocks/loop_widget/267a7c64-5cb3-4552-b817-5485165f0a0b",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "loop_subscriptions_loop_widget_wHQMtA"
+      ],
+      "settings": {
+        "copy_under_atc_button": "Order 12+ for free shipping"
+      }
+    },
+    "section_marquee_MGmD88": {
+      "type": "section-marquee",
+      "blocks": {
+        "item_eA7Neb": {
+          "type": "item",
+          "settings": {
+            "text": "Bold Flavours"
+          }
+        },
+        "item_6XmXCL": {
+          "type": "item",
+          "settings": {
+            "text": "Mind & Body"
+          }
+        },
+        "item_LJAa3p": {
+          "type": "item",
+          "settings": {
+            "text": "No added sugar"
+          }
+        },
+        "item_mPYPLt": {
+          "type": "item",
+          "settings": {
+            "text": "Vegan & Gluten Free"
+          }
+        },
+        "item_CRP6KU": {
+          "type": "item",
+          "settings": {
+            "text": "No Artificial Anything"
+          }
+        }
+      },
+      "block_order": [
+        "item_eA7Neb",
+        "item_6XmXCL",
+        "item_LJAa3p",
+        "item_mPYPLt",
+        "item_CRP6KU"
+      ],
+      "settings": {
+        "subheading": "",
+        "title": "",
+        "body": "",
+        "wave_colour": "#f0eb74"
+      }
+    },
+    "section_image_and_text_NKACLj": {
+      "type": "section-image-and-text",
+      "settings": {
+        "image_placement": "image_left",
+        "bgColor": "orange",
+        "textColor": "white",
+        "button_style": "white-orange",
+        "title_font_size": "h3",
+        "show_wave": true,
+        "wave_colour": "#fe4613",
+        "curved_heading": true,
+        "show_seperators": true,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "anchor_id": "",
+        "subheading": "A little moment in your day",
+        "title": "That brings your back to yourself",
+        "body": "<p>Because energy shoudl feel like ease. Embrace the rhythm of our day, feel more in control and uplifted. Let it be your gentle reset.</p>",
+        "button_label": "About Journée",
+        "button_link": "",
+        "mediaType": "image",
+        "image": "shopify://shop_images/about.jpg"
+      }
+    },
+    "section_richtext_q6iLNz": {
+      "type": "section-richtext",
+      "settings": {
+        "show_wave": false,
+        "bgColor": "orange",
+        "textColor": "white",
+        "curved_heading": false,
+        "titleWidth": "full",
+        "wave_colour": "#ffffff",
+        "reviews_section": true,
+        "anchor_id": "",
+        "subheading": "Reviews",
+        "title": "What others are saying",
+        "title_font_size": "h2",
+        "body": "<p>Nunc tincidunt, arcu eget sagittis mattis, neque dui euismod elit, a ultricies tellus ligula id leo. Donec sed porta risus, vel ullamcorper eros. </p>",
+        "button_label": "Button",
+        "button_link": ""
+      }
+    },
+    "section_image_and_text_8GyFqt": {
+      "type": "section-image-and-text",
+      "settings": {
+        "image_placement": "image_right",
+        "bgColor": "yellow",
+        "textColor": "orange",
+        "button_style": "orange-white",
+        "title_font_size": "h3",
+        "show_wave": false,
+        "wave_colour": "#fe4613",
+        "curved_heading": true,
+        "show_seperators": true,
+        "padding_top": 60,
+        "padding_bottom": 20,
+        "anchor_id": "",
+        "subheading": "Want to learn more",
+        "title": "Get a brain boost that goes the distance",
+        "body": "<p>Journée creates elixirs inspired by the Mediterranean way of life, where living well and well-being blend harmoniously.The Med way of life is filled with wholesomeness, generosity and hedonistic, upbeat and carefree moments, to be enjoyed alone or with others.</p>",
+        "button_label": "The science behind Journée",
+        "button_link": "",
+        "mediaType": "image",
+        "image": "shopify://shop_images/flower-ice.jpg"
+      }
+    },
+    "section_faqs_gNXtEe": {
+      "type": "section-faqs",
+      "blocks": {
+        "question_iyCfCt": {
+          "type": "question",
+          "settings": {
+            "title": "Why Should I Drink Journee?",
+            "answer": "<p>lorem ipsum</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_MRfKH6": {
+          "type": "question",
+          "settings": {
+            "title": "Where is Journée made?",
+            "answer": "<p>lorem ipsum</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_YqFf3j": {
+          "type": "question",
+          "settings": {
+            "title": "Do you ship internationally?",
+            "answer": "<p>lorem ipsum</p>",
+            "filter_tags": ""
+          }
+        },
+        "question_adKfBa": {
+          "type": "question",
+          "settings": {
+            "title": "Can you store Journee in the Pantry?",
+            "answer": "<p>lorem ipsum</p>",
+            "filter_tags": ""
+          }
+        }
+      },
+      "block_order": [
+        "question_iyCfCt",
+        "question_MRfKH6",
+        "question_YqFf3j",
+        "question_adKfBa"
+      ],
+      "settings": {
+        "bgColor": "yellow",
+        "anchor_id": "",
+        "subheading": "faqs",
+        "title": "Still Have Questions?",
+        "body": "<p>Below are some of the most common questions our customers have asked us.</p>",
+        "button_label": "View All",
+        "button_link": "shopify://pages/faqs"
+      }
+    },
+    "section_featured_collection_KVWbMJ": {
+      "type": "section-featured-collection",
+      "settings": {
+        "title": "You’ll also like",
+        "title_font_size": "caption",
+        "body": "",
+        "collection": "single-cans",
+        "button_label": "",
+        "button_link": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_marquee_MGmD88",
+    "section_image_and_text_NKACLj",
+    "section_richtext_q6iLNz",
+    "section_image_and_text_8GyFqt",
+    "section_faqs_gNXtEe",
+    "section_featured_collection_KVWbMJ"
+  ]
+}

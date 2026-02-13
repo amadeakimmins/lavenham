@@ -1,0 +1,244 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "favicon": "shopify://shop_images/favicon-red.png",
+    "instagram_handle": "drinkjournee",
+    "spotify_url": "spotify",
+    "facebook_url": "facebook url",
+    "linkedIn_url": "linkedin",
+    "sections": {
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "menu_FMHQn8": {
+            "type": "menu",
+            "settings": {
+              "menu": "shop",
+              "title": "Shop"
+            }
+          },
+          "menu_wP3Grh": {
+            "type": "menu",
+            "settings": {
+              "menu": "learn",
+              "title": "Learn"
+            }
+          },
+          "menu_6AJK7c": {
+            "type": "menu",
+            "settings": {
+              "menu": "help",
+              "title": "Help"
+            }
+          }
+        },
+        "block_order": [
+          "menu_FMHQn8",
+          "menu_wP3Grh",
+          "menu_6AJK7c"
+        ],
+        "settings": {
+          "copyright": "© 2024 Journée",
+          "bottom_menu": "footer"
+        }
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "menu_8n3EzX": {
+            "type": "menu",
+            "settings": {
+              "menu_mob": "mobile-menu",
+              "body": ""
+            }
+          },
+          "collection_GrKPyb": {
+            "type": "collection",
+            "settings": {
+              "title": "Shop All",
+              "parent_section": "Shop",
+              "collection": "all"
+            }
+          },
+          "image_link_F6yAa8": {
+            "type": "image_link",
+            "settings": {
+              "title": "Science",
+              "parent_section": "Learn",
+              "parent_link": "Science",
+              "url": "shopify://pages/science",
+              "image": "shopify://shop_images/ice-passion-fruit.jpg"
+            }
+          },
+          "image_link_njbiEp": {
+            "type": "image_link",
+            "settings": {
+              "title": "About",
+              "parent_section": "Learn",
+              "parent_link": "About",
+              "url": "shopify://pages/about",
+              "image": "shopify://shop_images/christian-nicole.jpg"
+            }
+          },
+          "image_link_PXNqaE": {
+            "type": "image_link",
+            "settings": {
+              "title": "FAQs",
+              "parent_section": "Learn",
+              "parent_link": "FAQs",
+              "url": "shopify://pages/faqs",
+              "image": "shopify://shop_images/subscribe-image.jpg"
+            }
+          },
+          "link_8mnq8d": {
+            "type": "link",
+            "settings": {
+              "title": "Contact",
+              "parent_section": "Learn",
+              "url": "shopify://pages/contact"
+            }
+          },
+          "link_GgqRpK": {
+            "type": "link",
+            "settings": {
+              "title": "Shipping",
+              "parent_section": "Learn",
+              "url": "shopify://policies/shipping-policy"
+            }
+          }
+        },
+        "block_order": [
+          "menu_8n3EzX",
+          "collection_GrKPyb",
+          "image_link_F6yAa8",
+          "image_link_njbiEp",
+          "image_link_PXNqaE",
+          "link_8mnq8d",
+          "link_GgqRpK"
+        ],
+        "settings": {
+          "menu": "main-menu"
+        }
+      },
+      "header-mobile": {
+        "type": "header-mobile",
+        "blocks": {
+          "menu_UVWbYJ": {
+            "type": "menu",
+            "settings": {
+              "menu_mob": "mobile-menu",
+              "body": ""
+            }
+          },
+          "collection_xkMRxw": {
+            "type": "collection",
+            "settings": {
+              "title": "Shop All",
+              "parent_section": "Shop",
+              "collection": "all"
+            }
+          },
+          "image_link_6mGkDE": {
+            "type": "image_link",
+            "settings": {
+              "title": "Science",
+              "parent_section": "Learn",
+              "parent_link": "Science",
+              "url": "shopify://pages/science",
+              "image": "shopify://shop_images/ice-passion-fruit.jpg"
+            }
+          },
+          "image_link_8mVFCL": {
+            "type": "image_link",
+            "settings": {
+              "title": "About",
+              "parent_section": "Learn",
+              "parent_link": "About",
+              "url": "shopify://pages/about",
+              "image": "shopify://shop_images/christian-nicole.jpg"
+            }
+          },
+          "image_link_8bMgVJ": {
+            "type": "image_link",
+            "settings": {
+              "title": "FAQs",
+              "parent_section": "Learn",
+              "parent_link": "FAQs",
+              "url": "shopify://pages/faqs",
+              "image": "shopify://shop_images/subscribe-image.jpg"
+            }
+          },
+          "link_kyzzi8": {
+            "type": "link",
+            "settings": {
+              "title": "Contact",
+              "parent_section": "Learn",
+              "url": "shopify://pages/contact"
+            }
+          },
+          "link_yeXLUj": {
+            "type": "link",
+            "settings": {
+              "title": "Shipping",
+              "parent_section": "Learn",
+              "url": "shopify://policies/shipping-policy"
+            }
+          }
+        },
+        "block_order": [
+          "menu_UVWbYJ",
+          "collection_xkMRxw",
+          "image_link_6mGkDE",
+          "image_link_8mVFCL",
+          "image_link_8bMgVJ",
+          "link_kyzzi8",
+          "link_yeXLUj"
+        ],
+        "settings": {
+          "menu": "mobile-menu"
+        }
+      },
+      "my-cart": {
+        "type": "my-cart",
+        "settings": {
+          "upsell_collection": "all"
+        }
+      },
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "active": true,
+          "text": "Free shipping when you spend over €100"
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {}
+      },
+      "16017602894386113438": {
+        "type": "shopify://apps/junip/blocks/junip-store-key/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
+        "disabled": false,
+        "settings": {
+          "enablePreviewMode": true
+        }
+      },
+      "1232542678405107163": {
+        "type": "shopify://apps/instafeed/blocks/head-block/c447db20-095d-4a10-9725-b5977662c9d5",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  }
+}

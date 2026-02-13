@@ -1,0 +1,98 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "heading": "",
+        "limit": 10,
+        "tag_colour": "#1c1c1c"
+      }
+    },
+    "section_marquee_QbyL49": {
+      "type": "section-marquee",
+      "blocks": {
+        "item_3984rM": {
+          "type": "item",
+          "settings": {
+            "text": "Bold Flavours"
+          }
+        },
+        "item_wFaABf": {
+          "type": "item",
+          "settings": {
+            "text": "Mind & Body"
+          }
+        },
+        "item_pCz7Df": {
+          "type": "item",
+          "settings": {
+            "text": "No added sugar"
+          }
+        },
+        "item_RUBxGb": {
+          "type": "item",
+          "settings": {
+            "text": "Vegan & Gluten Free"
+          }
+        },
+        "item_VqLGJE": {
+          "type": "item",
+          "settings": {
+            "text": "No Artifical Anything"
+          }
+        }
+      },
+      "block_order": [
+        "item_3984rM",
+        "item_wFaABf",
+        "item_pCz7Df",
+        "item_RUBxGb",
+        "item_VqLGJE"
+      ],
+      "settings": {
+        "subheading": "",
+        "title": "",
+        "body": "",
+        "wave_colour": "#f0eb74"
+      }
+    },
+    "section_image_and_text_XWqUmU": {
+      "type": "section-image-and-text",
+      "settings": {
+        "image_placement": "image_left",
+        "bgColor": "orange",
+        "textColor": "white",
+        "button_style": "yellow",
+        "title_font_size": "h3",
+        "show_wave": true,
+        "wave_colour": "#ff4712",
+        "curved_heading": true,
+        "show_seperators": true,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "anchor_id": "",
+        "subheading": "The science behind journée",
+        "title": "Functional beverages designed to help elevate your every day from dusk till dawn.",
+        "body": "<p>Rooted in Ayurvedic medicine, Journée is a functional beverage, designed to offer an entourage effect by using natural ingredients that nourish the mind and body.</p>",
+        "button_label": "The science behind journée",
+        "button_link": "",
+        "mediaType": "image",
+        "image": "shopify://shop_images/ice-passion-fruit.jpg"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_marquee_QbyL49",
+    "section_image_and_text_XWqUmU"
+  ]
+}

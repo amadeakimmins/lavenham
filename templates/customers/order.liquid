@@ -1,0 +1,137 @@
+<section class="customer-account order container">
+  {% render 'account-nav' %}
+
+  <div class="reveal">
+    <a href="{{ routes.account_url }}#orders" class="button button--link">Back to all orders</a>
+    <h2 class="customer-account__title h2 reveal">Order #{{ order.order_number }}</h2>
+  </div>
+
+  <div class="account__order-wrapper">
+    <div class="account__order-details reveal">
+      <div class="account__order-detail">
+        <p class="caption">Order number</p>
+        <p class="account__detail-content">#{{ order.order_number }}</p>
+      </div>
+      <div class="account__order-detail">
+        <p class="caption">Payment status</p>
+        <p class="account__detail-content">{{ order.financial_status_label }}</p>
+      </div>
+      <div class="account__order-detail">
+        <p class="caption">Date</p>
+        <p class="account__detail-content">{{ order.created_at | date: '%d.%m.%y' }}</p>
+      </div>
+      <div class="account__order-detail">
+        <p class="caption">Fulfillment status</p>
+        <p class="account__detail-content">{{ order.fulfillment_status_label }}</p>
+      </div>
+      <div class="account__order-detail">
+        <p class="caption">Items</p>
+        <p class="account__detail-content">{{ order.item_count }}</p>
+      </div>
+      <div class="account__order-detail">
+        <p class="caption">Shipping address</p>
+        <div class="account__detail-content">
+          {{ order.shipping_address | format_address }}
+        </div>
+      </div>
+      <button class="reorder-button button button--primary" data-line-items='{{ order.line_items | json | escape }}'>Reorder</button>
+    </div>
+
+    <div class="account__order-summary reveal">
+      <div class="account__border-bottom">
+        <p class="caption">Order</p>
+      </div>
+
+      <div class="account__orders reveal">
+        <ul>
+          {%- for line_item in order.line_items -%}
+            <li class="account__order-item">
+              <div class="account__order-item-details">
+                <div>
+                  <a href="{{ line_item.product.url }}" aria-label="{{ line_item.product.title }}">{{- line_item.product.title -}}</a>
+                  {%- unless line_item.product.has_only_default_variant %}
+                    {% for option in line_item.options_with_values -%}
+                      <p>{{ option.name }}: {{ option.value }}</p>
+                    {%- endfor %}
+                  {% endunless %}
+
+                  <p>{{- line_item.final_price | money -}}</p>
+                  <p class="account__order-quantity">Qty:<span> {{- line_item.quantity -}}</span></p>
+                </div>
+                <p>{{- line_item.final_line_price | money -}}</p>
+              </div>
+              {%- render 'media-img', media: line_item.image -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+        <div class="account__order-bottom-level">
+          <div class="account__border-bottom">
+            <p class="account__order-summary-item">
+              <span class="caption">Subtotal</span>
+              {{ order.total_price | money }}
+            </p>
+          </div>
+          
+          {% if order.shipping_methods.size > 0 %}
+            <div class="account__border-bottom">
+              <p class="account__order-summary-item">
+                <span class="caption">Shipping</span>
+                {% for shipping_method in order.shipping_methods %}
+                  {{ shipping_method.price | money }}
+                {% endfor %}
+              </p>
+            </div>
+          {% endif %}
+          <div class="account__border-bottom">
+            <p class="account__order-summary-item">
+              <span class="caption">Total</span>
+              {% if order.shipping_methods.size > 0 %}
+                {% for shipping_method in order.shipping_methods %}
+                  {{ shipping_method.price | plus: order.total_price | money }}
+                {% endfor %}
+              {% else %}
+                {{ order.total_price | money }}
+              {% endif %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const reorderButton = document.querySelector('.reorder-button');
+
+    if (reorderButton) {
+      reorderButton.addEventListener('click', async function () {
+        const rawLineItems = reorderButton.getAttribute('data-line-items');
+        const lineItems = JSON.parse(rawLineItems);
+
+        const itemsToAdd = lineItems.map(item => ({
+          id: item.variant_id,
+          quantity: item.quantity
+        }));
+
+        try {
+          for (const item of itemsToAdd) {
+            await fetch('/cart/add.js', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify(item)
+            });
+          }
+
+          window.location.href = '/cart';
+        } catch (error) {
+          console.error('Error reordering items:', error);
+          alert('Something went wrong while reordering.');
+        }
+      });
+    }
+  });
+</script>

@@ -1,0 +1,137 @@
+<section class="customer-account address container">
+  {% render 'account-nav' %}
+
+  <div class="form__intro-wrapper reveal">
+    <h3 class="h2">Addresses</h3>
+    <p>View your saved addresses.</p>
+  </div>
+
+  <div class="address__meta-container">
+    <div class="customer__meta-left address__form" data-address>
+      <div class="account__border-bottom reveal">
+        <p class="caption">Default Address</p>
+      </div>
+      {% if customer.default_address != null %}
+  
+        <div class="address__default-container active reveal">
+          <p class="address__default-title h6">{{ customer.default_address.address1 }}</p>
+  
+          <div class="account-section__address">
+            <div>
+              <p>{{ customer.default_address.name }}</p>
+              <p>{{ customer.default_address.company }}</p>
+              <p>{{ customer.default_address.phone }}</p>
+            </div>
+            <div>
+              <p">{{ customer.default_address.address1 }}</p>
+              <p">{{ customer.default_address.city }}, {{ customer.default_address.zip }}</p>
+              <p">{{ customer.default_address.country }}</p>
+            </div>
+          </div>
+  
+          <div class="account-section__button-wrapper">
+            <button onclick="toggleMultipleClass('.address__edit-default', '.address__default-container')" aria-label="Edit address" class="button button--secondary button--medium">Edit address</button>
+            <a href="#" class="button button--medium button--link text-fade" onclick="Shopify.CustomerAddress.destroy({{ customer.default_address.id }})">Delete</a>
+          </div>
+        </div>
+        
+        {%- form 'customer_address', customer.default_address, aria-labelledBy: 'Main address', class: 'address__edit-default form_form reveal' -%}
+          <p class="address__default-title h6">{{ address.address1 }}</p>
+          {%- render 'form-update-address', form: form -%}
+
+        {%- endform -%}
+      {% else %}
+        {%- form 'customer_address', customer.new_address, aria-labelledBy: 'Main address', class: 'form_form reveal' -%}
+          {%- render 'form-update-address', form: form -%}
+        {%- endform -%}
+      {% endif %}
+    </div>
+  
+    <div class="customer__meta-right address__form">
+      {%- assign fClass = 'address__form-new form_form' -%}
+      <div class="account__border-bottom reveal">
+        <p class="caption">Additional addresses</p>
+      </div>
+  
+      <ul class="address__addresses reveal" role="list">
+        {%- for address in customer.addresses -%}
+          {%- if address != customer.default_address -%}
+            <li class="address__form" data-address>
+              <div class="address__default active" id="address__default--{{ address.id }}">
+                <p class="address__default-title h6">{{ address.address1 }}</p>
+                <div class="account-section__address">
+                  <div>
+                    <p>{{ address.name }}</p>
+                    <p>{{ address.company }}</p>
+                    <p>{{ address.phone }}</p>
+                  </div>
+                  <div>
+                    <p">{{ address.address1 }}</p>
+                    <p">{{ address.city }}, {{ address.zip }}</p>
+                    <p">{{ address.country }}</p>
+                  </div>
+                </div>
+  
+                <div class="account-section__button-wrapper">
+                  <button aria-label="Edit Address" class="button button--medium button--secondary" onclick="toggleMultipleClass('#form-address-{{ address.id }}', '#address__default--{{ address.id }}')" >
+                    Edit address
+                  </button>
+                  <a href="#" class="button button--medium button--link text-fade" onclick="Shopify.CustomerAddress.destroy({{ address.id }})">Delete</a>
+                </div>
+              </div>
+
+  
+              {% assign ad = address.id | prepend: 'form-address-' %}
+  
+              {%- form 'customer_address', address, id: ad, class: fClass -%}
+                <p class="address__default-title h6">{{ address.address1 }}</p>
+                {%- render 'form-update-address', form: form -%}
+              {%- endform -%}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+
+      <li class="address__form address__new-address-wrapper" data-address>
+        <button aria-label="Add new address" class="address__new-address-button button button--medium button--secondary" onclick="toggleClass('#new-address')">
+          Add new address
+        </button>
+
+        {%- form 'customer_address', customer.new_address, id: 'new-address', class: fClass -%}
+          {%- render 'form-new-address', form: form -%}
+        {%- endform -%}
+      </li>
+    </div>
+  </div>
+</section>
+
+<script>
+  function postLink(url, data = {}) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = url;
+    form.style.display = 'none';
+
+    for (const key in data) {
+      const input = document.createElement('input');
+      input.name = key;
+      input.value = data[key];
+      form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+  window.onload = () => {
+    typeof CustomerAddresses !== 'undefined' && new CustomerAddresses();
+  };
+
+  Shopify.CustomerAddress = {
+    destroy: function (id, confirm_msg) {
+      if (confirm(confirm_msg || 'Are you sure you wish to delete this address?')) {
+        postLink('/account/addresses/' + id, { _method: 'delete' });
+      }
+    }
+  };
+</script>

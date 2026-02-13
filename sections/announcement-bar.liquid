@@ -1,0 +1,60 @@
+{% if section.settings.active == true %}
+  <div class="announcement-bar hidden-by-default" id="announcement-bar">
+    <div class="announcement-bar__inner">
+      <p class="announcement-bar__text caption">{{ section.settings.text }}</p>
+      <button class="announcement-bar__close" aria-label="Close announcement">
+        {% render 'icon-close' %}
+      </button>
+    </div>
+  </div>
+{% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const body = document.body;
+    const bar = document.getElementById('announcement-bar');
+    const closeBtn = bar?.querySelector('.announcement-bar__close');
+
+    if (!bar || !closeBtn) return;
+
+    if (localStorage.getItem('announcementBarClosed') === 'true') {
+      return;
+    }
+
+    bar.classList.remove('hidden-by-default');
+    body.classList.add('announcement-bar-visible');
+
+    closeBtn.addEventListener('click', function () {
+      bar.style.display = 'none';
+      body.classList.remove('announcement-bar-visible');
+      localStorage.setItem('announcementBarClosed', 'true');
+    });
+  });
+</script>
+
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "active",
+      "label": "Show Announcement Bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Free shipping when you spend over €100"
+    }
+  ],
+  "blocks": []
+}
+{% endschema %}

@@ -1,0 +1,210 @@
+<section class="banner {{ section.settings.size }}">
+  <div class="banner__media">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when "media" -%}
+          <div class="banner__media-inner">
+            {% if block.settings.type == "img" %}
+              {%- assign hero_img = block.settings.featured_image -%}
+              {%- render "media-img", media: hero_img -%}
+            {% elsif block.settings.type == "video" %}
+              <div class="aspectholder">
+                <video class="lazy" data-src="{{ block.settings.video }}" preload autoplay muted playsinline loop>
+                  <source type="video/mp4" data-src="{{ block.settings.video }}">
+                </video>
+              </div>
+            {% endif %}
+
+            {% if block.settings.mobile == true %}
+              {% if block.settings.type == "img" and block.settings.featured_image != blank %}
+                {%- assign hero_imgM = block.settings.featured_imageM -%}
+                {%- render "media-img", media: hero_imgM -%}
+              {% elsif block.settings.type == "video" and block.settings.video != blank %}
+                <div class="aspectholder">
+                  <video class="lazy" data-src="{{ block.settings.video }}" preload autoplay muted playsinline loop>
+                    <source type="video/mp4" data-src="{{ block.settings.video }}">
+                  </video>
+                </div>
+              {% endif %}
+            {% endif %}
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when "content" -%}
+        <div class="banner__content {{ block.settings.position }}">
+          {% if block.settings.heading != blank %}
+            <h2 class="">{{- block.settings.heading | newline_to_br -}}</h2>
+          {% endif %}
+          {% if block.settings.body != blank %}
+            <p class="">{{- block.settings.body -}}</p>
+          {% endif %}
+          {% if block.settings.button_label != blank %}
+            <a
+              href="{{ block.settings.button_link | default: '#' }}"
+              class="button"
+              aria-label="{{ block.settings.button_label }}"
+            >
+              {{- block.settings.button_label | escape -}}
+          {% endif %}
+        </div>
+    {%- endcase -%}
+  {%- endfor -%}
+</section>
+
+
+{% schema %}
+{
+  "name": "Main Index",
+  "enabled_on": { 
+    "templates": ["index"]
+  },
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "options": [
+        {
+          "value": "size_small",
+          "label": "Small"
+        },
+        {
+          "value": "size_medium",
+          "label": "Medium"
+        },
+        {
+          "value": "size_screen",
+          "label": "Full Screen"
+        }
+      ],
+      "default": "size_screen",
+      "label": "Banner Size"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content",
+      "name": "Content",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "CTA Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "CTA Link"
+        },
+        {
+          "type": "header",
+          "content": "Settings"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "options": [
+            {
+              "value": "pos_bl-s",
+              "label": "Bottom Left - Small"
+            },
+            {
+              "value": "pos_bl",
+              "label": "Bottom Left"
+            },
+            {
+              "value": "pos_c",
+              "label": "Center"
+            }
+          ],
+          "default": "pos_bl",
+          "label": "Content Position"
+        }
+      ]
+    },
+    {
+      "type": "media",
+      "name": "Media",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "options": [
+            {
+              "value": "img",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ],
+          "default": "img",
+          "label": "Media Type"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_image",
+          "label": "Image Selector"
+        },
+        {
+          "type": "text",
+          "id": "video",
+          "label": "Video URL",
+          "info": "For video embeds, use full url including .mp4"
+        },
+        {
+          "type": "checkbox",
+          "id": "mobile",
+          "default": false,
+          "label": "Mobile override enabled",
+          "info": "Default media field must be filled in for relevant media type."
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_imageM",
+          "label": "Image Selector Mobile"
+        },
+        {
+          "type": "text",
+          "id": "videoM",
+          "label": "Video URL Mobile",
+          "info": "Mobile override. Default must be filled in first."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Index"
+    }
+  ]
+}
+{% endschema %}

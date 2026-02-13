@@ -1,0 +1,62 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "size": "size_screen"
+      }
+    },
+    "section_contact_wDiDBP": {
+      "type": "section-contact",
+      "blocks": {
+        "email_address_hcKzQF": {
+          "type": "email_address",
+          "settings": {
+            "title": "Order Enquiries",
+            "email": "info@journee.com"
+          }
+        },
+        "email_address_EGpJhK": {
+          "type": "email_address",
+          "settings": {
+            "title": "Sales Enquiries",
+            "email": "sales@journee.com"
+          }
+        },
+        "email_address_Q3kjif": {
+          "type": "email_address",
+          "settings": {
+            "title": "Marketing Enquiries",
+            "email": "social@journee.com"
+          }
+        }
+      },
+      "block_order": [
+        "email_address_hcKzQF",
+        "email_address_EGpJhK",
+        "email_address_Q3kjif"
+      ],
+      "name": "Contact",
+      "settings": {
+        "subheading": "Contact us",
+        "title": "Have any questions?",
+        "body": "<p>You've come to the right place! For Customer Service, send us an email or chat and a team member will respond shortly or check out the FAQ page, the answer might be there already!</p>",
+        "image": "shopify://shop_images/bfcd429b00e4c30f02b6b5eefc87dbb6b3c9ec83.png"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_contact_wDiDBP"
+  ]
+}

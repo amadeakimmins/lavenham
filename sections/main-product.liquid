@@ -1,0 +1,251 @@
+<section class="product">
+  <div class="product__carousel swiper-container carousel_product reveal">
+    <div class="swiper-wrapper">
+      {%- for image in product.images -%}
+        <div class="swiper-slide">
+          {%- assign img = image -%}
+          {%- render "media-img", media: img -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="swiper-button-prev swiper-product-button-prev">
+      {% render 'icon-arrow-left' %}
+    </div>
+    <div class="swiper-button-next swiper-product-button-next">
+      {% render 'icon-arrow-right' %}
+    </div>
+  </div>
+
+  <div class="product__meta">
+    <div class="product__info">
+      {% if product.metafields.custom.subheading != blank %}
+        <p class="caption reveal">{{ product.metafields.custom.subheading }}</p>
+      {% endif %}
+
+      {% assign pTitle = product.title | escape | split: " - " | first %}
+      <h2 class="product__title reveal">{{- pTitle -}}</h2>
+      
+      {% if product.description != blank %}
+        <div class="richtext reveal">
+          {{- product.description -}}
+        </div>
+      {% endif %}
+
+      <div id="price-{{ section.id }}" class="product__price no-js-hidden reveal">
+        <p
+          id="product__price-sale"
+          class="caption"
+          style="text-decoration: line-through; {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}display: none;{% endunless %}"
+        >
+          {{ product.selected_or_first_available_variant.compare_at_price | money }}
+        </p>
+
+          <p id="product__price-og" class="caption">{{ product.selected_or_first_available_variant.price | money }}</p>
+      </div>
+    </div>
+
+    <div class="flavour-selector reveal">
+      <p class="product__variant-title caption">Flavour</p>
+      <div class="flavour-options">
+        {% for flavour_product in product.metafields.custom.flavours.value %}
+          <a
+            href="{{ flavour_product.url }}"
+            class="flavour-option{% if flavour_product.id == product.id %} active{% endif %}"
+          >
+            <img src="{{ flavour_product.featured_image | image_url: width: 100 }}" alt="{{ flavour_product.title }}">
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <form id="product-form" class="product__form" action="/cart/add" method="post">
+      <input type="hidden" name="id" id="product-select" value="{{ product.selected_or_first_available_variant.id }}">
+      {% if product.metafields.my_fields.colour_name != blank %}
+        <input
+          type="text"
+          name="properties[colour]"
+          style="display: none;"
+          value="{{ product.metafields.my_fields.colour_name }}"
+        >
+      {% endif %}
+
+      <div class="product__variants reveal">
+        {% if product.variants.size > 1 %}
+          {%- for option in product.options_with_values -%}
+            <div class="product__variant">
+              <p class="product__variant-title caption">{{ option.name }}:</p>
+
+              <div class="product__variant-pills" data-option-position="{{ option.position }}">
+                {% for value in option.values %}
+                  <button
+                    type="button"
+                    class="variant-pill caption{% if forloop.first %} active{% endif %}"
+                    data-value="{{ value | escape }}"
+                    onclick="changeSelect(this)"
+                  >
+                    {{ value }}
+                  </button>
+                {% endfor %}
+              </div>
+
+              {%- comment -%} <div class="product__variant-select">
+                <select
+                  id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                  class=""
+                  onchange="changeSelect(this)"
+                >
+                  {%- for value in option.values -%}
+                    <option
+                      class=""
+                      value="{{ value | escape }}"
+                      aria-label="{{ value | escape }}"
+                    >
+                      {{- value | escape -}}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div> {%- endcomment -%}
+            </div>
+          {%- endfor -%}
+        {% endif %}
+      </div>
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when '@app' %}
+            {% render block %}
+        {% endcase %}
+      {% endfor %}
+
+      <div class="product__atc reveal">
+        <div class="product__quantity button_pill">
+          <button
+            id="product-btn-minus"
+            class="product__btn-minus no-js-hidden"
+            name="minus"
+            type="button"
+            aria-label="Decrease Quantity"
+            onclick="changeQuantity('#form-quantity', '-')"
+          >
+            {% render 'icon-minus' %}
+          </button>
+          <input class="caption" min="1" type="number" id="form-quantity" name="quantity" value="1" class="">
+          <button
+            id="product-btn-plus"
+            class="product__btn-plus no-js-hidden"
+            name="plus"
+            type="button"
+            aria-label="Increase Quantity"
+            onclick="changeQuantity('#form-quantity', '+')"
+          >
+            {% render 'icon-plus' %}
+          </button>
+        </div>
+
+        <div
+          id="product-btn"
+          class="product__buttons {% if product.selected_or_first_available_variant.available %}available{% endif %}"
+        >
+          <button
+            id="product-btn-avail"
+            type="submit"
+            name="add"
+            class="button button--primary button--full-width"
+            aria-label="Add to Cart"
+          >
+            Add to Cart
+          </button>
+
+          <div id="product-btn-sold" class="product__atc-button product__atc-btn--disabled button button--primary button--full-width">Sold Out</div>
+        </div>
+
+        <div class="product__errors" data-ajax-cart-messages="form"></div>
+      </div>
+    </form>
+
+    <p class="caption text-fade reveal">{{ section.settings.copy_under_atc_button }}</p>
+  </div>
+
+  <script>
+    function changeSelect(clickedBtn) {
+      // Remove 'active' from siblings and add to clicked
+      const parentGroup = clickedBtn.closest('.product__variant-pills');
+      parentGroup.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+      clickedBtn.classList.add('active');
+  
+      // Get current selected values from all option groups
+      const option1 = document.querySelector('[data-option-position="1"] .active')?.dataset.value || '';
+      const option2 = document.querySelector('[data-option-position="2"] .active')?.dataset.value || '';
+      const option3 = document.querySelector('[data-option-position="3"] .active')?.dataset.value || '';
+  
+      let id = '';
+      let price = '';
+      let salePrice = '';
+      let sale = false;
+      let avail = false;
+  
+      {% for v in product.variants %}
+        if (
+          option1 === "{{ v.option1 }}" {% if product.options[1] %} && option2 === "{{ v.option2 }}"{% endif %} {% if product.options[2] %} && option3 === "{{ v.option3 }}"{% endif %}
+        ) {
+          id = {{ v.id }};
+          price = "{{ v.price | money }}";
+          salePrice = "{{ v.compare_at_price | money }}";
+          {% if v.compare_at_price > v.price %}
+            sale = true;
+          {% endif %}
+          avail = {{ v.available }};
+        }
+      {% endfor %}
+  
+      const cartBtn = document.querySelector("#product-btn");
+      const priceSale = document.querySelector("#product__price-sale");
+      const priceOg = document.querySelector("#product__price-og");
+  
+      if (id !== '') {
+        document.getElementById("product-select").value = id;
+        updateQueryString('variant', id);
+      }
+  
+      if (avail) {
+        cartBtn.classList.add("available");
+      } else {
+        cartBtn.classList.remove("available");
+      }
+  
+      if (sale) {
+        priceSale.style.display = "block";
+        priceSale.innerHTML = salePrice;
+      } else {
+        priceSale.style.display = "none";
+      }
+  
+      priceOg.innerHTML = price;
+    }
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Main Product",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "class": "product-container",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "label": "Copy under ATC button",
+      "id": "copy_under_atc_button",
+      "default": "Order 12+ for free shipping"     
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}

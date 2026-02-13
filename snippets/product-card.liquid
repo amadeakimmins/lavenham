@@ -1,0 +1,143 @@
+{%- style -%}
+  #pcard--{{ product.id }} {
+    --primary-colour: {{ product.metafields.custom.primary_colour }};
+  }
+{%- endstyle -%}
+
+<div class="card pcard reveal {% if product.metafields.custom.featured == true %}pcard--featured{% endif %}" aria-label="{{- pTitle -}}" id="pcard--{{ product.id }}">
+  {% assign pTitle = product.title | escape | split: " - " | first %}
+
+  <div class="card__image{% if product.media.size > 1 %} card__image--has-secondary {% endif %}">
+    {% if product.tags contains 'Best Seller' %}
+      <div class="card__image-badge best-seller">
+        <span class="caption">Best Seller</span>
+        {% render 'icon-circle-shape' %}
+      </div>
+    {% endif %}
+
+    <div>
+      <div class="product-card__primary-media">
+        {%- render "media-img", media: product.featured_media -%}
+      </div>
+      {% if product.media.size > 1 %}
+        <div class="product-card__secondary-media">
+          {% render 'media-img', media: product.media[1] %}
+        </div>
+      {% endif %}
+    </div>
+    
+    {% if showATC != false %}
+      <form class="product-card__atc-form" action="/cart/add" method="post">
+        {% if product.has_only_default_variant %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% endif %}
+        <input min="1" type="number" name="quantity" value="1" style="display: none;">
+        <div class="product-card__mobile-close">
+          <div aria-label="Mobile add to cart form close" class="product-card__atc-form-close-btn">
+            {% render 'icon-cross.liquid' %}
+          </div>
+          <div>
+            <p class="caption">Add to cart</p>
+          </div>
+        </div>
+        {% if product.selling_plan_groups.size > 0 or product.has_only_default_variant == false %}
+          <div class="product-card__selects-container">
+            {% unless product.has_only_default_variant %}
+              <div class="product-card__option-select-container">
+                <select class="product__card-option-select caption" name="id" data-variant-select>
+                  {% for variant in product.variants %}
+                    <option {% if forloop.first %}selected {% endif %} class="product-option" value="{{ variant.id }}" data-price={{variant.price}} data-sub-price="{{ variant.selling_plan_allocations.first.price }}">
+                      {{ variant.title }}
+                    </option>
+                  {% endfor %}
+                </select>
+                {% render 'icon-chevron' %}
+              </div>
+            {% endunless %}
+
+            {% if product.selling_plan_groups.size > 0 %}
+              {% assign defaultSellingPlan = product.selling_plan_groups.first.selling_plans.first.id  %}
+              <div class="product-card__option-select-container">
+                <select class="product__card-option-select caption" value="subscription" data-purchase-type-select>
+                  <option value="subscription" class="product-option">Subscription</option>
+                  <option value="oneOff" class="product-option">One off</option>
+                </select>
+                {% render 'icon-chevron' %}
+              </div>
+              <div class="product-card__option-select-container" data-subsciption-select>
+                <select class="product__card-option-select caption" id="sellingPlanSelect" value="{{ defaultSellingPlan }}" name="selling_plan">
+                  {% for selling_plan_group in product.selling_plan_groups %}
+                    {% for selling_plan in selling_plan_group.selling_plans %}
+                      <option {% if forloop.parentloop.first and forloop.first %}selected{% endif %} value="{{ selling_plan.id }}" class="product-option">
+                        {{ selling_plan.name }}
+                      </option>
+                    {% endfor %}
+                  {% endfor %}
+                </select>
+                {% render 'icon-chevron' %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <div class="product-card__atc-container">
+          <div class="product-card__quantity-container">
+            
+            <div class="product-card__quantity product__quantity button_pill">
+              <button class="no-js-hidden product-card__quantity-btn" name="minus" type="button" aria-label="Decrease Quantity">
+                {% render 'icon-minus' %}
+              </button>
+              <input min="1" type="number" name="quantity" value="1" class="product-card__quantity-input caption">
+              <button class="no-js-hidden product-card__quantity-btn" name="plus" type="button" aria-label="Increase Quantity">
+                {% render 'icon-plus' %}
+              </button>
+            </div>
+
+            <div class="product-card__price-container">
+              {% if product.selling_plan_groups.size > 0 %}
+                <p class="product-card__normal-price caption" data-price="{{ product.price }}">{{ product.price | money }}</p>
+                <p class="product-card__sub-price caption" data-price="{{ product.selected_or_first_available_variant.selling_plan_allocations.first.price }}">{{ product.selected_or_first_available_variant.selling_plan_allocations.first.price | money }}
+                </p>
+              {% else %}
+                <p class="product-card__regular-price caption" data-price="{{ product.price }}">{{ product.price | money }}</p>
+              {% endif %}
+
+            </div>
+          </div>
+
+          <button type="submit" name="add" class="product-card__atc-form-button button button--primary" aria-label="Add to Cart">
+            ADD TO CART
+          </button>
+        </div>
+      </form>
+      {% if product.selected_or_first_available_variant.available %}
+        <div class="product-card__image-atc" data-card-atc>
+          <div class="product-card__atc-button button button--primary">
+            ADD TO CART
+          </div>
+          <div class="pcard__form-errors richtext font_b" data-ajax-cart-messages="form"></div>
+        </div>
+
+
+      {% else %}
+        <div class="product-card__image-atc disabled">
+          <div class="product-card__atc-button">
+            SOLD OUT
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+
+    <a href="{{ product.url | default: '#' }}" class="pcard__info">
+    {% if product.metafields.custom.subheading != blank %}
+      <p class="caption">{{ product.metafields.custom.subheading }}</p>
+    {% endif %}
+    <p class="h4">{{- pTitle -}}</p>
+    {% if product.metafields.custom.excerpt != blank %}
+      <div class="pcard__description text-base">{{- product.metafields.custom.excerpt -}}</div>
+    {% else %}
+      <div class="pcard__description text-base">{{- product.description -}}</div>
+    {% endif %}
+  </a>
+</div>

@@ -1,0 +1,47 @@
+<section class="register form-container">
+  <div class="form_wrapper">
+
+    <div class="form__intro-wrapper reveal">
+      <h2 class="h4">Create an account</h2>
+      <p>Enter your details to create a new account.</p>
+    </div>
+
+    {%- form 'create_customer', novalidate: 'novalidate', class: 'form_form reveal' -%}
+      <div class="form_fields">
+        <div class="form_field">
+          <label class="caption" for="customer[first_name]">First Name</label>
+          <input class="caption" placeholder="Jane" type="text" name="customer[first_name]" {% if form.first_name %} value="{{ form.first_name }}" {% endif %} autocomplete="given-name">
+        </div>
+        <div class="form_field">
+          <label class="caption" for="customer[last_name]">Last Name</label>
+          <input class="caption" placeholder="Smith" type="text" name="customer[last_name]" {% if form.last_name %} value="{{ form.last_name }}" {% endif %} autocomplete="family-name">
+        </div>
+        <div class="form_field">
+          <label class="caption" for="customer[email]">Email Address</label>
+          <input class="caption" placeholder="jane.smith@gmail.com" type="email" name="customer[email]" {% if form.email %} value="{{ form.email }}" {% endif %} spellcheck="false" autocapitalize="off" autocomplete="email" aria-required="true" {% if form.errors contains 'email' %} aria-invalid="true" aria-describedby="RegisterForm-email-error" {% endif %}>
+        </div>
+        <div class="form_field">
+          <label class="caption" for="customer[password]">Password</label>
+          <input class="caption" placeholder="••••••••" type="password" name="customer[password]" aria-required="true" {% if form.errors contains 'password' %} aria-invalid="true" aria-describedby="RegisterForm-password-error" {% endif %}>
+        </div>
+      </div>
+
+      <button aria-label="Create account" class="form__primary-button button button--primary" type="submit">
+        Create your account
+      </button>
+
+      {%- if form.errors -%}
+        <div>
+          {{ form.errors.messages.form }}
+        </div>
+      {%- endif -%}
+    {%- endform -%}
+
+    <div class="form_alternate_login reveal">
+      <p>Already have an account with us?</p>
+      <a href="{{ routes.account_url }}" class="button button--secondary" aria-label="Create an account">
+        Sign in
+      </a>
+    </div>
+  </div>
+</section>

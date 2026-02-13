@@ -1,0 +1,4 @@
+[environments.dev]
+store = "rizk-world"
+open = true
+verbose = true

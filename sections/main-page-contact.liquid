@@ -1,0 +1,176 @@
+<section class="contact">
+  <div class="contact__meta">
+    <h2 class="">{{- page.title -}}</h2>
+
+    {% if page.content != blank %}
+      <div class="richtext">
+        {{- page.content -}}
+      </div>
+    {% endif %}
+  </div>
+
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'fairies' -%}
+        <div class="contact__fairies">
+          <div class="aspectholder">
+            {%- assign img = block.settings.image -%}
+            {%- render 'media-img', media: img -%}
+          </div>
+        </div>
+    {%- endcase -%}
+  {%- endfor -%}
+
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'media' -%}
+        <div class="contact__image">
+          {%- render 'media-block', block: block -%}
+        </div>
+    {%- endcase -%}
+  {%- endfor -%}
+
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'form' -%}
+        <div class="contact__form">
+          {% if block.settings.heading != blank %}
+            <h3 class="">{{- block.settings.heading | newline_to_br -}}</h3>
+          {% endif %}
+
+          {% form 'contact', class: 'form_form' %}
+            <div class="form_fields">
+              <div class="form_field">
+                <label class="" for="contact[name]">Full name</label>
+                <input class="" type="text" name="contact[name]">
+              </div>
+              <div class="form_field">
+                <label class="" for="contact[email]">Email address</label>
+                <input class="" type="email" name="contact[email]">
+              </div>
+              {% if block.settings.subjects != blank %}
+                {% assign subjects = block.settings.subjects | split: ", " %}
+                <div class="form_field form_field-select">
+                  <label class="" for="contact[subject]">Select enquiry</label>
+                  <select class="" name="contact[subject]">
+                    {% for s in subjects %}
+                      <option value="{{ s }}">{{- s -}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              {% endif %}
+              <div class="form_field">
+                <label class="" for="contact[body]">Let us know a little more</label>
+                <textarea class="" name="contact[body]" rows="4"></textarea>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="button"
+              aria-label="Submit enquiry"
+            >
+              Send now
+            </button>
+
+            {%- if form.errors -%}
+              <div class="richtext">
+                {{- form.errors | default_errors -}}
+              </div>
+            {%- endif -%}
+          {% endform %}
+        </div>
+    {%- endcase -%}
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Main Page - Contact Form",
+  "enabled_on": { 
+    "templates": ["page"]
+  },
+  "limit": 1,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "fairies",
+      "name": "Fairies",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image Selector"
+        }
+      ]
+    },
+    {
+      "type": "media",
+      "name": "Media",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "options": [
+            {
+              "value": "img",
+              "label": "Image"
+            },
+            {
+              "value": "video",
+              "label": "Video"
+            }
+          ],
+          "default": "img",
+          "label": "Media Type"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image Selector"
+        },
+        {
+          "type": "text",
+          "id": "video",
+          "label": "Video URL",
+          "info": "For video embeds, use full url including .mp4"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_controls",
+          "default": false,
+          "label": "Enable Video Controls"
+        }
+      ]
+    },
+    {
+      "type": "form",
+      "name": "Form",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "subjects",
+          "label": "Subjects",
+          "info": "Split subjects using comma-space; ', '"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

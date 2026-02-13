@@ -1,0 +1,68 @@
+<section class="faq-links reveal">
+  {% for block in section.blocks %}
+    <a href="#{{ block.settings.anchor_id}}" aria-label="{{ block.settings.title }}" class="faq-links__link caption{% if forloop.first %} active{% endif %}" data-anchor="{{ block.settings.anchor_id }}">{{ block.settings.title }}</a>
+  {% endfor %}
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const links = document.querySelectorAll('.faq-links__link');
+
+    const linkMap = {};
+    links.forEach(link => {
+      const id = link.getAttribute('data-anchor');
+      linkMap[id] = link;
+    });
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        const link = linkMap[id];
+
+        if (entry.isIntersecting && link) {
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    Object.keys(linkMap).forEach(id => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+  });
+</script>
+
+
+{% schema %}
+{
+  "name": "FAQ Links",
+  "class": "faq-links-section",
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        { 
+          "type": "text", 
+          "id": "title", 
+          "label": "Title" 
+        },
+        { 
+          "type": "text", 
+          "id": "anchor_id", 
+          "label": "Anchor ID" ,
+          "info": "Needs to match the anchor id given in each of the FAQ sections"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "FAQ Links" }]
+}
+{% endschema %}

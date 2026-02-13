@@ -1,0 +1,140 @@
+<section class="faq background--{{ section.settings.bgColor }} container" id="{{ section.settings.anchor_id }}">
+  {% if section.settings.subheading != blank or section.settings.title != blank or section.settings.body != blank %}
+    <div class="heading__content-wrapper">
+      {%- if section.settings.subheading != blank -%}
+        <p class="caption">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    
+      {%- if section.settings.title != blank -%}
+        <h2 class="heading__title heading__narrow h3 reveal">{{ section.settings.title }}</h2>
+      {%- endif -%}
+    
+      {%- if section.settings.body != blank -%}
+        <div class="heading__body reveal">{{- section.settings.body -}}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  
+
+  <div class="faq__container reveal">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'question' %}
+          {% assign tag_list = block.settings.filter_tags | strip %}
+          <details class="faq__item" data-tags="{{ tag_list }}">
+            <summary>
+              <div class="faq__question">
+                <p class="h4">{{ block.settings.title }}</p>
+                <div class="faq__icons">
+                  {% render 'icon-plus' %}
+                  {% render 'icon-minus' %}
+                </div>
+              </div>
+            </summary>
+            <div class="faq__answer text-base">{{ block.settings.answer | newline_to_br }}</div>
+          </details>
+      {% endcase %}
+    {% endfor %}
+  </div>
+
+  {% if section.settings.button_label != blank %}
+    <div class="faq__button-wrapper reveal">
+      <a href="{{ section.settings.button_link | default: '#' }}" class="faq__button button button--primary" aria-label="{{ section.settings.button_label }}">
+        {{ section.settings.button_label | escape }}
+      </a>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "FAQs",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "select",
+      "id": "bgColor",
+      "label": "Background Color",
+      "default": "none",
+      "options": [
+        {
+          "value": "secondary",
+          "label": "Yellow"
+        },
+        {
+          "value": "primary",
+          "label": "Orange"
+        }, {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    { 
+      "type": "text", 
+      "id": "anchor_id", 
+      "label": "Anchor ID" ,
+      "info": "For the filters. Lowercase and no spaces."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "subheading"
+    }, 
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body Copy"
+    },
+    {
+      "type": "text",
+      "label": "Button Label",
+      "id": "button_label"    
+    },
+    {
+      "type": "url",
+      "label": "Button Link",
+      "id": "button_link"      
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { 
+          "type": "text", 
+          "id": "title", 
+          "label": "Question" 
+        },
+        { 
+          "type": "richtext", 
+          "id": "answer", 
+          "label": "Answer" 
+        },
+        { 
+          "type": "textarea", 
+          "id": "filter_tags", 
+          "label": "Tags (comma-separated)" 
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "FAQs" }]
+}
+{% endschema %}
