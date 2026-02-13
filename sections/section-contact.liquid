@@ -13,11 +13,11 @@
       {%- if section.settings.subheading != blank -%}
         <p class="contact__subheading caption reveal">{{ section.settings.subheading }}</p>
       {%- endif -%}
-    
+
       {%- if section.settings.title != blank -%}
         <h2 class="contact__title {{ section.settings.title_font_size }} contact__title--{{ section.settings.titleWidth }} reveal">{{ section.settings.title }}</h2>
       {%- endif -%}
-    
+
       {%- if section.settings.body != blank -%}
         <div class="contact__body text-base reveal">{{- section.settings.body -}}</div>
       {%- endif -%}
@@ -26,16 +26,18 @@
         {% for block in section.blocks %}
           <div>
             <p class="contact__email-title caption">{{ block.settings.title }}</p>
-            <a href="mailto:{{ block.settings.email }}" class="button button--secondary">{{ block.settings.email }}</a>
+            <a href="mailto:{{ block.settings.email }}" class="button">{{ block.settings.email }}</a>
           </div>
         {% endfor %}
       </div>
 
       <div class="contact__socials reveal">
-        {% if settings.instagram_handle != blank %}<a aria-label="Instagram" href="https://www.instagram.com/{{ settings.instagram_handle | strip }}" rel="noopener noreferrer" target="blank">{% render 'icon-instagram' %}</a>{% endif %}
-        {% if settings.spotify_url != blank %}<a aria-label="Spotify" href="{{ settings.spotify_url }}" rel="noopener noreferrer" target="blank">{% render 'icon-spotify' %}</a>{% endif %}
-        {% if settings.facebook_url != blank %}<a aria-label="Facebook" href="{{ settings.facebook_url }}" rel="noopener noreferrer" target="blank">{% render 'icon-facebook' %}</a>{% endif %}
-        {% if settings.linkedIn_url != blank %}<a aria-label="Linkedin" href="{{ settings.linkedIn_url }}" rel="noopener noreferrer" target="blank">{% render 'icon-linkedin' %}</a>{% endif %}
+        {% if settings.instagram_handle != blank %}
+          <a aria-label="Instagram" href="https://www.instagram.com/{{ settings.instagram_handle | strip }}" rel="noopener noreferrer" target="blank">Instagram</a>
+        {% endif %}
+        {% if settings.facebook_url != blank %}
+          <a aria-label="Facebook" href="{{ settings.facebook_url }}" rel="noopener noreferrer" target="blank">Facebook</a>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -43,78 +45,74 @@
 
 
 {% schema %}
-{
-  "name": "Contact",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Subheading"
-    }, 
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Title"
-    },
-    {
-      "type": "richtext",
-      "id": "body",
-      "label": "Body Copy"
-    },
-    {
-      "type": "select",
-      "label": "Media Type",
-      "id": "mediaType",
-      "default": "image",
-      "options": [
-        {
-          "value": "image",
-          "label": "Image"
-        }, {
-          "value": "video",
-          "label": "Video"
-        }
-      ]
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
-    },
-    {
-      "type": "video",
-      "id": "video",
-      "label": "Video File"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "email_address",
-      "name": "Email Address",
-      "settings": [
-        { 
-          "type": "text", 
-          "id": "title", 
-          "label": "Title" 
-        },
-        { 
-          "type": "text", 
-          "id": "email", 
-          "label": "Email Address" 
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Contact"
-    }
-  ]
-}
+  {
+    "name": "Contact",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "body",
+        "label": "Body Copy"
+      }, {
+        "type": "select",
+        "label": "Media Type",
+        "id": "mediaType",
+        "default": "image",
+        "options": [
+          {
+            "value": "image",
+            "label": "Image"
+          }, {
+            "value": "video",
+            "label": "Video"
+          }
+        ]
+      }, {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      }, {
+        "type": "video",
+        "id": "video",
+        "label": "Video File"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "email_address",
+        "name": "Email Address",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          }, {
+            "type": "text",
+            "id": "email",
+            "label": "Email Address"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Contact"
+      }
+    ]
+  }
 {% endschema %}

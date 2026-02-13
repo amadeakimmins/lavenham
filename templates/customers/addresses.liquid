@@ -30,8 +30,8 @@
           </div>
   
           <div class="account-section__button-wrapper">
-            <button onclick="toggleMultipleClass('.address__edit-default', '.address__default-container')" aria-label="Edit address" class="button button--secondary button--medium">Edit address</button>
-            <a href="#" class="button button--medium button--link text-fade" onclick="Shopify.CustomerAddress.destroy({{ customer.default_address.id }})">Delete</a>
+            <button onclick="toggleMultipleClass('.address__edit-default', '.address__default-container')" aria-label="Edit address" class="button">Edit address</button>
+            <a href="#" class="button button--link text-fade" onclick="Shopify.CustomerAddress.destroy({{ customer.default_address.id }})">Delete</a>
           </div>
         </div>
         
@@ -73,10 +73,10 @@
                 </div>
   
                 <div class="account-section__button-wrapper">
-                  <button aria-label="Edit Address" class="button button--medium button--secondary" onclick="toggleMultipleClass('#form-address-{{ address.id }}', '#address__default--{{ address.id }}')" >
+                  <button aria-label="Edit Address" class="button" onclick="toggleMultipleClass('#form-address-{{ address.id }}', '#address__default--{{ address.id }}')" >
                     Edit address
                   </button>
-                  <a href="#" class="button button--medium button--link text-fade" onclick="Shopify.CustomerAddress.destroy({{ address.id }})">Delete</a>
+                  <a href="#" class="button button--link text-fade" onclick="Shopify.CustomerAddress.destroy({{ address.id }})">Delete</a>
                 </div>
               </div>
 
@@ -93,7 +93,7 @@
       </ul>
 
       <li class="address__form address__new-address-wrapper" data-address>
-        <button aria-label="Add new address" class="address__new-address-button button button--medium button--secondary" onclick="toggleClass('#new-address')">
+        <button aria-label="Add new address" class="address__new-address-button button" onclick="toggleClass('#new-address')">
           Add new address
         </button>
 

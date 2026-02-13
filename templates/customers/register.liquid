@@ -18,11 +18,11 @@
         </div>
         <div class="form_field">
           <label class="caption" for="customer[email]">Email Address</label>
-          <input class="caption" placeholder="jane.smith@gmail.com" type="email" name="customer[email]" {% if form.email %} value="{{ form.email }}" {% endif %} spellcheck="false" autocapitalize="off" autocomplete="email" aria-required="true" {% if form.errors contains 'email' %} aria-invalid="true" aria-describedby="RegisterForm-email-error" {% endif %}>
+          <input class="caption" placeholder="jane.smith@gmail.com" type="email" name="customer[email]" {% if form.email %} value="{{ form.email }}" {% endif %} spellcheck="false" autocapitalize="off" autocomplete="email" aria-required="true" {% if form.errors contains 'email' %} aria-invalid="true"aria-describedby="RegisterForm-email-error"{% endif %}>
         </div>
         <div class="form_field">
           <label class="caption" for="customer[password]">Password</label>
-          <input class="caption" placeholder="••••••••" type="password" name="customer[password]" aria-required="true" {% if form.errors contains 'password' %} aria-invalid="true" aria-describedby="RegisterForm-password-error" {% endif %}>
+          <input class="caption" placeholder="••••••••" type="password" name="customer[password]" aria-required="true" {% if form.errors contains 'password' %} aria-invalid="true"aria-describedby="RegisterForm-password-error"{% endif %}>
         </div>
       </div>
 
@@ -39,7 +39,7 @@
 
     <div class="form_alternate_login reveal">
       <p>Already have an account with us?</p>
-      <a href="{{ routes.account_url }}" class="button button--secondary" aria-label="Create an account">
+      <a href="{{ routes.account_url }}" class="button" aria-label="Create an account">
         Sign in
       </a>
     </div>

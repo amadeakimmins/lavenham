@@ -127,25 +127,27 @@ var swiperFeaturedCollection = new Swiper(
   {
     direction: 'horizontal',
     slidesPerView: 1.2,
-    slidesOffsetBefore: 20,
-    slidesOffsetAfter: 20,
-    spaceBetween: 20,
+    slidesOffsetBefore: 16,
+    slidesOffsetAfter: 16,
+    spaceBetween: 16,
     navigation: {
       nextEl: '.swiper-featured-collection-button-next',
       prevEl: '.swiper-featured-collection-button-prev'
     },
     breakpoints: {
       768: {
-        slidesPerView: 2.5,
-        spaceBetween: 40,
-        slidesOffsetBefore: 40,
+        slidesPerView: 3.3,
+        spaceBetween: 20,
+        slidesOffsetBefore: 20,
         slidesOffsetAfter: 20
       },
       1024: {
-        slidesPerView: 3,
-        spaceBetween: 40,
-        slidesOffsetBefore: 0,
-        slidesOffsetAfter: 0
+        slidesPerView: 4.5,
+        // centeredSlides: true,
+        // loop: true,
+        spaceBetween: 20,
+        slidesOffsetBefore: 20,
+        slidesOffsetAfter: 20
       }
     }
   }

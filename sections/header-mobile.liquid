@@ -4,19 +4,21 @@
 
 <button aria-label="Open Menu" class="header__toggle button" onclick="toggleClass('.header.mobile', 'nav-open')">Menu</button>
 
-<a href="/" aria-label="Home" class="header__logo">{% render 'icon-logo-large' %}</a>
+<a href="/" aria-label="Home" class="header__logo">{% render 'icon-logo' %}</a>
 
 <nav class="header__secondary" aria-label="Secondary Navigation">
-  <a aria-label="Account Page" class="header__link" href="/account">{% render 'icon-account' %}</a>
-  <button class="header__link header__cart" data-ajax-cart-toggle-class-button="js-my-cart-open" aria-label="Show Cart">{% render 'icon-cart' %}</button>
+  {%- comment -%}
+    <a aria-label="Account Page" class="header__link" href="/account">{% render 'icon-account' %}</a>
+  {%- endcomment -%}
+  <button class="header__link header__cart" data-ajax-cart-toggle-class-button="js-my-cart-open" aria-label="Show Cart">Bag</button>
 </nav>
 
 <div class="header__search header__search-mobile">
   <button onclick="toggleClass('.header__search-mobile')" class="header__search-close-button">{% render 'icon-cross' %}</button>
   <form action="{{ routes.search_url }}" method="get" role="search" class="header__search-form">
-      <input type="hidden" name="options[prefix]" value="last" />
-      <input class="h4" placeholder="Begin typing..." type="text" name="q" value="{{ search.terms | escape }}" {% if search.performed %}autofocus{% endif %}>
-      <button type="submit" class="button button--primary button--full-width" aria-label="Search">Search</button>
+    <input type="hidden" name="options[prefix]" value="last"/>
+    <input class="h4" placeholder="Begin typing..." type="text" name="q" value="{{ search.terms | escape }}" {% if search.performed %}autofocus{% endif %}>
+    <button type="submit" class="button button--primary button--full-width" aria-label="Search">Search</button>
   </form>
 </div>
 
@@ -39,13 +41,10 @@
                 {%- assign has_child_links = true -%}
               {% endif %}
             {%- endfor -%}
-          
-            <a 
-              href="{% if has_child_links %}#{% else %}{{ link.url }}{% endif %}" 
-              aria-label="{{ link.title }}" 
-              class="header__menu-button button button--icon{% if has_child_links %} has-children{% endif %}{% if forloop.first %} active{% endif %}" 
-              data-nav-item="{{ link.title | escape }}" 
-              id="{% if has_child_links %}headerMenuItemMobile{% endif %}"><span>{{ link.title }}</span></a>
+
+            <a href="{% if has_child_links %}#{% else %}{{ link.url }}{% endif %}" aria-label="{{ link.title }}" class="header__menu-button button button--icon{% if has_child_links %} has-children{% endif %}{% if forloop.first %} active{% endif %}" data-nav-item="{{ link.title | escape }}" id="{% if has_child_links %}headerMenuItemMobile{% endif %}">
+              <span>{{ link.title }}</span>
+            </a>
           {%- endfor -%}
         </nav>
       {% endif %}
@@ -57,7 +56,7 @@
 
       {%- assign has_image_links = false -%}
       {%- assign has_text_links = false -%}
-  
+
       {%- for childLink in link.links -%}
         {%- for block in section.blocks -%}
           {%- if block.type == "image_link" and childLink.title == block.settings.title and link.title == block.settings.parent_section -%}
@@ -67,10 +66,10 @@
           {%- endif -%}
         {%- endfor -%}
       {%- endfor -%}
-  
+
       <div class="navigation__child-link navigation__child-link--mobile{% if forloop.first %} active{% endif %}" id="navChildMenuMobile" data-nav-item="{{- link.title | escape -}}">
         <div class="navigation__child-links-content">
-          
+
           {% if has_image_links %}
             <div class="navigation__image-link-section">
               {% for childLink in link.links %}
@@ -93,7 +92,7 @@
               {% endfor %}
             </div>
           {% endif %}
-  
+
           {% if has_text_links %}
             <div class="navigation__link-section">
               {% for childLink in link.links %}
@@ -112,36 +111,36 @@
               {% endfor %}
             </div>
           {% endif %}
-          
+
           {% for block in section.blocks %}
             {%- case block.type -%}
               {%- when "collection" -%}
                 {% if link.title == block.settings.parent_section %}
-                    <div class="navigation-collection-swiper swiper" id="navigationCollectionSlider">
-                      <div class="swiper-wrapper">
-                        {% for product in block.settings.collection.products %}
-                          <div class="swiper-slide">
-                            {% render 'product-card', product: product, showATC: false %}
-                          </div>
-                        {% endfor %}
-                      </div>
+                  <div class="navigation-collection-swiper swiper" id="navigationCollectionSlider">
+                    <div class="swiper-wrapper">
+                      {% for product in block.settings.collection.products %}
+                        <div class="swiper-slide">
+                          {% render 'product-card', product: product, showATC: false %}
+                        </div>
+                      {% endfor %}
                     </div>
-                  
-  
+                  </div>
+
+
                   {% if block.settings.collection.url != blank %}
                     <a href="{{ block.settings.collection.url | default: '#' }}" class="header__shop-all-button button--full-width button button--primary" aria-label="Shop All">
-                        <span>Shop All</span>
-                      </a>
+                      <span>Shop All</span>
+                    </a>
                   {% endif %}
                 {% endif %}
             {% endcase %}
           {% endfor %}
-  
+
         </div>
       </div>
     {% endfor %}
-  
-    <button onclick="toggleClass('.header__search-mobile')" class="header__search-button button button--secondary">Search</button>
+
+    <button onclick="toggleClass('.header__search-mobile')" class="header__search-button button">Search</button>
   </div>
 </div>
 
@@ -178,8 +177,7 @@
             "label": "Mobile Body"
           }
         ]
-      },
-      {
+      }, {
         "type": "collection",
         "name": "Collection",
         "settings": [
@@ -187,8 +185,7 @@
             "type": "text",
             "id": "title",
             "label": "Title"
-          },
-          {
+          }, {
             "type": "text",
             "id": "parent_section",
             "label": "Parent Section",
@@ -200,8 +197,7 @@
             "label": "Collection"
           }
         ]
-      },
-      {
+      }, {
         "type": "image_link",
         "name": "Image for Link",
         "settings": [
@@ -234,8 +230,7 @@
             "label": "Image"
           }
         ]
-      },
-      {
+      }, {
         "type": "link",
         "name": "Link",
         "settings": [
@@ -243,8 +238,7 @@
             "type": "text",
             "id": "title",
             "label": "Title"
-          },
-          {
+          }, {
             "type": "text",
             "id": "parent_section",
             "label": "Parent Section",

@@ -1,26 +1,20 @@
 <section class="banner reveal" id="{{ section.settings.anchor_id }}">
   <div class="banner__inner{% if section.settings.stack_content_mobile %} banner__inner--stacked{% endif %}">
     {% if section.settings.heading != blank or section.settings.button_label != blank %}
-      <div class="banner__content-container banner__content-container--{{ section.settings.content_position }}">
-        <div class="banner__content text--{{ section.settings.textColor }}">
-          {%- if section.settings.subheading != blank -%}
-            <p class="image-and-text__subheading caption">{{ section.settings.subheading }}</p>
-          {%- endif -%}
-          {% if section.settings.heading != blank %}
-            <h2 class="banner__title {% if section.settings.content_position == 'left' %} h3{% else%} h1{% endif %}">
-              {{- section.settings.heading | newline_to_br -}}
-            </h2>
-          {% endif %}
-        </div>
-
-        <div class="banner__content text--{{ section.settings.textColor }}">
-          {% if section.settings.body != blank %}
-            <div class="banner__body">{{ section.settings.body }}</div>
-          {% endif %}
-          {% if section.settings.button_label != blank %}
-            <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary button--large" aria-label="{{ section.settings.button_label }}"><span>{{- section.settings.button_label | escape -}}</span></a>
-          {% endif %}
-        </div>
+      <div class="banner__content-container text--{{ section.settings.textColor }}">
+        {% if section.settings.heading != blank %}
+          <h2 class="banner__title h1">
+            {{- section.settings.heading | newline_to_br -}}
+          </h2>
+        {% endif %}
+        {% if section.settings.body != blank %}
+          <div class="banner__body">{{ section.settings.body }}</div>
+        {% endif %}
+        {% if section.settings.button_label != blank %}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="button button--link{% if section.settings.textColor == 'white' %} button--link-white{% endif %}" aria-label="{{ section.settings.button_label }}">
+            <span>{{- section.settings.button_label | escape -}}</span>
+          </a>
+        {% endif %}
       </div>
     {% endif %}
 
@@ -61,40 +55,19 @@
       {
         "type": "header",
         "content": "Settings"
-      }, 
-      {
-        "type": "select",
-        "id": "content_position",
-        "label": "Content Position",
-        "default": "left",
-        "options": [
-          {
-            "value": "center",
-            "label": "Center"
-          },
-          {
-            "value": "left",
-            "label": "Left Aligned"
-          }
-        ]
       },
       {
         "type": "select",
         "id": "textColor",
         "label": "Text Color",
-        "default": "orange",
+        "default": "white",
         "options": [
           {
             "value": "white",
             "label": "White"
-          },
-          {
+          }, {
             "value": "black",
             "label": "Black"
-          },
-          {
-            "value": "orange",
-            "label": "Orange"
           }
         ]
       },
@@ -112,7 +85,8 @@
             "label": "Inset"
           }
         ]
-      }, {
+      },
+      {
         "type": "select",
         "label": "Image Height",
         "id": "image_height",
@@ -126,34 +100,24 @@
             "label": "Two Thirds"
           }
         ]
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "stack_content_mobile",
         "label": "Stack content on mobile",
         "default": false
-      },
-      {
+      }, {
         "type": "header",
         "content": "Content"
-      }, 
-      {
+      }, {
         "type": "text",
         "id": "anchor_id",
         "label": "Anchor ID",
         "info": "Only used on pages with sticky navigation"
-      }, 
-      {
-        "type": "text",
-        "id": "subheading",
-        "label": "Subheading",
-        "default": "Subheading"
       }, {
         "type": "text",
         "id": "heading",
         "label": "Heading"
-      },
-      {
+      }, {
         "type": "textarea",
         "id": "body",
         "label": "Body"
@@ -182,8 +146,7 @@
             "label": "Video"
           }
         ]
-      },
-      {
+      }, {
         "type": "image_picker",
         "id": "image",
         "label": "Image Selector"

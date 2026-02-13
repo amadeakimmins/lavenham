@@ -1,92 +1,69 @@
 <section class="featured-collection">
-  <div class="featured-collection__copy-wrapper container {% if section.settings.title_font_size == 'caption' %}featured-collection__copy-wrapper--small-padding{% endif %}">
-    <h2 class="featured-collection__title reveal {{ section.settings.title_font_size }}">
+  <div class="featured-collection__copy-wrapper">
+    <h2 class="featured-collection__title h4 reveal">
       {{ section.settings.title | default: "Featured products"}}
     </h2>
-    {% if section.settings.body != blank %}
-      <div class="featured-collection__body text-base reveal">{{ section.settings.body }}</div>
+
+    {% if section.settings.button_label != blank %}
+      <a href="{{ section.settings.button_link | default: '#' }}" class="button button--link" aria-label="{{ section.settings.button_label }}">
+        <span>{{- section.settings.button_label | escape -}}</span>
+      </a>
     {% endif %}
   </div>
   <div class="featured-collection__slider swiper reveal" id="featuredCollectionSlider">
     <div class="swiper-wrapper">
       {% for product in section.settings.collection.products %}
         <div class="swiper-slide featured-collection__slide">
-          {% render 'product-card', product: product %}
+          {% render 'product-card', product: product, showATC: false %}
         </div>
       {% endfor %}
     </div>
   </div>
 
-  {%- comment -%} <div class="landing__navigation">
+  {%- comment -%}
+    <div class="landing__navigation">
     <div class="swiper-button-prev swiper-featured-collection-button-prev">
-      {% render 'icon-arrow-left' %}
+    {% render 'icon-arrow-left' %}
     </div>
     <div class="swiper-button-next swiper-featured-collection-button-next">
-      {% render 'icon-arrow-right' %}
+    {% render 'icon-arrow-right' %}
     </div>
-  </div> {%- endcomment -%}
-
-  {% if section.settings.button_label != blank %}
-    <div class="generic__button-wrapper reveal">
-      <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary button--large" aria-label="{{ section.settings.button_label }}"><span>{{- section.settings.button_label | escape -}}</span></a>
     </div>
-  {% endif %}
+  {%- endcomment -%}
 </section>
 
 {% schema %}
-{
-  "name": "Featured Collection",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Content"
-    }, 
-    {
-      "type": "text",
-      "label": "Title",
-      "id": "title"      
-    },
-    {
-      "type": "select",
-      "id": "title_font_size",
-      "label": "Title Font Size",
-      "default": "h2",
-      "options": [
-        {
-          "value": "h2",
-          "label": "Large"
-        },
-        {
-          "value": "caption",
-          "label": "Small"
-        }
-      ]
-    },
-    {
-      "type": "textarea",
-      "label": "Body",
-      "id": "body"      
-    },
-    { 
-      "type": "collection", 
-      "id": "collection", 
-      "label": "Collection"
-    },
-    {
-      "type": "text",
-      "label": "Button Label",
-      "id": "button_label"      
-    },
-    {
-      "type": "url",
-      "label": "Button Link",
-      "id": "button_link"      
-    }
-  ],
-  "presets": [
-    {
-      "name": "Featured Collection"
-    }
-  ]
-}
+  {
+    "name": "Featured Collection",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "label": "Title",
+        "id": "title"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "text",
+        "label": "Button Label",
+        "id": "button_label"
+      }, {
+        "type": "url",
+        "label": "Button Link",
+        "id": "button_link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Collection"
+      }
+    ]
+  }
 {% endschema %}

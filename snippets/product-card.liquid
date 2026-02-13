@@ -1,5 +1,5 @@
 {%- style -%}
-  #pcard--{{ product.id }} {
+  #pcard--{{ product.id }}{
     --primary-colour: {{ product.metafields.custom.primary_colour }};
   }
 {%- endstyle -%}
@@ -25,7 +25,7 @@
         </div>
       {% endif %}
     </div>
-    
+
     {% if showATC != false %}
       <form class="product-card__atc-form" action="/cart/add" method="post">
         {% if product.has_only_default_variant %}
@@ -82,7 +82,7 @@
 
         <div class="product-card__atc-container">
           <div class="product-card__quantity-container">
-            
+
             <div class="product-card__quantity product__quantity button_pill">
               <button class="no-js-hidden product-card__quantity-btn" name="minus" type="button" aria-label="Decrease Quantity">
                 {% render 'icon-minus' %}
@@ -129,15 +129,9 @@
     {% endif %}
   </div>
 
-    <a href="{{ product.url | default: '#' }}" class="pcard__info">
-    {% if product.metafields.custom.subheading != blank %}
-      <p class="caption">{{ product.metafields.custom.subheading }}</p>
-    {% endif %}
+  <a href="{{ product.url | default: '#' }}" class="pcard__info">
     <p class="h4">{{- pTitle -}}</p>
-    {% if product.metafields.custom.excerpt != blank %}
-      <div class="pcard__description text-base">{{- product.metafields.custom.excerpt -}}</div>
-    {% else %}
-      <div class="pcard__description text-base">{{- product.description -}}</div>
-    {% endif %}
-  </a>
+    {% if product.metafields.custom.subheading != blank %}
+      <p class="caption">{{ product.metafields.custom.color }}</p>
+    {% endif %}<p class="product-card__regular-price caption" data-price="{{ product.price }}">{{ product.price | money }}</p></a>
 </div>

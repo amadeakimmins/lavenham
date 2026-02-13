@@ -10,38 +10,23 @@
         <div class="form_fields">
           <div class="form_field">
             <label class="caption" for="customer[email]">Email Address</label>
-            <input
-              class="caption"
-              type="email"
-              name="customer[email]"
-              autocomplete="email"
-              autocorrect="off"
-              autocapitalize="off"
-              placeholder="jane.smith@gmail.com"
+            <input class="caption" type="email" name="customer[email]" autocomplete="email" autocorrect="off" autocapitalize="off" placeholder="jane.smith@gmail.com"
               {% if form.errors contains 'form' %}
-                aria-invalid="true"
-              {% endif %}
-            >
+              aria-invalid="true"
+              {% endif %}>
           </div>
           <div class="form_field">
             <label class="caption" for="customer[password]">Password</label>
-            <input
-              class="caption"
-              type="password"
-              value=""
-              name="customer[password]"
-              placeholder="••••••••"
-              autocomplete="current-password"
+            <input class="caption" type="password" value="" name="customer[password]" placeholder="••••••••" autocomplete="current-password"
               {% if form.errors contains 'form' %}
-                aria-invalid="true"
-              {% endif %}
-            >
+              aria-invalid="true"
+              {% endif %}>
           </div>
         </div>
 
         <div class="form_buttons reveal">
           <button type="submit" class="button button--primary" aria-label="Sign in">Sign in</button>
-  
+
           <button type="button" class="login__forgot-password-button button button--link" aria-label="Forgot Password">Forgot your password</button>
         </div>
 
@@ -54,7 +39,7 @@
 
       <div class="form_alternate_login reveal">
         <p class="caption">Don’t have an account with us?</p>
-        <a href="{{ routes.account_register_url }}" class="button button--secondary" aria-label="Create an account">
+        <a href="{{ routes.account_register_url }}" class="button" aria-label="Create an account">
           Create Account
         </a>
       </div>
@@ -76,7 +61,7 @@
         <div class="form_fields">
           <div class="form_field">
             <label class="caption" for="email">Email Address</label>
-            <input class="caption" placeholder="jane.smith@gmail.com" type="email" value="" name="email" autocorrect="off" autocapitalize="off" autocomplete="email" {% if form.errors %} aria-invalid="true" aria-describedby="RecoverEmail-email-error" autofocus {% endif %}>
+            <input class="caption" placeholder="jane.smith@gmail.com" type="email" value="" name="email" autocorrect="off" autocapitalize="off" autocomplete="email" {% if form.errors %} aria-invalid="true"aria-describedby="RecoverEmail-email-error"autofocus {% endif %}>
           </div>
         </div>
 
@@ -94,13 +79,10 @@
       <div class="form_alternate_login">
         <p class="caption">Don’t need to reset your password?</p>
         <div class="form_buttons">
-          <button
-            class="login__forgot-password-button button button--secondary"
-            aria-label="Forgot Password"
-          >
+          <button class="login__forgot-password-button button" aria-label="Forgot Password">
             Sign in
           </button>
-          <a href="{{ routes.account_register_url }}" class="button button--secondary" aria-label="Create an account">
+          <a href="{{ routes.account_register_url }}" class="button" aria-label="Create an account">
             Create an account
           </a>
         </div>

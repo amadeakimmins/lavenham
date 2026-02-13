@@ -465,7 +465,6 @@ footer,
   top: 0;
   z-index: 10;
   width: 100%;
-  height: var(--headerHeight);
 }
 
 /* Cart Popup */
@@ -518,8 +517,8 @@ form.js-ajax-cart-form-in-progress [type='submit'] {
   padding: var(--margin);
   width: 472px;
   height: 100dvh;
-  background-color: var(--secondary);
   transform: translateX(100%);
+  background-color: var(--white);
   visibility: hidden;
   transition: all var(--tZip);
 }
@@ -527,6 +526,11 @@ form.js-ajax-cart-form-in-progress [type='submit'] {
 .js-my-cart-open .cart-modal__inner {
   visibility: visible;
   transform: translateX(0);
+}
+
+.cart-modal__close svg {
+  width: 20px;
+  height: 20px;
 }
 
 .shopify-challenge__container {
@@ -542,7 +546,6 @@ form.js-ajax-cart-form-in-progress [type='submit'] {
 }
 
 .cart-modal__item .aspectholder {
-  background-color: var(--secondary);
   grid-column: span 1;
 }
 

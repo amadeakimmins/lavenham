@@ -7,63 +7,10 @@
     /* Spacing */
     --pageTop: var(--headerHeight);
     --baseFontSize: 14px;
-    --baseFontFamily: 'Copyright';
+    --baseFontFamily: 'Gill Sans';
   }
 
   /* FONT SIZES & STYLES */
-  .h1,
-  h1 {
-    font-size: 52px;
-    line-height: 56px;
-    letter-spacing: 0.2px;
-  }
-
-  .h2,
-  h2 {
-    font-size: 33px;
-    line-height: 38px;
-    letter-spacing: 0.2px;
-  }
-
-  .h3,
-  h3 {
-    font-size: 28px;
-    line-height: 34px;
-    letter-spacing: 0.1px;
-  }
-
-  .h4,
-  h4 {
-    font-size: 23px;
-    line-height: 28px;
-    letter-spacing: 0.1px;
-  }
-
-  .h6,
-  h6 {
-    font-size: 17px;
-    line-height: 22px;
-  }
-
-  .text-base,
-  p {
-    font-size: 14px;
-    line-height: 18px;
-  }
-
-  .button,
-  .button span,
-  .caption {
-    font-size: 11px;
-    line-height: 16px;
-    letter-spacing: 1.8px;
-  }
-
-  .text-small {
-    font-size: 11px;
-    line-height: 16px;
-    letter-spacing: 0.1px;
-  }
 
   /* END OF FONT SIZES & STYLES */
 
@@ -492,8 +439,8 @@
   }
 
   .header__search-close-button svg {
-    height: 40px;
-    width: 40px;
+    height: 20px;
+    width: 20px;
   }
 
   .header__toggle {

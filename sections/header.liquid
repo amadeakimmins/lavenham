@@ -1,137 +1,137 @@
-<h1 class="visually-hidden">
-  {{- page.title | default: shop.name -}}
-</h1>
+<div class="header__inner">
+  <h1 class="visually-hidden">
+    {{- page.title | default: shop.name -}}
+  </h1>
 
-{% if section.settings.menu != blank or section.blocks != blank %}
-  <div class="header__menu">
-    {% if section.settings.menu != blank %}
-      <nav class="header__menu-primary" aria-label="Primary Header Navigation">
-        {%- for link in section.settings.menu.links -%}
-
-          {%- assign has_child_links = false -%}
-          {%- for block in section.blocks -%}
-            {% if block.type == "image_link" or block.type == "link" %}
-              {%- for childLink in link.links -%}
-                {%- if childLink.title == block.settings.title and link.title == block.settings.parent_section -%}
-                  {%- assign has_child_links = true -%}
-                {%- endif -%}
-              {%- endfor -%}
-            {% elsif block.type == "collection" and link.title == block.settings.parent_section %}
-              {%- assign has_child_links = true -%}
-            {% endif %}
-          {%- endfor -%}
-        
-          <a 
-            href="{% if has_child_links %}#{% else %}{{ link.url }}{% endif %}" 
-            aria-label="{{ link.title }}" 
-            class="header__menu-button button button--icon{% if has_child_links %} has-children{% endif %}" 
-            data-nav-item="{{ link.title | escape }}" 
-            id="headerMenuItem"><span>{{ link.title }}</span>{% if has_child_links %}{% render 'icon-chevron' %}{% endif %}</a>
-        {%- endfor -%}
-      </nav>
-    {% endif %}
+  <div class="header__logo-wrapper">
+    <a href="/" aria-label="Home" class="header__logo">{% render 'icon-logo' %}</a>
   </div>
-{% endif %}
 
-<a href="/" aria-label="Home" class="header__logo">{% render 'icon-logo-large' %}</a>
+  {% if section.settings.menu != blank or section.blocks != blank %}
+    <div class="header__menu">
+      {% if section.settings.menu != blank %}
+        <nav class="header__menu-primary" aria-label="Primary Header Navigation">
+          {%- for link in section.settings.menu.links -%}
 
-<nav class="header__secondary" aria-label="Secondary Navigation">
-  <button onclick="toggleClass('.header', 'active-search')" class="header__link header__search-button" aria-label="Search Link">{% render 'icon-search' %}</button>
-  <a aria-label="Account Page" class="header__link" href="/account">{% render 'icon-account' %}</a>
-  <button class="header__link header__cart" data-ajax-cart-toggle-class-button="js-my-cart-open" aria-label="Show Cart">{% render 'icon-cart' %}</button>
-</nav>
+            {%- assign has_child_links = false -%}
+            {%- for block in section.blocks -%}
+              {% if block.type == "image_link" or block.type == "link" %}
+                {%- for childLink in link.links -%}
+                  {%- if childLink.title == block.settings.title and link.title == block.settings.parent_section -%}
+                    {%- assign has_child_links = true -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {% elsif block.type == "collection" and link.title == block.settings.parent_section %}
+                {%- assign has_child_links = true -%}
+              {% endif %}
+            {%- endfor -%}
 
-<div class="header__search">
-  <form action="{{ routes.search_url }}" method="get" role="search" class="header__search-form">
-      <input type="hidden" name="options[prefix]" value="last" />
+            <a href="{% if has_child_links %}#{% else %}{{ link.url }}{% endif %}" aria-label="{{ link.title }}" class="header__menu-button caption{% if has_child_links %} has-children{% endif %}" data-nav-item="{{ link.title | escape }}" id="headerMenuItem">{{ link.title }}</a>
+          {%- endfor -%}
+        </nav>
+      {% endif %}
+    </div>
+  {% endif %}
+
+
+  <nav class="header__secondary" aria-label="Secondary Navigation">
+    <button onclick="toggleClass('.header', 'active-search')" class="header__link caption header__search-button" aria-label="Search Link">Search</button>
+    <a aria-label="Account Page" class="header__link caption" href="/account">Members</a>
+    <button class="header__link caption header__cart" data-ajax-cart-toggle-class-button="js-my-cart-open" aria-label="Show Cart">Bag</button>
+  </nav>
+
+  <div class="header__search">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="header__search-form">
+      <input type="hidden" name="options[prefix]" value="last"/>
       <input class="h4" placeholder="Begin typing..." type="text" name="q" value="{{ search.terms | escape }}" {% if search.performed %}autofocus{% endif %}>
       <button type="submit" class="button button--primary" aria-label="Search">Search</button>
-  </form>
-</div>
+    </form>
+  </div>
 
-<div class="navigation" id="navigation">
-  {% for link in section.settings.menu.links %}
+  <div class="navigation" id="navigation">
+    {% for link in section.settings.menu.links %}
 
-    {%- assign has_image_links = false -%}
-    {%- assign has_text_links = false -%}
+      {%- assign has_image_links = false -%}
+      {%- assign has_text_links = false -%}
 
-    {%- for childLink in link.links -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == "image_link" and childLink.title == block.settings.title and link.title == block.settings.parent_section -%}
-          {%- assign has_image_links = true -%}
-        {%- elsif block.type == "link" and childLink.title == block.settings.title and link.title == block.settings.parent_section -%}
-          {%- assign has_text_links = true -%}
-        {%- endif -%}
+      {%- for childLink in link.links -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == "image_link" and childLink.title == block.settings.title and link.title == block.settings.parent_section -%}
+            {%- assign has_image_links = true -%}
+          {%- elsif block.type == "link" and childLink.title == block.settings.title and link.title == block.settings.parent_section -%}
+            {%- assign has_text_links = true -%}
+          {%- endif -%}
+        {%- endfor -%}
       {%- endfor -%}
-    {%- endfor -%}
 
-    <div class="navigation__child-link" id="navChildMenu" data-nav-item="{{- link.title | escape -}}">
-      <div class="navigation__child-links-content">
-        
-        {% if has_image_links %}
-          <div class="navigation__image-link-section">
-            {% for childLink in link.links %}
-              {% for block in section.blocks %}
-                {% if childLink.title == block.settings.title %}
-                  {%- case block.type -%}
-                    {%- when "image_link" -%}
-                      {% if link.title == block.settings.parent_section %}
-                        <a href="{{ block.settings.url | default: '#' }}" class="navigation__image-link">
-                          <div class="navigation__image">
-                            {% render 'icon-circle-shape-clip' %}
-                            {%- render "media-img", media: block.settings.image -%}
-                          </div>
-                          <p class="caption">{{- childLink.title -}}</p>
-                        </a>
-                      {% endif %}
-                  {% endcase %}
-                {% endif %}
+      <div class="navigation__child-link" id="navChildMenu" data-nav-item="{{- link.title | escape -}}">
+        <div class="navigation__child-links-content">
+
+          {% if has_image_links %}
+            <div class="navigation__image-link-section">
+              {% for childLink in link.links %}
+                {% for block in section.blocks %}
+                  {% if childLink.title == block.settings.title %}
+                    {%- case block.type -%}
+                      {%- when "image_link" -%}
+                        {% if link.title == block.settings.parent_section %}
+                          <a href="{{ block.settings.url | default: '#' }}" class="navigation__image-link">
+                            <div class="navigation__image">
+                              {% render 'icon-circle-shape-clip' %}
+                              {%- render "media-img", media: block.settings.image -%}
+                            </div>
+                            <p class="caption">{{- childLink.title -}}</p>
+                          </a>
+                        {% endif %}
+                    {% endcase %}
+                  {% endif %}
+                {% endfor %}
               {% endfor %}
-            {% endfor %}
-          </div>
-        {% endif %}
+            </div>
+          {% endif %}
 
-        {% if has_text_links %}
-          <div class="navigation__link-section">
-            {% for childLink in link.links %}
-              {% for block in section.blocks %}
-                {% if childLink.title == block.settings.title %}
-                  {%- case block.type -%}
-                    {%- when "link" -%}
-                      {% if link.title == block.settings.parent_section %}
-                        <a href="{{ block.settings.url | default: '#' }}" class="button button--primary">
-                          {{- childLink.title -}}
-                        </a>
-                      {% endif %}
-                  {% endcase %}
-                {% endif %}
+          {% if has_text_links %}
+            <div class="navigation__link-section">
+              {% for childLink in link.links %}
+                {% for block in section.blocks %}
+                  {% if childLink.title == block.settings.title %}
+                    {%- case block.type -%}
+                      {%- when "link" -%}
+                        {% if link.title == block.settings.parent_section %}
+                          <a href="{{ block.settings.url | default: '#' }}" class="button button--primary">
+                            {{- childLink.title -}}
+                          </a>
+                        {% endif %}
+                    {% endcase %}
+                  {% endif %}
+                {% endfor %}
               {% endfor %}
-            {% endfor %}
-          </div>
-        {% endif %}
-        
-        {% for block in section.blocks %}
-          {%- case block.type -%}
-            {%- when "collection" -%}
-              {% if link.title == block.settings.parent_section %}
-                <div class="navigation__child-sub-link-wrapper">
-                  {% for product in block.settings.collection.products %}
-                    {% render 'product-card', product: product, showATC: false %}
-                  {% endfor %}
-                </div>
+            </div>
+          {% endif %}
 
-                {% if block.settings.collection.url != blank %}
-                  <a href="{{ block.settings.collection.url | default: '#' }}" class="button button--primary button--full-width button--large" aria-label="Shop All">
+          {% for block in section.blocks %}
+            {%- case block.type -%}
+              {%- when "collection" -%}
+                {% if link.title == block.settings.parent_section %}
+                  <div class="navigation__child-sub-link-wrapper">
+                    {% for product in block.settings.collection.products %}
+                      {% render 'product-card', product: product, showATC: false %}
+                    {% endfor %}
+                  </div>
+
+                  {% if block.settings.collection.url != blank %}
+                    <a href="{{ block.settings.collection.url | default: '#' }}" class="button button--primary button--full-width button--large" aria-label="Shop All">
                       <span>Shop All</span>
                     </a>
+                  {% endif %}
                 {% endif %}
-              {% endif %}
-          {% endcase %}
-        {% endfor %}
+            {% endcase %}
+          {% endfor %}
 
+        </div>
       </div>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 </div>
 
 {% schema %}
@@ -167,8 +167,7 @@
             "label": "Mobile Body"
           }
         ]
-      },
-      {
+      }, {
         "type": "collection",
         "name": "Collection",
         "settings": [
@@ -176,8 +175,7 @@
             "type": "text",
             "id": "title",
             "label": "Title"
-          },
-          {
+          }, {
             "type": "text",
             "id": "parent_section",
             "label": "Parent Section",
@@ -189,8 +187,7 @@
             "label": "Collection"
           }
         ]
-      },
-      {
+      }, {
         "type": "image_link",
         "name": "Image for Link",
         "settings": [
@@ -223,8 +220,7 @@
             "label": "Image"
           }
         ]
-      },
-      {
+      }, {
         "type": "link",
         "name": "Link",
         "settings": [
@@ -232,8 +228,7 @@
             "type": "text",
             "id": "title",
             "label": "Title"
-          },
-          {
+          }, {
             "type": "text",
             "id": "parent_section",
             "label": "Parent Section",
