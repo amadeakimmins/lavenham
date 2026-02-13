@@ -18,11 +18,11 @@
         "image_height": "full_height",
         "stack_content_mobile": false,
         "anchor_id": "",
-        "subheading": "sip today",
-        "heading": "Expand your tomorrow",
-        "body": "Uplifting energy for mind, body and mood",
-        "button_label": "Shop our collection",
-        "button_link": "shopify://collections/all",
+        "subheading": "",
+        "heading": "A jacket well worn",
+        "body": "",
+        "button_label": "Shop jackets",
+        "button_link": "shopify://collections/mens-jackets",
         "mediaType": "image",
         "image": "shopify://shop_images/home-hero.jpg"
       }
