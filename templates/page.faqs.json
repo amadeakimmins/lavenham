@@ -18,13 +18,13 @@
     },
     "section_richtext_hQDBHt": {
       "type": "section-richtext",
+      "disabled": true,
       "name": "Richtext",
       "settings": {
-        "show_wave": false,
         "bgColor": "none",
         "textColor": "orange",
         "titleWidth": "full",
-        "wave_colour": "#ffffff",
+        "anchor_id": "",
         "subheading": "FAQS",
         "title": "Have questions?",
         "title_font_size": "h1",
@@ -71,6 +71,7 @@
         "link_cz8MCL",
         "link_ethhn7"
       ],
+      "disabled": true,
       "name": "FAQ Links",
       "settings": {}
     },
@@ -125,6 +126,7 @@
         "question_Bw7prb",
         "question_RMyeM7"
       ],
+      "disabled": true,
       "name": "FAQs",
       "settings": {
         "bgColor": "none",
@@ -187,6 +189,7 @@
         "question_kiHAtj",
         "question_kJbTFn"
       ],
+      "disabled": true,
       "name": "FAQs",
       "settings": {
         "bgColor": "none",
@@ -249,6 +252,7 @@
         "question_p6HVMg",
         "question_Ygxw8N"
       ],
+      "disabled": true,
       "name": "FAQs",
       "settings": {
         "bgColor": "none",
@@ -311,6 +315,7 @@
         "question_QcAPDw",
         "question_XJR7jQ"
       ],
+      "disabled": true,
       "name": "FAQs",
       "settings": {
         "bgColor": "none",
