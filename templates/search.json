@@ -12,85 +12,9 @@
     "main": {
       "type": "main-search",
       "settings": {}
-    },
-    "section_marquee_E7Bc8X": {
-      "type": "section-marquee",
-      "blocks": {
-        "item_L3yPWF": {
-          "type": "item",
-          "settings": {
-            "text": "Bold Flavours"
-          }
-        },
-        "item_MNLxHH": {
-          "type": "item",
-          "settings": {
-            "text": "Mind & Body"
-          }
-        },
-        "item_MawWVe": {
-          "type": "item",
-          "settings": {
-            "text": "No added sugar"
-          }
-        },
-        "item_r97ywd": {
-          "type": "item",
-          "settings": {
-            "text": "Vegan & Gluten Free"
-          }
-        },
-        "item_MwYfg3": {
-          "type": "item",
-          "settings": {
-            "text": "No Artifical Anything"
-          }
-        }
-      },
-      "block_order": [
-        "item_L3yPWF",
-        "item_MNLxHH",
-        "item_MawWVe",
-        "item_r97ywd",
-        "item_MwYfg3"
-      ],
-      "name": "Marquee",
-      "settings": {
-        "subheading": "",
-        "title": "",
-        "body": "",
-        "wave_colour": "#f0eb74"
-      }
-    },
-    "section_image_and_text_4LfKWP": {
-      "type": "section-image-and-text",
-      "name": "Image & Text",
-      "settings": {
-        "image_placement": "image_left",
-        "bgColor": "orange",
-        "textColor": "white",
-        "button_style": "white",
-        "title_font_size": "h3",
-        "show_wave": true,
-        "wave_colour": "#ff4712",
-        "curved_heading": true,
-        "show_seperators": true,
-        "padding_top": 20,
-        "padding_bottom": 40,
-        "anchor_id": "",
-        "subheading": "the science behind journée",
-        "title": "Functional beverages designed to help elevate your every day from dusk till dawn.",
-        "body": "<p>Rooted in Ayurvedic medicine, Journée is a functional beverage, designed to offer an entourage effect by using natural ingredients that nourish the mind and body.</p>",
-        "button_label": "the science behind journée",
-        "button_link": "",
-        "mediaType": "image",
-        "image": "shopify://shop_images/ice-passion-fruit.jpg"
-      }
     }
   },
   "order": [
-    "main",
-    "section_marquee_E7Bc8X",
-    "section_image_and_text_4LfKWP"
+    "main"
   ]
 }
