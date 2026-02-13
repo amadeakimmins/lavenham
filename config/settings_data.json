@@ -21,21 +21,21 @@
           "menu_FMHQn8": {
             "type": "menu",
             "settings": {
-              "menu": "shop",
+              "menu": "",
               "title": "Shop"
             }
           },
           "menu_wP3Grh": {
             "type": "menu",
             "settings": {
-              "menu": "learn",
+              "menu": "",
               "title": "Learn"
             }
           },
           "menu_6AJK7c": {
             "type": "menu",
             "settings": {
-              "menu": "help",
+              "menu": "",
               "title": "Help"
             }
           }
@@ -46,7 +46,7 @@
           "menu_6AJK7c"
         ],
         "settings": {
-          "copyright": "© 2024 Journée",
+          "copyright": "© 2026 Lavenham",
           "bottom_menu": "footer"
         }
       },
@@ -56,7 +56,7 @@
           "menu_8n3EzX": {
             "type": "menu",
             "settings": {
-              "menu_mob": "mobile-menu",
+              "menu_mob": "",
               "body": ""
             }
           },
@@ -74,8 +74,7 @@
               "title": "Science",
               "parent_section": "Learn",
               "parent_link": "Science",
-              "url": "shopify://pages/science",
-              "image": "shopify://shop_images/ice-passion-fruit.jpg"
+              "url": "shopify://pages/science"
             }
           },
           "image_link_njbiEp": {
@@ -84,8 +83,7 @@
               "title": "About",
               "parent_section": "Learn",
               "parent_link": "About",
-              "url": "shopify://pages/about",
-              "image": "shopify://shop_images/christian-nicole.jpg"
+              "url": "shopify://pages/about"
             }
           },
           "image_link_PXNqaE": {
@@ -94,8 +92,7 @@
               "title": "FAQs",
               "parent_section": "Learn",
               "parent_link": "FAQs",
-              "url": "shopify://pages/faqs",
-              "image": "shopify://shop_images/subscribe-image.jpg"
+              "url": "shopify://pages/faqs"
             }
           },
           "link_8mnq8d": {
@@ -134,7 +131,7 @@
           "menu_UVWbYJ": {
             "type": "menu",
             "settings": {
-              "menu_mob": "mobile-menu",
+              "menu_mob": "",
               "body": ""
             }
           },
@@ -152,8 +149,7 @@
               "title": "Science",
               "parent_section": "Learn",
               "parent_link": "Science",
-              "url": "shopify://pages/science",
-              "image": "shopify://shop_images/ice-passion-fruit.jpg"
+              "url": "shopify://pages/science"
             }
           },
           "image_link_8mVFCL": {
@@ -162,8 +158,7 @@
               "title": "About",
               "parent_section": "Learn",
               "parent_link": "About",
-              "url": "shopify://pages/about",
-              "image": "shopify://shop_images/christian-nicole.jpg"
+              "url": "shopify://pages/about"
             }
           },
           "image_link_8bMgVJ": {
@@ -172,8 +167,7 @@
               "title": "FAQs",
               "parent_section": "Learn",
               "parent_link": "FAQs",
-              "url": "shopify://pages/faqs",
-              "image": "shopify://shop_images/subscribe-image.jpg"
+              "url": "shopify://pages/faqs"
             }
           },
           "link_kyzzi8": {
@@ -203,7 +197,7 @@
           "link_yeXLUj"
         ],
         "settings": {
-          "menu": "mobile-menu"
+          "menu": ""
         }
       },
       "my-cart": {
@@ -220,25 +214,6 @@
         }
       }
     },
-    "content_for_index": [],
-    "blocks": {
-      "855628211100114053": {
-        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
-        "disabled": false,
-        "settings": {}
-      },
-      "16017602894386113438": {
-        "type": "shopify://apps/junip/blocks/junip-store-key/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
-        "disabled": false,
-        "settings": {
-          "enablePreviewMode": true
-        }
-      },
-      "1232542678405107163": {
-        "type": "shopify://apps/instafeed/blocks/head-block/c447db20-095d-4a10-9725-b5977662c9d5",
-        "disabled": false,
-        "settings": {}
-      }
-    }
+    "content_for_index": []
   }
 }
