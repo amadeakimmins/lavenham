@@ -24,7 +24,7 @@
         "button_label": "Shop our collection",
         "button_link": "shopify://collections/all",
         "mediaType": "image",
-        "image": "shopify://shop_images/hero-journee.jpg"
+        "image": "shopify://shop_images/home-hero.jpg"
       }
     },
     "section_featured_collection_qkj9gj": {
@@ -93,8 +93,7 @@
           "settings": {
             "title": "Lion's Mane",
             "body": "Bursting with vitamins and nutrients, this nutritional powerhouse is known to soothe stress, sharpen the mind.",
-            "milligrams": "1600",
-            "image": "shopify://shop_images/image.png"
+            "milligrams": "1600"
           }
         },
         "item_9kRaqh": {
@@ -102,8 +101,7 @@
           "settings": {
             "title": "Acerola Cherry",
             "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit cras non dui porta,",
-            "milligrams": "",
-            "image": "shopify://shop_images/image_3.png"
+            "milligrams": ""
           }
         },
         "item_VCqyL7": {
@@ -111,8 +109,7 @@
           "settings": {
             "title": "Monk Fruit",
             "body": "A stress soothing, brain boosting botanical that keeps your immune system going strong.",
-            "milligrams": "",
-            "image": "shopify://shop_images/Image_2bcb476b-2552-4d5c-bd95-08ff010646f1.png"
+            "milligrams": ""
           }
         },
         "item_wTRyLh": {
@@ -120,8 +117,7 @@
           "settings": {
             "title": "Adaptogenic plants  & roots",
             "body": "Consectetur adipiscing elit cras non dui porta lorem ipsum dolor sit amet",
-            "milligrams": "",
-            "image": "shopify://shop_images/Image_c5176b19-8eee-4e79-81c8-ab77be74fb15.png"
+            "milligrams": ""
           }
         }
       },
@@ -194,7 +190,6 @@
         "item_7V7KFW": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/Vector.png",
             "text": "A refreshing pick me up with no crash",
             "link": ""
           }
@@ -202,7 +197,6 @@
         "item_XcaJaz": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/Vector-1.png",
             "text": "incredibly good. they also work wonders.",
             "link": ""
           }
@@ -210,7 +204,6 @@
         "item_9tJMVX": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/Vector-2.png",
             "text": "Journée oozes comfort and accessibility while also toting some extremely potent nootropics.",
             "link": ""
           }
@@ -218,7 +211,6 @@
         "item_ypDfDC": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/Vector.png",
             "text": "A refreshing pick me up with no crash",
             "link": ""
           }
@@ -226,7 +218,6 @@
         "item_i3XzeF": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/Vector-1.png",
             "text": "incredibly good. they also work wonders.",
             "link": ""
           }
@@ -234,7 +225,6 @@
         "item_LBq6Ez": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/Vector-2.png",
             "text": "Journée oozes comfort and accessibility while also toting some extremely potent nootropics.",
             "link": ""
           }
@@ -268,8 +258,7 @@
         "body": "<p>Rooted in Ayurvedic medicine, Journée is a functional beverage, designed to offer an entourage effect by using natural ingredients that nourish the mind and body.</p>",
         "button_label": "The science behind Journée",
         "button_link": "",
-        "mediaType": "image",
-        "image": "shopify://shop_images/ice-passion-fruit.jpg"
+        "mediaType": "image"
       }
     },
     "section_image_and_text_aBhXhk": {
@@ -288,35 +277,11 @@
         "body": "<p>As two children of the Med, we seek to capture the recipe of a Mediterranean lifestyle, these simple pleasures that bring moments of joy and elation into the everyday.</p>",
         "button_label": "About us",
         "button_link": "",
-        "mediaType": "image",
-        "image": "shopify://shop_images/christian-nicole.jpg"
+        "mediaType": "image"
       }
     },
     "section_instagram_pXd9nQ": {
       "type": "section-instagram",
-      "blocks": {
-        "instafeed_app_block_FTXXem": {
-          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
-          "settings": {
-            "title": "",
-            "title_color": "",
-            "title_size_v2": 0,
-            "alignment": "center",
-            "instafeed_margin_top": 0,
-            "instafeed_margin_bottom": 0,
-            "instafeed_margin_sides": 0,
-            "show_instagram_link": false,
-            "link_alignment": "left",
-            "link_color": "#000000",
-            "background_color": "",
-            "feed_id": "",
-            "html_area": ""
-          }
-        }
-      },
-      "block_order": [
-        "instafeed_app_block_FTXXem"
-      ],
       "name": "Instagram",
       "settings": {
         "subheading": "Our instagram",
