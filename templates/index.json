@@ -30,11 +30,11 @@
     "section_featured_collection_qkj9gj": {
       "type": "section-featured-collection",
       "settings": {
-        "title": "Making functional mushrooms  refreshingly delicious",
+        "title": "Latest",
         "title_font_size": "h2",
-        "body": "Our next-gen sparkling drink is the experience you've been waiting for. Each sip is your ticket to bliss. Wherever, whenever.",
-        "collection": "all",
-        "button_label": "Shop our collection",
+        "body": "",
+        "collection": "womens-coats",
+        "button_label": "Shop all",
         "button_link": "shopify://collections/all"
       }
     }
