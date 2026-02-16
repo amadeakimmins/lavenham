@@ -6,9 +6,9 @@
           {%- render "media-img", media: block.settings.image -%}
           <div class="multicolumn__item-content">
             <p class="multicolumn__title h2 text--{{ section.settings.text_colour }}">{{ block.settings.title }}</p>
-            {% if section.settings.button_link != blank %}
-              <a href="{{ section.settings.button_link | default: '#' }}" class="button button--link button--link--{{ section.settings.text_colour }}" aria-label="{{ section.settings.button_label }}">
-                <span>{{- section.settings.button_label | escape -}}</span>
+            {% if block.settings.button_link != blank %}
+              <a href="{{ block.settings.button_link | default: '#' }}" class="button button--link button--link-{{ section.settings.text_colour }}" aria-label="{{ block.settings.button_label }}">
+                <span>{{- block.settings.button_label | escape -}}</span>
               </a>
             {% endif %}
           </div>

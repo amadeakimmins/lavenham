@@ -1,47 +1,36 @@
-<div class="footer__logo reveal">
-  <div class="aspectholder">
-    {% render "icon-logo" %}
+<div class="footer__top-section reveal">
+  <div class="footer__sign-up-form">
+    <p>Subscribe to our mailing list</p>
+    <div class="klaviyo-form-VYrLj9"></div>
   </div>
-</div>
-
-<div class="footer__middle-section reveal">
   <div class="footer__nav">
     {% for block in section.blocks %}
       <div class="footer__nav-wrapper">
         <p class="caption">{{ block.settings.title }}</p>
         <nav aria-label="Footer Menu" class="footer__nav-menu">
           {%- for link in block.settings.menu.links -%}
-            <a href="{{ link.url }}" aria-label="{{ link.title }}">
-              <p>{{- link.title -}}</p>
-            </a>
+            <a href="{{ link.url }}" aria-label="{{ link.title }}">{{- link.title -}}</a>
           {%- endfor -%}
         </nav>
       </div>
     {% endfor %}
   </div>
 
-  <div class="footer__sign-up-form">
-    <div class="klaviyo-form-VYrLj9"></div>
+  <div class="footer__currency-switcher">
+    {% render 'currency-switcher' %}
   </div>
 </div>
 
-<div class="footer__bottom-section reveal">
-  <p class="footer__copyright text-small">{{ section.settings.copyright }}</p>
-
-  <div class="footer__socials">
-    {% if settings.instagram_handle != blank %}
-      <a aria-label="Instagram" href="https://www.instagram.com/{{ settings.instagram_handle | strip }}" rel="noopener noreferrer" target="blank">Instagram</a>
-    {% endif %}
-    {% if settings.facebook_url != blank %}
-      <a aria-label="Facebook" href="{{ settings.facebook_url }}" rel="noopener noreferrer" target="blank">Facebook</a>
-    {% endif %}
+<div class="footer__bottom-section">
+  <div class="footer__logo">
+    <div class="aspectholder">
+      {% render "icon-logo" %}
+    </div>
   </div>
 
   <nav aria-label="Footer Menu" class="footer__bottom-menu">
     {%- for link in section.settings.bottom_menu.links -%}
-      <a href="{{ link.url }}" aria-label="{{ link.title }}" class="text-small">
-        {{- link.title -}}
-      </a>
+      <a href="{{ link.url }}" aria-label="{{ link.title }}" class="text-small">{{- link.title -}}</a>
     {%- endfor -%}
   </nav>
 </div>

@@ -2,7 +2,7 @@
   {% if section.blocks.size > 0 %}
     <div class="featured-articles__items">
       {% for block in section.blocks %}
-        {% render "article-card", article: block.settings.article %}
+        {% render "article-card", article: block.settings.article, class: 'reveal' %}
       {% endfor %}
     </div>
   {% endif %}

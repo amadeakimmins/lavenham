@@ -1,0 +1,31 @@
+{%- form 'localization' -%}
+  <div class="currency-switcher">
+    <select class="header__link currency-selector caption" name="country_code" id="CountrySelector-{{ form.id }}">
+      {% for country in form.available_countries %}
+        <option value="{{ country.iso_code }}" {% if country.iso_code == form.current_country.iso_code %}selected{% endif %}>
+          {{ country.name | upcase }} {{ country.currency.symbol }} {{ country.currency.iso_code }}
+        </option>
+      {% endfor %}
+    </select>
+
+    {% render 'icon-chevron' %}
+  </div>
+{%- endform -%}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const selectors = document.querySelectorAll('.currency-selector');
+    if (! selectors.length) {
+      return;
+    }
+
+    selectors.forEach(selector => {
+      selector.addEventListener('change', function() {
+        const form = selector.closest('form');
+        if (form) {
+          form.submit();
+        }
+      });
+    });
+  });
+</script>
