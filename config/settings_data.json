@@ -11,8 +11,8 @@
   "current": {
     "favicon": "shopify://shop_images/favicon-red.png",
     "instagram_handle": "drinkjournee",
-    "spotify_url": "spotify",
     "facebook_url": "facebook url",
+    "spotify_url": "spotify",
     "linkedIn_url": "linkedin",
     "sections": {
       "footer": {
@@ -53,151 +53,40 @@
       "header": {
         "type": "header",
         "blocks": {
-          "menu_8n3EzX": {
-            "type": "menu",
+          "search_term_9grFAr": {
+            "type": "search_term",
             "settings": {
-              "menu_mob": "",
-              "body": ""
+              "search_term": "Classics"
             }
           },
-          "collection_GrKPyb": {
-            "type": "collection",
+          "search_term_pNrypL": {
+            "type": "search_term",
             "settings": {
-              "title": "Shop All",
-              "parent_section": "Shop",
-              "collection": "all"
+              "search_term": "Gilets"
             }
           },
-          "image_link_F6yAa8": {
-            "type": "image_link",
+          "search_term_AE9QGq": {
+            "type": "search_term",
             "settings": {
-              "title": "Science",
-              "parent_section": "Learn",
-              "parent_link": "Science",
-              "url": "shopify://pages/science"
+              "search_term": "Jackets"
             }
           },
-          "image_link_njbiEp": {
-            "type": "image_link",
+          "search_term_RXRAeA": {
+            "type": "search_term",
             "settings": {
-              "title": "About",
-              "parent_section": "Learn",
-              "parent_link": "About",
-              "url": "shopify://pages/about"
-            }
-          },
-          "image_link_PXNqaE": {
-            "type": "image_link",
-            "settings": {
-              "title": "FAQs",
-              "parent_section": "Learn",
-              "parent_link": "FAQs",
-              "url": "shopify://pages/faqs"
-            }
-          },
-          "link_8mnq8d": {
-            "type": "link",
-            "settings": {
-              "title": "Contact",
-              "parent_section": "Learn",
-              "url": "shopify://pages/contact"
-            }
-          },
-          "link_GgqRpK": {
-            "type": "link",
-            "settings": {
-              "title": "Shipping",
-              "parent_section": "Learn",
-              "url": "shopify://policies/shipping-policy"
+              "search_term": "Gifts"
             }
           }
         },
         "block_order": [
-          "menu_8n3EzX",
-          "collection_GrKPyb",
-          "image_link_F6yAa8",
-          "image_link_njbiEp",
-          "image_link_PXNqaE",
-          "link_8mnq8d",
-          "link_GgqRpK"
+          "search_term_9grFAr",
+          "search_term_pNrypL",
+          "search_term_AE9QGq",
+          "search_term_RXRAeA"
         ],
         "settings": {
-          "menu": "main-menu"
-        }
-      },
-      "header-mobile": {
-        "type": "header-mobile",
-        "blocks": {
-          "menu_UVWbYJ": {
-            "type": "menu",
-            "settings": {
-              "menu_mob": "",
-              "body": ""
-            }
-          },
-          "collection_xkMRxw": {
-            "type": "collection",
-            "settings": {
-              "title": "Shop All",
-              "parent_section": "Shop",
-              "collection": "all"
-            }
-          },
-          "image_link_6mGkDE": {
-            "type": "image_link",
-            "settings": {
-              "title": "Science",
-              "parent_section": "Learn",
-              "parent_link": "Science",
-              "url": "shopify://pages/science"
-            }
-          },
-          "image_link_8mVFCL": {
-            "type": "image_link",
-            "settings": {
-              "title": "About",
-              "parent_section": "Learn",
-              "parent_link": "About",
-              "url": "shopify://pages/about"
-            }
-          },
-          "image_link_8bMgVJ": {
-            "type": "image_link",
-            "settings": {
-              "title": "FAQs",
-              "parent_section": "Learn",
-              "parent_link": "FAQs",
-              "url": "shopify://pages/faqs"
-            }
-          },
-          "link_kyzzi8": {
-            "type": "link",
-            "settings": {
-              "title": "Contact",
-              "parent_section": "Learn",
-              "url": "shopify://pages/contact"
-            }
-          },
-          "link_yeXLUj": {
-            "type": "link",
-            "settings": {
-              "title": "Shipping",
-              "parent_section": "Learn",
-              "url": "shopify://policies/shipping-policy"
-            }
-          }
-        },
-        "block_order": [
-          "menu_UVWbYJ",
-          "collection_xkMRxw",
-          "image_link_6mGkDE",
-          "image_link_8mVFCL",
-          "image_link_8bMgVJ",
-          "link_kyzzi8",
-          "link_yeXLUj"
-        ],
-        "settings": {
-          "menu": ""
+          "menu": "main-menu",
+          "menu_mobile": "main-menu"
         }
       },
       "my-cart": {
