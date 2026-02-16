@@ -519,6 +519,7 @@ form.js-ajax-cart-form-in-progress [type='submit'] {
   height: 100dvh;
   transform: translateX(100%);
   background-color: var(--white);
+  border-left: 1px solid var(--primary);
   visibility: hidden;
   transition: all var(--tZip);
 }
@@ -541,7 +542,7 @@ form.js-ajax-cart-form-in-progress [type='submit'] {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 16px;
-  border-bottom: 2px solid var(--primary);
+  border-bottom: 1px solid var(--primary);
   padding: 16px 0;
 }
 

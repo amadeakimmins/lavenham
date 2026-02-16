@@ -116,19 +116,6 @@
   }
   /* End of Featured Collection */
 
-  /* Reviews */
-  .reviews__navigation {
-    justify-content: center;
-    position: relative;
-    gap: 8px;
-    top: unset;
-    left: unset;
-    transform: unset;
-    width: 100%;
-  }
-
-  /* End of Reviews */
-
   /* Collection page */
   .collection__grid {
     display: flex;
@@ -194,17 +181,6 @@
     margin: 0 100px;
   }
   /* End of Multicolumn */
-
-  /* Marquee Press */
-  .marquee-press__text {
-    max-width: 331px;
-  }
-
-  .marquee-press__item {
-    min-height: 148px;
-    padding: 20px 24px;
-  }
-  /* End of Marquee Press */
 
   /* Announcement Bar */
   .announcement-bar {
@@ -280,14 +256,6 @@
     width: calc(50% - 20px);
   }
   /* End of Search page */
-
-  /* Instagram */
-  .instagram {
-    display: flex;
-    flex-direction: column;
-    padding: 0 0 80px;
-  }
-  /* End of Instagram */
 
   /* Mobile Header */
   .header.desktop {

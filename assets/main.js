@@ -97,31 +97,6 @@ for (var i = 0; i < swiperContainerP.length; i++) {
   });
 }
 
-var swiperTestimonialsCarousel = new Swiper(
-  '.swiper-testimonials-carousel',
-  {
-    direction: 'horizontal',
-    slidesPerView: 1,
-    centeredSlides: true,
-    loop: true,
-    spaceBetween: 30,
-    navigation: {
-      nextEl: '.swiper-testimonials-carousel-button-next',
-      prevEl: '.swiper-testimonials-carousel-button-prev'
-    },
-    breakpoints: {
-      768: {
-        slidesPerView: 1.5,
-        spaceBetween: 60
-      },
-      1024: {
-        slidesPerView: 2,
-        spaceBetween: 90
-      }
-    }
-  }
-);
-
 var swiperFeaturedCollection = new Swiper(
   '#featuredCollectionSlider',
   {
