@@ -43,7 +43,7 @@
           "settings": {
             "title": "Title in here",
             "button_label": "Shop women",
-            "button_link": "",
+            "button_link": "shopify://collections/women",
             "image": "shopify://shop_images/250522_LAVENHAM_SS26_MENS_BOMBER_JACKET_MENS_DRAB_LV13019212_085.jpg"
           }
         },
@@ -51,8 +51,8 @@
           "type": "item",
           "settings": {
             "title": "Title in here",
-            "button_label": "Shop women",
-            "button_link": "",
+            "button_label": "Shop men",
+            "button_link": "shopify://collections/men",
             "image": "shopify://shop_images/ROUNDBAGBRICK1.13.jpg"
           }
         }
