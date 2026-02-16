@@ -47,7 +47,7 @@
 .header__search {
   position: absolute;
   background: var(--white);
-  z-index: 42;
+  z-index: 51;
   top: -1px;
   width: calc(100% + 2px);
   left: -1px;
@@ -104,13 +104,25 @@
   border-left: 1px solid var(--grey);
   border-right: 1px solid var(--grey);
   border-bottom: 1px solid var(--grey);
-  max-height: 400px;
+  max-height: calc(100vh - 92px);
   overflow: scroll;
+}
+
+.announcement-bar-visible .header__search-suggested-terms {
+  max-height: calc(100vh - 122px);
+}
+
+.header__search-terms {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
 }
 
 .header__search-results {
   display: grid;
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px 20px;
 }
 
 .predictive-item a {

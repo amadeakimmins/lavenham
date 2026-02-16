@@ -1,105 +1,104 @@
 <section class="search container {% unless search.performed and search.results.size> 0 %} template-search--empty{% endunless %}">
   <nav class="search__nav" aria-label="search nav">
     <h1 class="caption">Your search</h1>
-    
-        <div class="search__form">
-            <form action="{{ routes.search_url }}" method="get" role="search" class="form_inline">
-                <input type="hidden" name="options[prefix]" value="last" />
-                <input class="search__input h2" type="text" name="q" value="{{ search.terms | escape }}" {% if search.performed %}autofocus{% endif %}>
-            </form>
-    
-            {%- if search.performed -%}
-                {% capture res %}
-                    {%- if search.performed and search.results.size > 0 -%}
-                        {%- for item in search.results -%}
-                            {% unless item.template_suffix contains "placeholder" %}
-                                {{ forloop.index }}{% unless forloop.last %},{% endunless %}
-                            {%- endunless -%}
-                        {% endfor %}
-                    {%- endif -%}
-                {% endcapture %}
 
-                {% assign re = res | split: "," %}
+    <div class="search__form">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="form_inline">
+        <input type="hidden" name="options[prefix]" value="last"/>
+        <input class="search__input h2" type="text" name="q" value="{{ search.terms | escape }}" {% if search.performed %}autofocus{% endif %}>
+      </form>
 
-                {% capture result %}
-                    {% for r in re %}
-                        {% if forloop.first %}
-                            {{ forloop.length }}
-                        {% endif %}
-                    {% endfor %}
-                {% endcapture %}
-
-                <p role="status">
-                    {%- if search.results_count == 0 -%}
-                        {{ 'templates.search.no_results' | t: terms: search.terms }}
-                    {%- else -%}
-                        {{ 'templates.search.results_with_count' | t: terms: search.terms, count: result }}
-                    {%- endif -%}
-                </p>
-            {%- endif -%}
-        </div> 
-    </nav>
-
-
-    {%- if search.performed and search.results.size > 0 -%}
-        <ul class="search__container" role="list">
+      {%- if search.performed -%}
+        {% capture res %}
+          {%- if search.performed and search.results.size > 0 -%}
             {%- for item in search.results -%}
-                {%- case item.object_type -%}
-                    {%- when 'product' -%}
-                        <li>
-                            {% render 'product-card', product: item, variants: true %}
-                        </li>
-                    {%- when 'article' -%}
-                        {% unless item.template_suffix contains "placeholder" %}
-                            <li>
-                                <div class="card">
-                                    <a href="{{ item.url }}" aria-label="{{ item.title | truncate: 50 | escape }}">
-                                        <div class="card__image">
-                                            {%- assign img = item.image -%}
-                                            {%- render 'media-img', media: img -%} 
-                                        </div>
+              {% unless item.template_suffix contains "placeholder" %}
+                {{ forloop.index }}{% unless forloop.last %},{% endunless %}
+              {%- endunless -%}
+            {% endfor %}
+          {%- endif -%}
+        {% endcapture %}
 
-                                        <div class="card__text">
-                                            <h3>{{ item.title | truncate: 50 | escape }}</h3>
-                                            <div class="card__info">
-                                                <p class="">{{ 'blogs.article.blog' | t }}</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                        {% endunless %}
-                    {%- when 'page' -%}
-                        <li>
-                            <div class="card">
-                                <a href="{{ item.url }}" aria-label="{{ item.title | truncate: 50 | escape }}">
-                                    <div class="card__image">
-                                        <div class="aspectholder"></div>
-                                    </div>
+        {% assign re = res | split: "," %}
 
-                                    <div class="card__text">
-                                        <h3>{{ item.title | truncate: 50 | escape }}</h3>
-                                        <div class="card__info">
-                                            <p class="">{{ 'templates.search.page' | t }}</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-                {%- endcase -%}
-            {%- endfor -%}
-        </ul>
-    {%- endif -%}
+        {% capture result %}
+          {% for r in re %}
+            {% if forloop.first %}
+              {{ forloop.length }}
+            {% endif %}
+          {% endfor %}
+        {% endcapture %}
+
+        <p role="status">
+          {%- if search.results_count == 0 -%}
+            {{ 'templates.search.no_results' | t: terms: search.terms }}
+          {%- else -%}
+            {{ 'templates.search.results_with_count' | t: terms: search.terms, count: result }}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+    </div>
+  </nav>
+
+
+  {%- if search.performed and search.results.size > 0 -%}
+    <ul class="search__container" role="list">
+      {%- for item in search.results -%}
+        {%- case item.object_type -%}
+          {%- when 'product' -%}
+            <li>
+              {% render 'product-card', product: item, variants: true %}
+            </li>
+          {%- when 'article' -%}
+            {% unless item.template_suffix contains "placeholder" %}
+              <li>
+                <div class="card">
+                  <a href="{{ item.url }}" aria-label="{{ item.title | truncate: 50 | escape }}">
+                    <div class="card__image">
+                      {%- assign img = item.image -%}
+                      {%- render 'media-img', media: img -%}
+                    </div>
+
+                    <div class="card__text">
+                      <h3>{{ item.title | truncate: 50 | escape }}</h3>
+                      <div class="card__info">
+                        <p class="">{{ 'blogs.article.blog' | t }}</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </li>
+            {% endunless %}
+          {%- when 'page' -%}
+            <li>
+              <div class="card">
+                <a href="{{ item.url }}" aria-label="{{ item.title | truncate: 50 | escape }}">
+                  <div class="card__image">
+                    <div class="aspectholder"></div>
+                  </div>
+
+                  <div class="card__text">
+                    <h3>{{ item.title | truncate: 50 | escape }}</h3>
+                    <div class="card__info">
+                      <p class="">{{ 'templates.search.page' | t }}</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </li>
+        {%- endcase -%}
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
 </section>
 
 {% schema %}
-    {
-        "name": "Main Search",
-        "enabled_on": { 
-          "templates": ["search"]
-        },
-        "limit": 1,
-        "settings": [
-        ]
-    }
+  {
+    "name": "Main Search",
+    "enabled_on": {
+      "templates": ["search"]
+    },
+    "limit": 1,
+    "settings": []
+  }
 {% endschema %}

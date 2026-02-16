@@ -797,11 +797,11 @@ a.pcard__info {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 40px;
+  gap: 20px;
 }
 
 .search__container li {
-  width: calc((100% / 3) - 40px);
+  width: calc((100% / 3) - 20px);
 }
 /* End of Search */
 

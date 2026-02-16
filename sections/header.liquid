@@ -42,6 +42,12 @@
 
       <p class="text-fade">Suggested</p>
 
+      <div class="header__search-terms">
+        {% for block in section.blocks %}
+          <a href="/search?q={{ block.settings.search_term }}">{{ block.settings.search_term }}</a>
+        {% endfor %}
+
+      </div>
     </div>
   </div>
 

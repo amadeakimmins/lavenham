@@ -1,20 +1,6 @@
-{%- style -%}
-  #pcard--{{ product.id }}{
-    --primary-colour: {{ product.metafields.custom.primary_colour }};
-  }
-{%- endstyle -%}
-
-<div class="card pcard reveal {% if product.metafields.custom.featured == true %}pcard--featured{% endif %}" aria-label="{{- pTitle -}}" id="pcard--{{ product.id }}">
-  {% assign pTitle = product.title | escape | split: " - " | first %}
+<div class="card pcard reveal" aria-label="{{- product.title -}}" id="pcard--{{ product.id }}">
 
   <div class="card__image{% if product.media.size > 1 %} card__image--has-secondary {% endif %}">
-    {% if product.tags contains 'Best Seller' %}
-      <div class="card__image-badge best-seller">
-        <span class="caption">Best Seller</span>
-        {% render 'icon-circle-shape' %}
-      </div>
-    {% endif %}
-
     <div>
       <div class="product-card__primary-media">
         {%- render "media-img", media: product.featured_media -%}
@@ -130,7 +116,7 @@
   </div>
 
   <a href="{{ product.url | default: '#' }}" class="pcard__info">
-    <p class="h4">{{- pTitle -}}</p>
+    <p class="h4">{{- product.title -}}</p>
     {% if product.metafields.custom.subheading != blank %}
       <p class="caption">{{ product.metafields.custom.color }}</p>
     {% endif %}<p class="product-card__regular-price caption" data-price="{{ product.price }}">{{ product.price | money }}</p></a>
