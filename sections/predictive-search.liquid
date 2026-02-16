@@ -1,0 +1,44 @@
+{% if predictive_search.performed %}
+
+  {% assign products = predictive_search.resources.products %}
+  {% assign product_count = products.size %}
+
+  {% if product_count > 0 %}
+
+    <div class="predictive-header">
+      <p>
+        {% if product_count == 10 %}
+          10+
+        {% else %}
+          {{ product_count }}
+        {% endif %}
+        product{% if product_count > 1 %}s{% endif %}
+      </p>
+
+      <a href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}" class="caption predictive-view-all">
+        View all results
+      </a>
+    </div>
+
+    <div class="predictive-grid">
+      {% for product in products %}
+        {% render 'product-card', product: product, showATC: false %}
+      {% endfor %}
+    </div>
+
+
+
+  {% else %}
+    <div class="predictive-empty">
+      <p>No results found</p>
+    </div>
+  {% endif %}
+
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Predictive Search",
+    "settings": []
+  }
+{% endschema %}

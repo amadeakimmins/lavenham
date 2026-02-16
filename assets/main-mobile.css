@@ -256,8 +256,8 @@
   /* End of Footer */
 
   /* Search page */
-  .search__container li {
-    width: calc(50% - 20px);
+  .search__container {
+    grid-template-columns: repeat(2, 1fr);
   }
   /* End of Search page */
 }

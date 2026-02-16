@@ -268,58 +268,34 @@ class HeaderSearch {
 
   async handleInput(e) {
     const query = e.target.value.trim();
-
-    // Clear results if too short
+  
     if (query.length < 2) {
       this.clearResults();
       return;
     }
-
-    // Cancel previous request
+  
     if (this.abortController) {
       this.abortController.abort();
     }
-
+  
     this.abortController = new AbortController();
-
+  
     try {
       const response = await fetch(
-        `/search/suggest?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=20`,
-        {
-          signal: this.abortController.signal,
-          headers: { Accept: 'application/json' }
-        }
+        `/search/suggest?q=${encodeURIComponent(query)}&section_id=predictive-search&resources[type]=product&resources[limit]=20`,
+        { signal: this.abortController.signal }
       );
-
-      const data = await response.json();
-      const products = data?.resources?.results?.products || [];
-
-      if (!products.length) {
-        this.renderResults('<p>No results found</p>');
-        return;
-      }
-
-      const markup = products.map(product => `
-        <div class="predictive-item">
-          <a href="${product.url}">
-            ${
-              product.featured_image
-                ? `<img src="${product.featured_image.url}&width=120" alt="${product.title}" width="60" height="60" loading="lazy" />`
-                : ''
-            }
-            <span>${product.title}</span>
-          </a>
-        </div>
-      `).join('');
-
-      this.renderResults(markup);
-
+  
+      const html = await response.text();
+      this.renderResults(html);
+  
     } catch (err) {
       if (err.name !== 'AbortError') {
         console.error('Predictive search error:', err);
       }
     }
   }
+  
 
   renderResults(html) {
     this.resultsContainers.forEach(container => {

@@ -119,10 +119,18 @@
   margin-top: 24px;
 }
 
-.header__search-results {
+.predictive-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.predictive-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 60px 20px;
+  margin-bottom: 60px;
 }
 
 .predictive-item a {
