@@ -1481,11 +1481,12 @@ a.pcard__info {
   height: 30px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   position: fixed;
   top: 0;
   z-index: 10;
   width: 100%;
+  padding: 0 var(--margin);
 }
 
 .announcement-bar__inner {
@@ -1507,6 +1508,24 @@ a.pcard__info {
 
 .announcement-bar.hidden-by-default {
   display: none;
+}
+
+.announcement-bar__link {
+  flex: 1;
+}
+
+.announcement-bar__currency-switcher {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.announcement-bar__currency-switcher .currency-switcher select {
+  color: var(--white);
+}
+
+.announcement-bar__currency-switcher .currency-switcher svg path {
+  stroke: var(--white);
 }
 /* End of Announcement Bar */
 

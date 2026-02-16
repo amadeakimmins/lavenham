@@ -1,21 +1,29 @@
 {% if section.settings.active == true %}
   <div class="announcement-bar hidden-by-default" id="announcement-bar">
+    <a href="{{ section.settings.link_url }}" class="announcement-bar__link caption desktop">{{ section.settings.link_label }}</a>
+
     <div class="announcement-bar__inner">
       <p class="announcement-bar__text caption">{{ section.settings.text }}</p>
       <button class="announcement-bar__close" aria-label="Close announcement">
         {% render 'icon-close' %}
       </button>
     </div>
+
+    <div class="announcement-bar__currency-switcher desktop">
+      {% render 'currency-switcher' %}
+    </div>
   </div>
 {% endif %}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function() {
     const body = document.body;
     const bar = document.getElementById('announcement-bar');
-    const closeBtn = bar?.querySelector('.announcement-bar__close');
+    const closeBtn = bar ?. querySelector('.announcement-bar__close');
 
-    if (!bar || !closeBtn) return;
+    if (! bar || ! closeBtn) {
+      return;
+    }
 
     if (localStorage.getItem('announcementBarClosed') === 'true') {
       return;
@@ -24,7 +32,7 @@
     bar.classList.remove('hidden-by-default');
     body.classList.add('announcement-bar-visible');
 
-    closeBtn.addEventListener('click', function () {
+    closeBtn.addEventListener('click', function() {
       bar.style.display = 'none';
       body.classList.remove('announcement-bar-visible');
       localStorage.setItem('announcementBarClosed', 'true');
@@ -34,27 +42,37 @@
 
 
 {% schema %}
-{
-  "name": "Announcement Bar",
-  "limit": 1,
-  "settings": [
-    {
-      "type": "header",
-      "content": "Settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "active",
-      "label": "Show Announcement Bar",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "text",
-      "label": "Text",
-      "default": "Free shipping when you spend over €100"
-    }
-  ],
-  "blocks": []
-}
+  {
+    "name": "Announcement Bar",
+    "limit": 1,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "active",
+        "label": "Show Announcement Bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Text",
+        "default": "Free shipping when you spend over €100"
+      },
+      {
+        "type": "text",
+        "id": "link_label",
+        "label": "Link Label",
+        "default": "Customer service"
+      }, {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      }
+    ],
+    "blocks": []
+  }
 {% endschema %}
