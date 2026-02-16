@@ -42,8 +42,8 @@
           "type": "item",
           "settings": {
             "title": "Title in here",
-            "body": "",
-            "milligrams": "",
+            "button_label": "Shop women",
+            "button_link": "",
             "image": "shopify://shop_images/250522_LAVENHAM_SS26_MENS_BOMBER_JACKET_MENS_DRAB_LV13019212_085.jpg"
           }
         },
@@ -51,8 +51,8 @@
           "type": "item",
           "settings": {
             "title": "Title in here",
-            "body": "",
-            "milligrams": "",
+            "button_label": "Shop women",
+            "button_link": "",
             "image": "shopify://shop_images/ROUNDBAGBRICK1.13.jpg"
           }
         }
@@ -63,18 +63,37 @@
       ],
       "name": "Multicolumn",
       "settings": {
-        "bgColor": "none",
-        "subheading": "ingredients",
-        "title": "",
-        "body": "=",
-        "button_label": "",
-        "button_link": ""
+        "text_colour": "white"
       }
+    },
+    "section_featured_articles_YPkzpL": {
+      "type": "section-featured-articles",
+      "blocks": {
+        "article_mWfLat": {
+          "type": "article",
+          "settings": {
+            "article": "stories/title-in-here"
+          }
+        },
+        "article_t3CQ7n": {
+          "type": "article",
+          "settings": {
+            "article": "stories/title-in-here"
+          }
+        }
+      },
+      "block_order": [
+        "article_mWfLat",
+        "article_t3CQ7n"
+      ],
+      "name": "Featured Articles",
+      "settings": {}
     }
   },
   "order": [
     "section_hero_banner_kj8xai",
     "section_featured_collection_qkj9gj",
-    "section_multicolumn_fgVJin"
+    "section_multicolumn_fgVJin",
+    "section_featured_articles_YPkzpL"
   ]
 }
