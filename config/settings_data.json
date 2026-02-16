@@ -21,21 +21,21 @@
           "menu_FMHQn8": {
             "type": "menu",
             "settings": {
-              "menu": "",
+              "menu": "support",
               "title": "Support"
             }
           },
           "menu_wP3Grh": {
             "type": "menu",
             "settings": {
-              "menu": "",
+              "menu": "about-us",
               "title": "About us"
             }
           },
           "menu_6AJK7c": {
             "type": "menu",
             "settings": {
-              "menu": "",
+              "menu": "follow",
               "title": "Follow"
             }
           }
