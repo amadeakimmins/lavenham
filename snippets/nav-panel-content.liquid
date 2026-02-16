@@ -1,0 +1,42 @@
+<div class="nav-panel__grid">
+
+  <div class="nav-panel__categories">
+    <h4 class="caption text-fade">Categories</h4>
+    <ul>
+      {% for child in link.links %}
+        <li>
+          <a class="text-base" href="{{ child.url }}">
+            {{ child.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {% if panel.highlight_collections.value %}
+    <div class="nav-panel__highlights">
+      <h4 class="caption text-fade">Highlights</h4>
+      <ul>
+        {% for highlight in panel.highlight_collections.value %}
+          <li>
+            <a class="text-base" href="{{ highlight.url }}">
+              {{ highlight.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% if panel.featured_image and panel.featured_collection %}
+    <div class="nav-panel__featured">
+      <a href="{{ panel.featured_collection }}">
+        {% render 'media-img', media: panel.featured_image.value %}
+        {% if panel.featured_title %}
+          <span>{{ panel.featured_title }}</span>
+        {% endif %}
+      </a>
+    </div>
+  {% endif %}
+
+</div>

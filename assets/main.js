@@ -118,8 +118,6 @@ var swiperFeaturedCollection = new Swiper(
       },
       1024: {
         slidesPerView: 4.5,
-        // centeredSlides: true,
-        // loop: true,
         spaceBetween: 20,
         slidesOffsetBefore: 20,
         slidesOffsetAfter: 20
@@ -127,78 +125,6 @@ var swiperFeaturedCollection = new Swiper(
     }
   }
 );
-
-var navigationCollectionSlider = new Swiper(
-  '#navigationCollectionSlider',
-  {
-    direction: 'horizontal',
-    slidesPerView: 2.5,
-    slidesOffsetBefore: 20,
-    slidesOffsetAfter: 20,
-    spaceBetween: 20
-  }
-);
-
-var swiperMultiColumn = new Swiper('#multiColumnSlider', {
-  direction: 'horizontal',
-  slidesPerView: 1,
-  spaceBetween: 16,
-  navigation: {
-    nextEl: '.swiper-multicolumn-button-next',
-    prevEl: '.swiper-multicolumn-button-prev'
-  },
-  breakpoints: {
-    768: {
-      slidesPerView: 2.5,
-      spaceBetween: 40
-    },
-    1024: {
-      slidesPerView: 4,
-      spaceBetween: 40,
-      slidesOffsetBefore: 0
-    }
-  }
-});
-
-var swiperMultiColumnText = new Swiper('#multiColumnTextSlider', {
-  direction: 'horizontal',
-  slidesPerView: 1.2,
-  slidesOffsetBefore: 20,
-  spaceBetween: 20,
-  navigation: {
-    nextEl: '.swiper-mulitcolumn-button-next',
-    prevEl: '.swiper-mulitcolumn-button-prev'
-  },
-  breakpoints: {
-    768: {
-      slidesPerView: 2.5,
-      spaceBetween: 40,
-      slidesOffsetBefore: 40
-    },
-    1024: {
-      slidesPerView: 3,
-      spaceBetween: 0,
-      slidesOffsetBefore: 0
-    }
-  }
-});
-
-var tabContentSwiper = new Swiper('.tab-content__swiper', {
-  direction: 'horizontal',
-  slidesPerView: 1,
-  centeredSlides: false,
-  loop: false,
-  spaceBetween: 40,
-  navigation: {
-    nextEl: '.swiper-tab-content-button-next',
-    prevEl: '.swiper-tab-content-button-prev'
-  },
-  breakpoints: {
-    768: {
-      slidesPerView: 2
-    }
-  }
-});
 
 // Cart ATC FUNCTIONALITY
 const optionSelect = document.querySelector(
@@ -378,89 +304,6 @@ function listenersToCards() {
 }
 
 listenersToCards();
-
-// NAVIGATION MOBILE
-const navigationMobile = document.querySelector('#navigation-mobile');
-const headerWrapperMobile = document.querySelector('header.mobile');
-const menuItemsMobile = Array.from(
-  document.querySelectorAll('#headerMenuItemMobile')
-);
-const childLinksMobile = document.querySelectorAll(
-  '.navigation__child-link--mobile'
-);
-
-menuItemsMobile.forEach(item => {
-  item.addEventListener('click', e => {
-    const navItem = item.dataset.navItem;
-
-    menuItemsMobile.forEach(menuItem =>
-      menuItem.classList.remove('active')
-    );
-    document
-      .querySelectorAll('#navChildMenuMobile.active')
-      .forEach(el => {
-        el.classList.remove('active');
-      });
-
-    if (item.classList.contains('has-children')) {
-      const childLink = document.querySelector(
-        `#navChildMenuMobile[data-nav-item="${navItem}"]`
-      );
-
-      if (childLink) {
-        childLink.classList.add('active');
-        item.classList.add('active');
-      }
-    }
-  });
-});
-// END OF NAVIGATION MOBILE
-
-// NAVIGATION
-const navigation = document.querySelector('#navigation');
-const headerWrapper = document.querySelector('header');
-const menuItems = Array.from(
-  document.querySelectorAll('#headerMenuItem')
-);
-const childLinks = document.querySelectorAll(
-  '.navigation__child-link'
-);
-
-menuItems.forEach(item => {
-  item.addEventListener('mouseenter', e => {
-    const navItem = item.dataset.navItem;
-
-    navigation.classList.remove('active');
-    headerWrapper.classList.remove('nav-active');
-    menuItems.forEach(menuItem =>
-      menuItem.classList.remove('active')
-    );
-    document.querySelectorAll('#navChildMenu.active').forEach(el => {
-      el.classList.remove('active');
-    });
-
-    if (item.classList.contains('has-children')) {
-      const childLink = document.querySelector(
-        `#navChildMenu[data-nav-item="${navItem}"]`
-      );
-
-      if (childLink) {
-        childLink.classList.add('active');
-        item.classList.add('active');
-        navigation.classList.add('active');
-        headerWrapper.classList.add('nav-active');
-      }
-    }
-  });
-});
-
-navigation.addEventListener('mouseleave', () => {
-  navigation.classList.remove('active');
-  headerWrapper.classList.remove('nav-active');
-  menuItems.forEach(menuItem => menuItem.classList.remove('active'));
-  childLinks.forEach(child => child.classList.remove('active'));
-});
-// END OF NAVIGATION
 
 // MOBILE VIEWPORT HEIGHT FIX
 let vh = window.innerHeight * 0.01;

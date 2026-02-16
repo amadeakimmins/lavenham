@@ -1,0 +1,19 @@
+{% assign panel = shop.metaobjects.mega_nav_panel[link.handle] %}
+
+<li class="nav__item">
+
+  {% if panel and panel.enable_mega_panel.value and link.links.size > 0 %}
+
+    <button class="nav__trigger" aria-expanded="false" aria-controls="panel-{{ link.handle }}" data-nav-trigger="{{ link.handle }}">
+      {{ link.title }}
+    </button>
+
+  {% else %}
+
+    <a href="{{ link.url }}" class="nav__link">
+      {{ link.title }}
+    </a>
+
+  {% endif %}
+
+</li>
