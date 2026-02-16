@@ -12,13 +12,11 @@
     "section_hero_banner_kj8xai": {
       "type": "section-hero-banner",
       "settings": {
-        "content_position": "left",
         "textColor": "white",
         "image_width": "full_width",
         "image_height": "full_height",
         "stack_content_mobile": false,
         "anchor_id": "",
-        "subheading": "",
         "heading": "A jacket well worn",
         "body": "",
         "button_label": "Shop jackets",
@@ -32,16 +30,51 @@
       "type": "section-featured-collection",
       "settings": {
         "title": "Latest",
-        "title_font_size": "h2",
-        "body": "",
         "collection": "womens-classics",
         "button_label": "Shop all",
         "button_link": "shopify://collections/all"
+      }
+    },
+    "section_multicolumn_fgVJin": {
+      "type": "section-multicolumn",
+      "blocks": {
+        "item_dNAdnd": {
+          "type": "item",
+          "settings": {
+            "title": "",
+            "body": "",
+            "milligrams": "",
+            "image": "shopify://shop_images/250522_LAVENHAM_SS26_MENS_BOMBER_JACKET_MENS_DRAB_LV13019212_085.jpg"
+          }
+        },
+        "item_B7mPdw": {
+          "type": "item",
+          "settings": {
+            "title": "",
+            "body": "",
+            "milligrams": "",
+            "image": "shopify://shop_images/ROUNDBAGBRICK1.13.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "item_dNAdnd",
+        "item_B7mPdw"
+      ],
+      "name": "Multicolumn",
+      "settings": {
+        "bgColor": "none",
+        "subheading": "ingredients",
+        "title": "",
+        "body": "=",
+        "button_label": "",
+        "button_link": ""
       }
     }
   },
   "order": [
     "section_hero_banner_kj8xai",
-    "section_featured_collection_qkj9gj"
+    "section_featured_collection_qkj9gj",
+    "section_multicolumn_fgVJin"
   ]
 }
