@@ -1,144 +1,58 @@
-<section class="multicolumn background--{{ section.settings.bgColor }}">
-  <div class="multicolumn__wrapper">
-    <div class="heading__content-wrapper">
-      {%- if section.settings.subheading != blank -%}
-        <p class="caption reveal">{{ section.settings.subheading }}</p>
-      {%- endif -%}
-    
-      {%- if section.settings.title != blank -%}
-        <h2 class="heading__title heading__narrow h3 reveal">{{ section.settings.title }}</h2>
-      {%- endif -%}
-    
-      {%- if section.settings.body != blank -%}
-        <p class="heading__body reveal">{{ section.settings.body }}</p>
-      {%- endif -%}
+<section class="multicolumn">
+  {% if section.blocks.size > 0 %}
+    <div class="multicolumn__items multicolumn__items--{{ section.blocks.size }}">
+      {% for block in section.blocks %}
+        <div class="multicolumn__item">
+          {%- render "media-img", media: block.settings.image -%}
+          <div class="multicolumn__item-content">
+            <p class="multicolumn__title h2">{{ block.settings.title }}</p>
+            {% if section.settings.button_link != blank %}
+              <a href="{{ section.settings.button_link | default: '#' }}" class="button button--link" aria-label="{{ section.settings.button_label }}">
+                <span>{{- section.settings.button_label | escape -}}</span>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
     </div>
-  
-    {% if section.blocks.size > 0 %}
-      <div class="swiper swiper-multicolumn reveal" id="multiColumnSlider">
-        <div class="swiper-wrapper">
-          {% for block in section.blocks %}
-            <div class="swiper-slide">
-              {%- render "media-img", media: block.settings.image -%}
-              <div class="multicolumn__item-content">
-                {% if block.settings.milligrams != blank %}<p class="multicolumn__milligrams caption">{{ block.settings.milligrams }}mg</p>{% endif %}
-                <p class="multicolumn__title h4">{{ block.settings.title }}</p>
-                <p class="multicolumn__body">{{ block.settings.body }}</p>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-
-        <div class="swiper-button-prev swiper-multicolumn-button-prev">
-          {% render 'icon-arrow-left' %}
-        </div>
-        <div class="swiper-button-next swiper-multicolumn-button-next">
-          {% render 'icon-arrow-right' %}
-        </div>
-      </div>
-    {% endif %}
-  
-    {% if section.settings.button_label != blank %}
-      <div class="generic__button-wrapper reveal">
-        <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary button--large" aria-label="{{ section.settings.button_label }}"><span>{{- section.settings.button_label | escape -}}</span></a>
-      </div>
-    {% endif %}
-  </div>
+  {% endif %}
 </section>
 
 {% schema %}
-{
-  "name": "Multicolumn",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Settings"
-    },
-    {
-      "type": "select",
-      "id": "bgColor",
-      "label": "Background Color",
-      "default": "none",
-      "options": [
-        {
-          "value": "secondary",
-          "label": "Yellow"
-        },
-        {
-          "value": "primary",
-          "label": "Orange"
-        }, {
-          "value": "none",
-          "label": "None"
-        }
-      ]
-    },
-    {
-      "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "ingredients"
-    }, 
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Functional ingredients that nourish mind and body"
-    },
-    {
-      "type": "text",
-      "id": "body",
-      "label": "Body Copy",
-      "default": "Journée is made with 100% natural ingredients, with no artificial sweeteners or added sugars, Non-GMO, no preservatives, GF and Vegan."
-    },
-    {
-      "type": "text",
-      "label": "Button Label",
-      "id": "button_label",
-      "default": "The science behind Journée"     
-    },
-    {
-      "type": "url",
-      "label": "Button Link",
-      "id": "button_link"      
-    }
-  ],
-  "blocks": [
-    {
-      "type": "item",
-      "name": "Item",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title"
-        },
-        {
-          "type": "text",
-          "id": "body",
-          "label": "Body"
-        },
-        {
-          "type": "text",
-          "id": "milligrams",
-          "label": "Milligrams"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image Selector"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Multicolumn"
-    }
-  ]
-}
+  {
+    "name": "Multicolumn",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Item",
+        "limit": 3,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          }, {
+            "type": "text",
+            "label": "Button Label",
+            "id": "button_label",
+            "default": "Shop women"
+          }, {
+            "type": "url",
+            "label": "Button Link",
+            "id": "button_link"
+          }, {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image Selector"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Multicolumn"
+      }
+    ]
+  }
 {% endschema %}

@@ -168,17 +168,9 @@
   /* End of Image and Text */
 
   /* Multicolumn */
-  .multicolumn .swiper-multicolumn {
-    padding: 0;
-  }
-
-  .multicolumn__item-content {
-    max-width: 329px;
-    margin: 0 auto;
-  }
-
-  .multicolumn .swiper-slide .aspectholder {
-    margin: 0 100px;
+  .multicolumn__items--2,
+  .multicolumn__items--3 {
+    grid-template-columns: 1fr;
   }
   /* End of Multicolumn */
 

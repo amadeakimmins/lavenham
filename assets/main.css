@@ -643,50 +643,30 @@ a.pcard__info {
 /* End of Richtext */
 
 /* Multicolumn */
-.multicolumn__wrapper {
-  padding: 40px 0;
+.multicolumn__items {
+  display: grid;
 }
 
-.multicolumn .heading__subheading text,
-.multicolumn .heading__subheading textpath {
-  fill: var(--white);
+.multicolumn__items--2 {
+  grid-template-columns: 1fr 1fr;
 }
 
-.multicolumn .swiper-slide .aspectholder {
-  aspect-ratio: 1.05;
-  margin: 0 50px;
+.multicolumn__items--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.multicolumn__item {
+  position: relative;
+}
+
+.multicolumn__item .aspectholder {
+  aspect-ratio: 0.84;
 }
 
 .multicolumn__item-content {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  display: flex;
-  gap: 4px;
-  margin-top: 36px;
-}
-
-.multicolumn__milligrams {
-  background-color: var(--white);
-  color: var(--primary);
-  border-radius: 12px;
-  padding: 4px 8px;
-}
-
-.multicolumn .swiper-multicolumn {
-  padding: 0 40px 20px;
-  max-width: 1440px;
-}
-
-.multicolumn .swiper-button-prev .container,
-.multicolumn .swiper-button-next .container {
-  fill: var(--white);
-}
-
-.multicolumn .swiper-button-prev .arrow,
-.multicolumn .swiper-button-next .arrow {
-  stroke: var(--primary);
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
 }
 /* End of Multicolumn */
 
