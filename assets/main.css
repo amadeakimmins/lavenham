@@ -586,7 +586,7 @@ a.pcard__info {
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 120px;
 }
 
 .heading__subheading text,
@@ -797,13 +797,18 @@ a.pcard__info {
 
 /* Collection page */
 .collection {
-  padding: 60px 0;
+  padding: 100px 0;
 }
+
 .collection__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 60px 20px;
-  padding: 0 40px;
+  padding: 0 var(--margin);
+}
+
+.collection__load-more-wrapper {
+  padding: 60px var(--margin);
 }
 /* End of Collection page */
 
@@ -832,12 +837,8 @@ a.pcard__info {
   gap: 60px 20px;
 }
 
-.search__pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 60px;
-  gap: 8px;
+.search__load-more-wrapper {
+  padding: 60px 0;
 }
 /* End of Search */
 

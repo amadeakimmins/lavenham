@@ -25,7 +25,7 @@
   {% if search.performed and search.results_count > 0 %}
     {% paginate search.results by 24 %}
 
-      <ul class="search__container" role="list">
+      <ul class="search__container" id="search-results" role="list">
         {% for product in search.results %}
           <li>
             {% render 'product-card', product: product, showATC: false %}
@@ -33,10 +33,17 @@
         {% endfor %}
       </ul>
 
-      <div class="search__pagination">
-        {{ paginate | default_pagination }}
-      </div>
+      {% if paginate.next %}
+        <div class="search__load-more-wrapper">
+          <button class="js-load-more button button--outline" data-next-url="{{ paginate.next.url }}" data-container="#search-results">
+            Show More
+          </button>
+        </div>
+      {% endif %}
+
+
     {% endpaginate %}
+
   {% endif %}
 
 </section>

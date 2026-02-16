@@ -126,6 +126,60 @@ var swiperFeaturedCollection = new Swiper(
   }
 );
 
+// LOAD MORE BUTTON
+function initLoadMore() {
+  const buttons = document.querySelectorAll('.js-load-more');
+  if (!buttons.length) return;
+
+  buttons.forEach(button => {
+    if (button.dataset.initialized) return;
+    button.dataset.initialized = true;
+
+    button.addEventListener('click', function () {
+      const nextUrl = button.dataset.nextUrl;
+      const containerSelector = button.dataset.container;
+
+      if (!nextUrl || !containerSelector) return;
+
+      const container = document.querySelector(containerSelector);
+      if (!container) return;
+
+      button.classList.add('is-loading');
+
+      fetch(nextUrl)
+        .then(response => response.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+
+          const newContainer = doc.querySelector(containerSelector);
+          const newButton = doc.querySelector('.js-load-more');
+
+          if (newContainer) {
+            container.insertAdjacentHTML(
+              'beforeend',
+              newContainer.innerHTML
+            );
+          }
+
+          if (newButton) {
+            button.dataset.nextUrl = newButton.dataset.nextUrl;
+          } else {
+            button.remove();
+          }
+        })
+        .finally(() => {
+          button.classList.remove('is-loading');
+        });
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  initLoadMore();
+});
+// END OF LOAD MORE BUTTON
+
 // Cart ATC FUNCTIONALITY
 const optionSelect = document.querySelector(
   '.pcard--cart [data-purchase-type-select]'
