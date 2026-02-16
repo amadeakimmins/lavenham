@@ -26,15 +26,24 @@
     <button class="header__link caption header__cart" data-ajax-cart-toggle-class-button="js-my-cart-open" aria-label="Show Cart">Bag</button>
   </nav>
 
-  {%- comment -%}
-    <div class="header__search">
-    <form action="{{ routes.search_url }}" method="get" role="search" class="header__search-form">
-    <input type="hidden" name="options[prefix]" value="last"/>
-    <input class="h4" placeholder="Begin typing..." type="text" name="q" value="{{ search.terms | escape }}" {% if search.performed %}autofocus{% endif %}>
-    <button type="submit" class="button button--primary" aria-label="Search">Search</button>
-    </form>
+  <div class="header__search">
+    <div class="header__search-form-wrapper">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="header__search-form">
+        <input type="hidden" name="options[prefix]" value="last"/>
+        <input class="header__search-input caption" placeholder="Search" type="text" name="q" value="{{ search.terms | escape }}" {% if search.performed %}autofocus{% endif %}>
+      </form>
+      <button onclick="toggleClass('.header', 'active-search')" class="header__search-close" aria-label="Search Close">{% render 'icon-cross' %}</button>
+
+
     </div>
-  {%- endcomment -%}
+
+    <div class="header__search-suggested-terms">
+      <div class="header__search-results" data-predictive-search></div>
+
+      <p class="text-fade">Suggested</p>
+
+    </div>
+  </div>
 
 </div>
 
@@ -101,6 +110,20 @@
         "id": "menu_mobile",
         "default": "main-menu",
         "label": "Mobile Menu"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "search_term",
+        "name": "Search Term",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "text",
+            "id": "search_term",
+            "label": "Search Term"
+          }
+        ]
       }
     ]
   }

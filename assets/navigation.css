@@ -46,23 +46,31 @@
 
 .header__search {
   position: absolute;
-  width: 100%;
-  left: 0;
-  top: 0;
-  padding-top: 72px;
-  background-color: var(--white);
-  height: 150px;
+  background: var(--white);
+  z-index: 42;
+  top: -1px;
+  width: calc(100% + 2px);
+  left: -1px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   opacity: 0;
   visibility: hidden;
-  transition: all var(--tMedZip);
 }
 
 .active-search .header__search {
   opacity: 1;
   visibility: visible;
+}
+
+.header__search-form-wrapper {
+  height: var(--headerHeight);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 1px solid var(--grey);
 }
 
 .header__search-form {
@@ -79,6 +87,45 @@
 
 .header__search-form input::placeholder {
   opacity: 0.5;
+}
+
+.header__search-close {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 16px;
+  width: 16px;
+}
+
+.header__search-suggested-terms {
+  width: 100%;
+  padding: 40px 16px 60px;
+  border-left: 1px solid var(--grey);
+  border-right: 1px solid var(--grey);
+  border-bottom: 1px solid var(--grey);
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.header__search-results {
+  display: grid;
+  gap: 12px;
+}
+
+.predictive-item a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.predictive-item img {
+  object-fit: cover;
+}
+
+.predictive-item:last-of-type {
+  margin-bottom: 40px;
 }
 
 .nav {
