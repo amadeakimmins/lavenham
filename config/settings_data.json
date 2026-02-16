@@ -99,7 +99,9 @@
         "type": "announcement-bar",
         "settings": {
           "active": true,
-          "text": "Free shipping when you spend over €100"
+          "text": "Free shipping when you spend over €100",
+          "link_label": "Customer service",
+          "link_url": "#"
         }
       }
     },
