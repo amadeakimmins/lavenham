@@ -13,7 +13,7 @@
       "type": "main-collection",
       "settings": {
         "heading": "",
-        "limit": 10,
+        "limit": 12,
         "tag_colour": "#1c1c1c"
       }
     }
