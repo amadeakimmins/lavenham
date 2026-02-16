@@ -38,6 +38,10 @@
   color: var(--white);
 }
 
+.text--grey {
+  color: var(--grey);
+}
+
 .text--black {
   color: var(--black);
 }
@@ -643,6 +647,10 @@ a.pcard__info {
 /* End of Richtext */
 
 /* Multicolumn */
+.multicolumn {
+  padding: 60px 0;
+}
+
 .multicolumn__items {
   display: grid;
 }
@@ -665,7 +673,7 @@ a.pcard__info {
 
 .multicolumn__item-content {
   position: absolute;
-  bottom: 20px;
+  bottom: 32px;
   left: 20px;
 }
 /* End of Multicolumn */

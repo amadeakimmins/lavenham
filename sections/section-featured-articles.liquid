@@ -1,0 +1,35 @@
+<section class="featured-articles">
+  {% if section.blocks.size > 0 %}
+    <div class="featured-articles__items">
+      {% for block in section.blocks %}
+        {% render "article-card", article: block.settings.article %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+  {
+    "name": "Featured Articles",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "article",
+        "name": "Article",
+        "limit": 2,
+        "settings": [
+          {
+            "type": "article",
+            "id": "article",
+            "label": "Article"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Articles"
+      }
+    ]
+  }
+{% endschema %}

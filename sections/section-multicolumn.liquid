@@ -2,12 +2,12 @@
   {% if section.blocks.size > 0 %}
     <div class="multicolumn__items multicolumn__items--{{ section.blocks.size }}">
       {% for block in section.blocks %}
-        <div class="multicolumn__item">
+        <div class="multicolumn__item reveal">
           {%- render "media-img", media: block.settings.image -%}
           <div class="multicolumn__item-content">
-            <p class="multicolumn__title h2">{{ block.settings.title }}</p>
+            <p class="multicolumn__title h2 text--{{ section.settings.text_colour }}">{{ block.settings.title }}</p>
             {% if section.settings.button_link != blank %}
-              <a href="{{ section.settings.button_link | default: '#' }}" class="button button--link" aria-label="{{ section.settings.button_label }}">
+              <a href="{{ section.settings.button_link | default: '#' }}" class="button button--link button--link--{{ section.settings.text_colour }}" aria-label="{{ section.settings.button_label }}">
                 <span>{{- section.settings.button_label | escape -}}</span>
               </a>
             {% endif %}
@@ -21,7 +21,23 @@
 {% schema %}
   {
     "name": "Multicolumn",
-    "settings": [],
+    "settings": [
+      {
+        "type": "select",
+        "id": "text_colour",
+        "label": "Text Colour",
+        "options": [
+          {
+            "value": "grey",
+            "label": "Dark"
+          }, {
+            "value": "white",
+            "label": "Light"
+          }
+        ],
+        "default": "white"
+      }
+    ],
     "blocks": [
       {
         "type": "item",
