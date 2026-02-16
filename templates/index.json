@@ -41,7 +41,7 @@
         "item_dNAdnd": {
           "type": "item",
           "settings": {
-            "title": "",
+            "title": "Title in here",
             "body": "",
             "milligrams": "",
             "image": "shopify://shop_images/250522_LAVENHAM_SS26_MENS_BOMBER_JACKET_MENS_DRAB_LV13019212_085.jpg"
@@ -50,7 +50,7 @@
         "item_B7mPdw": {
           "type": "item",
           "settings": {
-            "title": "",
+            "title": "Title in here",
             "body": "",
             "milligrams": "",
             "image": "shopify://shop_images/ROUNDBAGBRICK1.13.jpg"
