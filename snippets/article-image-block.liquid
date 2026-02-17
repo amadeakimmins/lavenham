@@ -1,0 +1,26 @@
+<div class="image-block {% if block.media_two != blank %}image-block--two-images{% endif %} image-block__image-one--{{ block.media_one_aspect_ratio }} image-block__image-two--{{ block.media_two_aspect_ratio }}">
+  <div class="image-block__image-wrapper reveal">
+    <div class="{{ block.media_one_aspect_ratio }}">
+      {% if block.media_type_one == 'image' %}
+        {% render 'media-img', media: block.media_one.value %}
+      {% elsif block.media_type_one == 'video' %}
+        <div class="aspectholder">
+          {{ block.media_one.value | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '400x' }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  {% if block.media_two != blank %}
+    <div class="image-block__image-wrapper-two reveal">
+      <div class="{{ block.media_two_aspect_ratio }}">
+        {% if block.media_type_two == 'image' %}
+          {% render 'media-img', media: block.media_two.value %}
+        {% elsif block.media_type_two == 'video' %}
+          <div class="aspectholder">
+            {{ block.media_two.value | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '400x' }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</div>

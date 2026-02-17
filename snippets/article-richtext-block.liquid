@@ -1,0 +1,11 @@
+<div class="richtext">
+  <div class="richtext__content-wrapper">
+    {%- if block.title != blank -%}
+      <h2 class="richtext__title h3 reveal">{{ block.title }}</h2>
+    {%- endif -%}
+
+    {%- if block.body != blank -%}
+      <div class="richtext__body rte reveal">{{- block.body | metafield_tag -}}</div>
+    {%- endif -%}
+  </div>
+</div>

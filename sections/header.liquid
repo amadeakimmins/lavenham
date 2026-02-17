@@ -1,7 +1,10 @@
 <div class="header__inner">
   <button class="mobile-toggle caption mobile" aria-expanded="false" aria-controls="mobile-nav">
-    Menu
+    {% render 'icon-hamburger' %}
   </button>
+  {%- comment -%}
+    <button onclick="toggleClass('.header', 'active-search')" class="header__link caption header__search-button mobile" aria-label="Search Link">{% render 'icon-search' %}</button>
+  {%- endcomment -%}
 
   <div class="header__logo-wrapper">
     <a href="/" aria-label="Home" class="header__logo">{% render 'icon-logo' %}</a>
@@ -21,9 +24,11 @@
   </div>
 
   <nav class="header__secondary" aria-label="Secondary Navigation">
-    <button onclick="toggleClass('.header', 'active-search')" class="header__link caption header__search-button desktop" aria-label="Search Link">Search</button>
-    <a aria-label="Account Page" class="header__link caption desktop" href="/account">Members</a>
-    <button class="header__link caption header__cart" data-ajax-cart-toggle-class-button="js-my-cart-open" aria-label="Show Cart">Bag</button>
+    <button onclick="toggleClass('.header', 'active-search')" class="header__link caption header__search-button desktop" aria-label="Search Link">{% render 'icon-search' %}</button>
+
+    <a aria-label="Account Page" class="header__link caption desktop" href="/account">{% render 'icon-account' %}</a>
+
+    <button class="header__link caption header__cart" data-ajax-cart-toggle-class-button="js-my-cart-open" aria-label="Show Cart">{% render 'icon-cart' %}</button>
   </nav>
 
   <div class="header__search">

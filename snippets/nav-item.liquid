@@ -4,13 +4,13 @@
 
   {% if panel and panel.enable_mega_panel.value and link.links.size > 0 %}
 
-    <button class="nav__trigger" aria-expanded="false" aria-controls="panel-{{ link.handle }}" data-nav-trigger="{{ link.handle }}">
+    <button class="nav__trigger caption" aria-expanded="false" aria-controls="panel-{{ link.handle }}" data-nav-trigger="{{ link.handle }}">
       {{ link.title }}
     </button>
 
   {% else %}
 
-    <a href="{{ link.url }}" class="nav__link">
+    <a href="{{ link.url }}" class="nav__link caption">
       {{ link.title }}
     </a>
 

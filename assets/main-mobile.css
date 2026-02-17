@@ -226,6 +226,53 @@
   }
   /* End of Blog */
 
+  /* Article */
+  .article {
+    padding-bottom: 30px;
+  }
+
+  .article__intro-wrapper {
+    padding: 60px var(--margin);
+  }
+
+  .article__image {
+    padding-bottom: 30px;
+  }
+
+  .article-related {
+    padding: 30px var(--margin);
+  }
+
+  .article-related__grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  /* End of Article */
+
+  /* Richtext */
+  .richtext {
+    padding: 30px var(--margin);
+  }
+  /* End of Richtext */
+
+  /* Image Block */
+  .image-block {
+    padding: 30px var(--margin);
+  }
+
+  .landscape .aspectholder {
+    aspect-ratio: 1.27;
+  }
+
+  .portrait .aspectholder {
+    aspect-ratio: 0.8;
+  }
+
+  .image-block--two-images {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  /* End of Image Block */
+
   /* Announcement Bar */
   .announcement-bar {
     justify-content: center;
