@@ -1,121 +1,70 @@
 <section class="blog">
+  <div class="blog__header">
+    <h1>{{ blog.title }}</h1>
+    <p>{{ blog.metafields.custom.blog_description }}</p>
+  </div>
   <div class="blog__container">
+    {% if blog.all_tags.size > 0 %}
+      <nav class="blog__tags" aria-label="Blog categories">
+        <ul class="blog__tags-list" role="list">
+
+          <li>
+            <a href="{{ blog.url }}" class="caption {% unless current_tags %}is-active{% endunless %}">
+              All
+            </a>
+          </li>
+
+          {% for tag in blog.all_tags %}
+            <li>
+              <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="caption {% if current_tags contains tag %}is-active{% endif %}">
+                {{ tag }}
+              </a>
+            </li>
+          {% endfor %}
+
+        </ul>
+      </nav>
+    {% endif %}
+
+
     {%- paginate blog.articles by section.settings.blogs_to_show -%}
-      <div class="blog__articles">
+      <div class="blog__articles" id="blog-articles">
         {% for article in blog.articles %}
-          {% if forloop.index0 == 0 %}
-            <div class="blog__feature">
-              <div class="blog__feature-meta">
-                {% if article.title contains " - " %}
-                  {% assign aTitle = article.title | escape | split: " - " %}
-                  <h2>
-                    <span class="">{{- aTitle | first -}}</span>
-                    <br>
-                    <br>
-                    <span class="">{{- aTitle | last -}}</span>
-                  </h2>
-                {% else %}
-                  <h2 class="">{{- article.title | escape -}}</h2>
-                {% endif %}
-
-                {% if article.excerpt != blank %}
-                  <div class="richtext">
-                    {{- article.excerpt -}}
-                  </div>
-                {% endif %}
-
-                <a
-                  href="{{ article.url }}"
-                  class="button_pill button_clear button_expand"
-                  aria-label="{{ article.title }}"
-                  >Read full article
-                </a>
-              </div>
-              <div class="blog__feature-image card__image">
-                {% if article.metafields.custom.blog_card_tags != blank %}
-                  <div class="blog__feature-badge card__image-badge">
-                    {% for metaobject in article.metafields.custom.blog_card_tags.value %}
-                      <div
-                        class="button"
-                        {% if metaobject.tag_colour != blank %}
-                          style="--bg: {{ metaobject.tag_colour }}"
-                        {% endif %}
-                      >
-                        {% if metaobject.tag_colour != blank %}
-                          <div class="aspectholder icon">
-                            <svg>
-                              <image xlink:href="{{- metaobject.tag_icon | file_url -}}" width="21px" height="21px" />
-                            </svg>
-                          </div>
-                        {% endif %}
-                        {{- metaobject.tag_name -}}
-                      </div>
-                    {% endfor %}
-                  </div>
-                {% endif %}
-
-                {%- assign img = article.image -%}
-                {%- render "media-img", media: img -%}
-              </div>
-            </div>
-          {% else %}
-            {% render "article-card", article: article, class: c %}
-          {% endif %}
+          {% render "article-card", article: article, class: c %}
         {% endfor %}
       </div>
 
-      <div class="blog__paginate pagination">
-        {% if paginate.previous.is_link %}
-          <a href="{{ paginate.previous.url }}" class="" aria-label="Previous Page">
-            Previous
-          </a>
-        {% endif %}
-
-        <div class="pagination__pages">
-          {% if paginate.parts != blank %}
-            {% for part in paginate.parts %}
-              {% if part.is_link %}
-                {{- part.title | link_to: part.url | replace: "<a", "<a class=''" -}}
-              {% else %}
-                {{- part.title | link_to: part.url | replace: "<a", "<a class=''" -}}
-              {% endif %}
-
-              {% unless forloop.last %}<span class="">&nbsp; — &nbsp;</span>{% endunless %}
-            {% endfor %}
-          {% else %}
-            <a href="{{ blog.url }}" class="" aria-label="First Page">1</a>
-          {% endif %}
+      {% if paginate.next %}
+        <div class="blog__load-more-wrapper">
+          <button class="js-load-more button button--outline" data-next-url="{{ paginate.next.url }}" data-container="#blog-articles">
+            Show More
+          </button>
         </div>
-
-        {% if paginate.next.is_link %}
-          <a href="{{ paginate.next.url }}" class="" aria-label="Next Page">Next</a>
-        {% endif %}
-      </div>
+      {% endif %}
     {%- endpaginate -%}
   </div>
 </section>
 
 {% schema %}
-{
-  "name": "Main Blog",
-  "enabled_on": { 
-    "templates": ["blog"]
-  },
-  "limit": 1,
-  "settings": [
-    {
-      "type": "header",
-      "content": "Settings"
+  {
+    "name": "Main Blog",
+    "enabled_on": {
+      "templates": ["blog"]
     },
-    {
-      "type": "range",
-      "id": "blogs_to_show",
-      "min": 1,
-      "max": 36,
-      "step": 1,
-      "default": 8,
-      "label": "Blogs to Show"
-    }
-  ]
-}
+    "limit": 1,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Settings"
+      }, {
+        "type": "range",
+        "id": "blogs_to_show",
+        "min": 1,
+        "max": 36,
+        "step": 1,
+        "default": 8,
+        "label": "Blogs to Show"
+      }
+    ]
+  }
 {% endschema %}

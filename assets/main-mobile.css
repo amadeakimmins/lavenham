@@ -206,6 +206,26 @@
   }
   /* End of Featured Articles */
 
+  /* Blog */
+  .blog__header {
+    padding: 60px var(--margin);
+  }
+
+  .blog__articles {
+    gap: 30px;
+  }
+
+  .blog__articles .article-card:nth-child(1),
+  .blog__articles .article-card:nth-child(2),
+  .blog__articles .article-card {
+    grid-column: span 12;
+  }
+
+  .blog__load-more-wrapper {
+    padding: 0 0 60px var(--margin);
+  }
+  /* End of Blog */
+
   /* Announcement Bar */
   .announcement-bar {
     justify-content: center;

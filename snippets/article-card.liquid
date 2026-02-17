@@ -3,7 +3,7 @@
     {% render 'media-img', media: article.image %}
   </div>
 
-  <p class="article-card__title h2">
-    {{ article.title }}
-  </p>
-</a>
+  <div class="article-card__content">
+    <p class="article-card__title h2">{{ article.title }}</p>
+    <div class="text-fade">{{ article.excerpt }}</div>
+  </div></a>
