@@ -19,10 +19,16 @@
       "settings": {
         "heading": "You may also like"
       }
+    },
+    "section_breadcrumbs_YpUbr4": {
+      "type": "section-breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {}
     }
   },
   "order": [
     "main",
-    "section_related_products_DWnUwX"
+    "section_related_products_DWnUwX",
+    "section_breadcrumbs_YpUbr4"
   ]
 }
