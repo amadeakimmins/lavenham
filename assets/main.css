@@ -483,7 +483,16 @@ footer {
 /* End of Featured Collection */
 
 /* Product Card */
-a.pcard__info {
+.pcard__link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.pcard__info {
   text-align: center;
   margin-top: 16px;
   display: grid;
@@ -907,29 +916,20 @@ a.pcard__info {
 .product {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  padding-left: var(--gutter);
-  padding-top: 20px;
-  padding-bottom: 40px;
-  gap: 40px;
 }
 
 .product__carousel {
-  grid-column: auto / span 6;
+  grid-column: span 6;
   overflow: hidden;
   position: relative;
-  margin-left: 20px;
   height: min-content;
 }
 
 .product__carousel .aspectholder {
-  aspect-ratio: 0.85;
-  max-height: calc(100vh - 120px);
+  aspect-ratio: 0.9;
+  max-height: calc(100vh - var(--headerHeight));
   width: 100%;
   height: 100%;
-}
-
-.product__carousel img {
-  border-radius: 3px;
 }
 
 .product__title {
@@ -937,14 +937,20 @@ a.pcard__info {
 }
 
 .product__meta {
-  grid-column: 8 / span 4;
+  grid-column: span 6;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: var(--margin);
 }
 
 .product__info {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
 }
 
 .product__buttons.available .product__atc-btn--disabled {

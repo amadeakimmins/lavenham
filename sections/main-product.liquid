@@ -23,21 +23,22 @@
         <p class="caption reveal">{{ product.metafields.custom.subheading }}</p>
       {% endif %}
 
-      {% assign pTitle = product.title | escape | split: " - " | first %}
-      <h2 class="product__title reveal">{{- pTitle -}}</h2>
+      <h2 class="product__title reveal">{{- product.title -}}</h2>
 
-      {% if product.description != blank %}
+      {%- comment -%}
+        {% if product.description != blank %}
         <div class="richtext reveal">
-          {{- product.description -}}
+        {{- product.description -}}
         </div>
-      {% endif %}
+        {% endif %}
+      {%- endcomment -%}
 
       <div id="price-{{ section.id }}" class="product__price no-js-hidden reveal">
         <p id="product__price-sale" class="caption" style="text-decoration: line-through; {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}display: none;{% endunless %}">
           {{ product.selected_or_first_available_variant.compare_at_price | money }}
         </p>
 
-        <p id="product__price-og" class="caption">{{ product.selected_or_first_available_variant.price | money }}</p>
+        <p id="product__price-og">{{ product.selected_or_first_available_variant.price | money }}</p>
       </div>
     </div>
 
@@ -114,8 +115,6 @@
         <div class="product__errors" data-ajax-cart-messages="form"></div>
       </div>
     </form>
-
-    <p class="caption text-fade reveal">{{ section.settings.copy_under_atc_button }}</p>
   </div>
 
   <script>
@@ -135,8 +134,7 @@
       let price = '';
       let salePrice = '';
       let sale = false;
-      let avail = false;{% for v in product.variants %}
-        if (
+      let avail = false;{% for v in product.variants %}if (
           option1 === "{{ v.option1 }}"{% if product.options[1] %} && option2 === "{{ v.option2 }}"{% endif %}{% if product.options[2] %} && option3 === "{{ v.option3 }}"{% endif %}
         ) {
           id = {{ v.id }};
@@ -178,14 +176,7 @@
     },
     "class": "product-container",
     "limit": 1,
-    "settings": [
-      {
-        "type": "text",
-        "label": "Copy under ATC button",
-        "id": "copy_under_atc_button",
-        "default": "Order 12+ for free shipping"
-      }
-    ],
+    "settings": [],
     "blocks": [
       {
         "type": "@app"

@@ -1,5 +1,5 @@
 <div class="card pcard" aria-label="{{- product.title -}}" id="pcard--{{ product.id }}">
-
+  <a href="{{ product.url | default: '#' }}" class="pcard__link"></a>
   <div class="card__image{% if product.media.size > 1 %} card__image--has-secondary {% endif %}">
     <div>
       <div class="product-card__primary-media">
@@ -115,9 +115,11 @@
     {% endif %}
   </div>
 
-  <a href="{{ product.url | default: '#' }}" class="pcard__info">
+  <div class="pcard__info">
     <p class="h4">{{- product.title -}}</p>
     {% if product.metafields.custom.subheading != blank %}
       <p class="caption">{{ product.metafields.custom.color }}</p>
-    {% endif %}<p class="product-card__regular-price caption" data-price="{{ product.price }}">{{ product.price | money }}</p></a>
+    {% endif %}
+    <p class="product-card__regular-price caption" data-price="{{ product.price }}">{{ product.price | money }}</p>
+  </div>
 </div>

@@ -441,7 +441,8 @@ body {
   overflow: hidden;
 } */
 
-body[data-template='index'] main {
+body[data-template='index'] main,
+body[data-template='product'] main {
   padding-top: 0;
 }
 
