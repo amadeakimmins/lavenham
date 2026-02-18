@@ -11,12 +11,18 @@
   "sections": {
     "main": {
       "type": "main-product",
+      "settings": {}
+    },
+    "section_related_products_DWnUwX": {
+      "type": "section-related-products",
+      "name": "Product Recommendations",
       "settings": {
-        "copy_under_atc_button": "Order 12+ for free shipping"
+        "heading": "You may also like"
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "section_related_products_DWnUwX"
   ]
 }
