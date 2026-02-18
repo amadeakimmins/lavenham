@@ -1,48 +1,25 @@
 {% if product.id != blank %}
-  <section class="product-recommendations container">
+  <section class="product-recommendations" data-product-recommendations data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4">
+
     {% if section.settings.heading != blank %}
-      <h2 class="product-recommendations__title text-base">{{- section.settings.heading -}}</h2>
+      <h2 class="product-recommendations__title text-base">
+        {{ section.settings.heading }}
+      </h2>
     {% endif %}
 
-    <div class="product-recommendations__grid" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4">
-
-      <div class="product-recommendations__swiper">
-        <div class="swiper" id="swiper-product-recommendations">
-          <div class="swiper-wrapper">
-            {%- if recommendations.performed and recommendations.products_count > 0 -%}
-              {% for product in recommendations.products %}
-                <div class="product-recommendations__card swiper-slide">
-                  {% render "product-card", product: product %}
-                </div>
-              {% endfor %}
-            {%- endif -%}
-          </div>
+    <div class="product-recommendations__swiper">
+      <div class="swiper" data-recommendation-swiper>
+        <div class="swiper-wrapper">
+          {%- if recommendations.performed and recommendations.products_count > 0 -%}
+            {% for recommendation in recommendations.products %}
+              <div class="product-recommendations__card swiper-slide">
+                {% render "product-card", product: recommendation, showATC: false %}
+              </div>
+            {% endfor %}
+          {%- endif -%}
         </div>
       </div>
     </div>
-
-    <script>
-      const container = document.querySelector('#swiper-product-recommendations .swiper-wrapper');
-
-      const fetchRelatedProducts = () => {
-        const url = '{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4';
-
-        fetch(url).then(response => response.text()).then(html => {
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = html;
-
-          const productCards = tempDiv.querySelectorAll('.product-recommendations__card');
-
-          productCards.forEach(productCard => {
-            container.appendChild(productCard);
-          });
-        }).catch(error => {
-          console.error('Error fetching content:', error);
-        });
-      };
-
-      fetchRelatedProducts();
-    </script>
 
   </section>
 {% endif %}
@@ -51,6 +28,9 @@
   {
     "name": "Product Recommendations",
     "limit": 1,
+    "enabled_on": {
+      "templates": ["product"]
+    },
     "settings": [
       {
         "type": "header",

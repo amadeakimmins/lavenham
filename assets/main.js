@@ -126,60 +126,6 @@ var swiperFeaturedCollection = new Swiper(
   }
 );
 
-// LOAD MORE BUTTON
-function initLoadMore() {
-  const buttons = document.querySelectorAll('.js-load-more');
-  if (!buttons.length) return;
-
-  buttons.forEach(button => {
-    if (button.dataset.initialized) return;
-    button.dataset.initialized = true;
-
-    button.addEventListener('click', function () {
-      const nextUrl = button.dataset.nextUrl;
-      const containerSelector = button.dataset.container;
-
-      if (!nextUrl || !containerSelector) return;
-
-      const container = document.querySelector(containerSelector);
-      if (!container) return;
-
-      button.classList.add('is-loading');
-
-      fetch(nextUrl)
-        .then(response => response.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-
-          const newContainer = doc.querySelector(containerSelector);
-          const newButton = doc.querySelector('.js-load-more');
-
-          if (newContainer) {
-            container.insertAdjacentHTML(
-              'beforeend',
-              newContainer.innerHTML
-            );
-          }
-
-          if (newButton) {
-            button.dataset.nextUrl = newButton.dataset.nextUrl;
-          } else {
-            button.remove();
-          }
-        })
-        .finally(() => {
-          button.classList.remove('is-loading');
-        });
-    });
-  });
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  initLoadMore();
-});
-// END OF LOAD MORE BUTTON
-
 // Cart ATC FUNCTIONALITY
 const optionSelect = document.querySelector(
   '.pcard--cart [data-purchase-type-select]'
@@ -513,6 +459,57 @@ if (llVideos.length > 0) {
   });
 }
 
+// LOAD MORE BUTTON
+function initLoadMore() {
+  const buttons = document.querySelectorAll('.js-load-more');
+  if (!buttons.length) return;
+
+  buttons.forEach(button => {
+    if (button.dataset.initialized) return;
+    button.dataset.initialized = true;
+
+    button.addEventListener('click', function () {
+      const nextUrl = button.dataset.nextUrl;
+      const containerSelector = button.dataset.container;
+
+      if (!nextUrl || !containerSelector) return;
+
+      const container = document.querySelector(containerSelector);
+      if (!container) return;
+
+      button.classList.add('is-loading');
+
+      fetch(nextUrl)
+        .then(response => response.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+
+          const newContainer = doc.querySelector(containerSelector);
+          const newButton = doc.querySelector('.js-load-more');
+
+          if (newContainer) {
+            container.insertAdjacentHTML(
+              'beforeend',
+              newContainer.innerHTML
+            );
+          }
+
+          if (newButton) {
+            button.dataset.nextUrl = newButton.dataset.nextUrl;
+          } else {
+            button.remove();
+          }
+        })
+        .finally(() => {
+          button.classList.remove('is-loading');
+        });
+    });
+  });
+}
+
+// END OF LOAD MORE BUTTON
+
 // Account nav
 function handleAccountPageNav() {
   const pathname = window.location.pathname;
@@ -557,5 +554,83 @@ function handleAccountPageNav() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', handleAccountPageNav);
+function initProductRecommendations(context = document) {
+  const sections = context.querySelectorAll(
+    '[data-product-recommendations]'
+  );
+  if (!sections.length) return;
+
+  sections.forEach(section => {
+    if (section.dataset.loaded === 'true') return;
+
+    const url = section.dataset.url;
+    if (!url) return;
+
+    const wrapper = section.querySelector('.swiper-wrapper');
+    if (!wrapper) return;
+
+    fetch(url)
+      .then(res => res.text())
+      .then(html => {
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+
+        const newSlides = temp.querySelectorAll(
+          '.product-recommendations__card'
+        );
+        if (!newSlides.length) return;
+
+        wrapper.innerHTML = '';
+
+        newSlides.forEach(slide => {
+          wrapper.appendChild(slide);
+        });
+
+        initRecommendationSwiper(section);
+
+        section.dataset.loaded = 'true';
+      })
+      .catch(err => {
+        console.error('Recommendation fetch failed:', err);
+      });
+  });
+}
+
+function initRecommendationSwiper(section) {
+  const swiperEl = section.querySelector(
+    '[data-recommendation-swiper]'
+  );
+  if (!swiperEl) return;
+
+  if (swiperEl.swiper) {
+    swiperEl.swiper.destroy(true, true);
+  }
+
+  new Swiper(swiperEl, {
+    direction: 'horizontal',
+    slidesPerView: 1.2,
+    spaceBetween: 12,
+    slidesOffsetBefore: 16,
+    slidesOffsetAfter: 16,
+    breakpoints: {
+      768: {
+        slidesPerView: 4,
+        spaceBetween: 24,
+        slidesOffsetBefore: 0,
+        slidesOffsetAfter: 0
+      }
+    }
+  });
+}
+
 window.addEventListener('hashchange', handleAccountPageNav);
+
+document.addEventListener('DOMContentLoaded', function () {
+  initLoadMore();
+  handleAccountPageNav();
+  initProductRecommendations();
+});
+
+document.addEventListener('shopify:section:load', event => {
+  initProductRecommendations(event.target);
+});

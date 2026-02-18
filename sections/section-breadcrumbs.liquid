@@ -1,0 +1,36 @@
+<section class="breadcrumbs">
+  <nav class="breadcrumbs__wrapper text-small reveal" aria-label="Breadcrumb">
+
+    <a class="caption text-fade" href="/collections/all">Shop</a>
+
+    {% if collection %}
+      <span class="breadcrumbs__separator text-fade">/</span>
+      <a class="caption text-fade" href="{{ collection.url }}">{{ collection.title }}</a>
+
+    {% elsif product.collections.size > 0 %}
+      <span class="breadcrumbs__separator text-fade">/</span>
+      <a class="caption text-fade" href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+    {% endif %}
+
+    <span class="breadcrumbs__separator text-fade">/</span>
+
+    <span class="breadcrumbs__current caption" aria-current="page">{{ product.title }}</span>
+  </nav>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Breadcrumbs",
+    "limit": 1,
+    "enabled_on": {
+      "templates": ["product"]
+    },
+    "settings": [],
+    "presets": [
+      {
+        "name": "Breadcrumbs"
+      }
+    ]
+  }
+{% endschema %}

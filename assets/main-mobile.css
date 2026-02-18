@@ -152,8 +152,10 @@
   .product {
     display: flex;
     flex-direction: column;
-    padding-left: 16px;
-    padding-right: 16px;
+  }
+
+  .product__meta {
+    max-width: 100%;
   }
 
   .product__carousel {
