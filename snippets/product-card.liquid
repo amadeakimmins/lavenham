@@ -1,5 +1,5 @@
 <div class="card pcard" aria-label="{{- product.title -}}" id="pcard--{{ product.id }}">
-  <a href="{{ product.url | default: '#' }}" class="pcard__link"></a>
+  <a href="{{ product.url | within: collection | default: '#' }}" class="pcard__link"></a>
   <div class="card__image{% if product.media.size > 1 %} card__image--has-secondary {% endif %}">
     <div>
       <div class="product-card__primary-media">
