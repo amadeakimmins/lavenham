@@ -408,7 +408,7 @@ footer {
   align-items: flex-start;
   bottom: 32px;
   left: var(--margin);
-  gap: 16px;
+  gap: 8px;
 }
 
 .banner__content {

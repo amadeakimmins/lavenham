@@ -334,6 +334,10 @@ body.nav-active::before {
     overflow: hidden;
   }
 
+  .announcement-bar-visible .mobile-nav {
+    top: 28px;
+  }
+
   .mobile-nav.is-active {
     transform: translateX(0);
   }
@@ -351,7 +355,6 @@ body.nav-active::before {
     padding: 84px 16px 32px;
     box-sizing: border-box;
     overflow-y: auto;
-
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.77, 0, 0.18, 1);
     background: var(--white);
@@ -422,7 +425,22 @@ body.nav-active::before {
     max-width: 300px;
   }
 
-  .mobile-toggle,
+  .mobile-nav-wrapper.mobile {
+    flex: 1;
+    display: flex;
+    gap: 16px;
+  }
+
+  .mobile-nav-wrapper .header__search-button {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mobile-nav-wrapper .header__search-button svg {
+    width: 100%;
+    height: 100%;
+  }
+
   .header__secondary {
     flex: 1;
   }
