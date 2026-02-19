@@ -1,0 +1,8 @@
+<div class="quote-block block-container">
+  {%- if block.content != blank -%}
+    <div class="rte reveal">{{- block.content | metafield_tag -}}</div>
+  {%- endif -%}
+  {%- if block.author != blank -%}
+    <p class="reveal">{{- block.author -}}</p>
+  {%- endif -%}
+</div>

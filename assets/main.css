@@ -200,6 +200,19 @@ p {
   padding-bottom: 40px;
 }
 
+.rte p,
+.rte h1,
+.rte h2,
+.rte h3,
+.rte h4,
+.rte h5 {
+  margin-bottom: 12px;
+}
+
+.rte p:last-of-type {
+  margin-bottom: 0;
+}
+
 /* End of Generic pages */
 
 /* BUTTON STYLES */
@@ -1160,7 +1173,38 @@ footer {
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
+
+.article-card__tags {
+  display: flex;
+  gap: 12px;
+}
+
+.article__content {
+  max-width: 726px;
+  margin: 0 auto;
+  padding: 60px var(--margin);
+}
+
+.article__introduction {
+  padding-bottom: 60px;
+}
+
+.block-container {
+  padding: 60px 0;
+}
 /* End of Article */
+
+/* Video block */
+.video-block iframe {
+  width: 100%;
+  aspect-ratio: 1.8;
+}
+
+/* Product block */
+.product-block {
+  max-width: 50%;
+  margin: 0 auto;
+}
 
 /* Richtext */
 .richtext {
@@ -1181,18 +1225,16 @@ footer {
 /* End of Richtext */
 
 /* Image Block */
-.image-block {
-  max-width: 726px;
-  margin: 0 auto;
-  padding: 60px 0;
-}
-
-.portrait .aspectholder {
+.image-block .aspectholder {
   aspect-ratio: 0.88;
 }
 
-.landscape .aspectholder {
+.image-block .landscape .aspectholder {
   aspect-ratio: 1.45;
+}
+
+.image-block--two-images .aspectholder {
+  aspect-ratio: 0.84;
 }
 
 .image-block--two-images {

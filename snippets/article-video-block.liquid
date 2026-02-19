@@ -1,0 +1,18 @@
+{% if video_block and video_block.vimeo_link != blank %}
+
+  {% assign vimeo_url = video_block.vimeo_link %}
+  {% assign vimeo_id = vimeo_url | split: '/' | last | split: '?' | first %}
+
+  <div class="video-block block-container">
+    <div class="video-block__wrapper">
+      <iframe src="https://player.vimeo.com/video/{{ vimeo_id }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    {% if video_block.caption != blank %}
+      <p class="video-block__caption">
+        {{ video_block.caption }}
+      </p>
+    {% endif %}
+  </div>
+
+{% endif %}

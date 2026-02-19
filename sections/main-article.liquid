@@ -1,84 +1,85 @@
 <section class="article">
   <div class="article__intro-wrapper reveal">
+    <div class="article__meta">
+      <div class="article-card__tags">
+        {% for tag in article.tags %}
+          <a class="caption" href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article-tag">{{ tag | replace: '-', ' ' | capitalize }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+
     <h2 class="article__title text-black">{{- article.title | escape -}}</h2>
 
     <div class="article__meta-description text-fade">
       {{- article.excerpt -}}
     </div>
-
-    {%- comment -%}
-      <div class="article__meta">
-      <div class="article-card__tags">
-      {% for tag in article.tags %}
-      <a class="caption" href="{{ blog.url }}/tagged/{{ tag }}" class="article-tag">{{ tag | replace: '-', ' ' | capitalize }}</a>
-      {% endfor %}
-      </div>
-      </div>
-    {%- endcomment -%}
   </div>
 
   <div class="article__image reveal">
     {%- render "media-img", media: article.image -%}
   </div>
 
-  {%- comment -%}
-    Content builder
-  {%- endcomment -%}
-  {% assign content_blocks = article.metafields.custom.blog_post_content_builder.value %}
+  <div class="article__content">
+    {% if article.content != blank %}
+      <div class="article__introduction">
+        {{- article.content -}}
+      </div>
+    {% endif %}
 
-  {% for block in content_blocks %}
-    {% case block.type.value %}
-      {% when "RichtextBlock" %}
-        {% render 'article-richtext-block', block: block %}
-      {% when "ImageBlock" %}
-        {% render 'article-image-block', block: block %}
-    {% endcase %}
-  {% endfor %}
+    {% for block in article.metafields.custom.content_blocks.value %}
+      {% case block.system.type %}
+
+        {% when 'text_block' %}
+          {% render 'article-text-block', block: block %}
+
+        {% when 'quote_block' %}
+          {% render 'article-quote-block', block: block %}
+
+        {% when 'video_block' %}
+          {% render 'article-video-block', block: block %}
+
+        {% when 'single_image_block' %}
+          {% render 'article-single-image-block', block: block %}
+
+        {% when 'double_image_block' %}
+          {% render 'article-double-image-block', block: block %}
+
+        {% when 'product_block' %}
+          {% render 'article-product-block', block: block %}
+
+      {% endcase %}
+    {% endfor %}
+
+  </div>
 
 
-  {%- comment -%}
-    Related Articles
-  {%- endcomment -%}
   {% assign related_articles_count = 0 %}
   {% assign max_related = 3 %}
 
   {% if article.tags.size > 0 %}
-
     <section class="article-related">
       <h2 class="article-related__title text-base">Read more</h2>
-
       <div class="article-related__grid">
-
         {% for tag in article.tags %}
           {% for related in blog.articles %}
             {% if related.id != article.id and related.tags contains tag %}
-
               {% unless related_articles contains related %}
-
                 {% render 'article-card', article: related %}
-
                 {% assign related_articles_count = related_articles_count | plus: 1 %}
-
                 {% if related_articles_count >= max_related %}
                   {% break %}
                 {% endif %}
-
               {% endunless %}
-
             {% endif %}
           {% endfor %}
-
           {% if related_articles_count >= max_related %}
             {% break %}
           {% endif %}
         {% endfor %}
-
       </div>
     </section>
-
   {% endif %}
-
-
 </section>
 
 

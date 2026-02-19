@@ -1,0 +1,5 @@
+<div class="product-block block-container">
+  {%- if block.product != blank -%}
+    {% render 'product-card', product: block.product.value, showATC: false %}
+  {%- endif -%}
+</div>

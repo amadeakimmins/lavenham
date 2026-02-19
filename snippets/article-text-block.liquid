@@ -1,0 +1,5 @@
+<div class="text-block block-container">
+  {%- if block.content != blank -%}
+    <div class="text-block__body rte reveal">{{- block.content | metafield_tag -}}</div>
+  {%- endif -%}
+</div>

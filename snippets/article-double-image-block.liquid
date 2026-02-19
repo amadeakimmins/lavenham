@@ -1,0 +1,8 @@
+<div class="image-block image-block--two-images block-container">
+  <a href="{{ block.link_one_url }}" class="image-block__image-wrapper portrait reveal">
+    {% render 'media-img', media: block.image_one.value %}
+  </a>
+  <a href="{{ block.link_two_url }}" class="image-block__image-wrapper-two portrait reveal">
+    {% render 'media-img', media: block.image_two.value %}
+  </a>
+</div>
