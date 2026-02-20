@@ -5,9 +5,7 @@
     <ul>
       {% for child in link.links %}
         <li>
-          <a class="text-base" href="{{ child.url }}">
-            {{ child.title }}
-          </a>
+          <a class="text-base" href="{{ child.url }}">{{ child.title }}</a>
         </li>
       {% endfor %}
     </ul>
@@ -19,9 +17,7 @@
       <ul>
         {% for highlight in panel.highlight_collections.value %}
           <li>
-            <a class="text-base" href="{{ highlight.url }}">
-              {{ highlight.title }}
-            </a>
+            <a class="text-base" href="{{ highlight.url }}">{{ highlight.title }}</a>
           </li>
         {% endfor %}
       </ul>

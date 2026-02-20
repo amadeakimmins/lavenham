@@ -32,6 +32,95 @@
   --baseFontSize: 16px;
   --baseFontFamily: 'Gill Sans';
   --borderRadius: 12px;
+
+  /* PDP Colour options */
+  --sable-black: var(--black);
+  --lamp-black: var(--black);
+  --black-ink: var(--black);
+  --black-pearl: var(--black);
+  --black-onyx: var(--black);
+  --dark-charcoal: var(--black);
+  --pure-black: var(--black);
+  --true-black: var(--black);
+  --blue: #2a3a5a;
+  --suffolk-navy: #2a3a5a;
+  --harbour-blue: #2a3a5a;
+  --tapestry-blue: var(--blue);
+  --navy-wool: var(--blue);
+  --dark-navy: var(--blue);
+  --navy: var(--blue);
+  --blue: var(--blue);
+  --sky-blue: var(--blue);
+  --water-fountain: var(--blue);
+  --dark-blue: var(--blue);
+  --plum: var(--blue);
+  --royal-purple: var(--blue);
+  --shadow-sax: var(--blue);
+  --pale-aqua: var(--blue);
+  --classic-navy: var(--blue);
+  --shadow-blue: var(--blue);
+  --blue-melange: var(--blue);
+  --taupe: #b69d72;
+  --brown: #9d684f;
+  --cork: var(--brown);
+  --floral-brown: var(--brown);
+  --chocolate: var(--brown);
+  --penines: var(--brown);
+  --breen: var(--brown);
+  --tobacco: var(--brown);
+  --cumin: var(--brown);
+  --dirty-dirty-base: var(--brown);
+  --green: #626c63;
+  --olive-green: var(--green);
+  --oliver-green: var(--green);
+  --green-sward: var(--green);
+  --seaspray-green: var(--green);
+  --olive: var(--green);
+  --dark-olive: var(--green);
+  --dark-olive-green: var(--green);
+  --dark-lovat: var(--green);
+  --army: var(--green);
+  --khaki: var(--green);
+  --ash-green: var(--green);
+  --olive-drab: var(--green);
+  --leaf-green: var(--green);
+  --khaki-brown: var(--green);
+  --bottle-green: var(--green);
+  --blackwatch: var(--green);
+  --red: #8d343b;
+  --brick: var(--red);
+  --pink: var(--red);
+  --dead-rose: var(--red);
+  --tabasco: var(--red);
+  --yellow: #daa85c;
+  --york-yellow: var(--yellow);
+  --mustard: var(--yellow);
+  --ochre: var(--yellow);
+  --dry-turf: var(--yellow);
+  --light-grey: #c5c5c2;
+  --moonbeam-silver: var(--light-grey);
+  --charcoal: var(--light-grey);
+  --marl: var(--light-grey);
+  --grey-marl: var(--light-grey);
+  --silver-fog: var(--light-grey);
+  --solid-grey: var(--light-grey);
+  --ash: var(--light-grey);
+  --heather-grey: var(--light-grey);
+  --regent-grey: var(--light-grey);
+  --dark-grey: var(--light-grey);
+  --vulcan: var(--light-grey);
+  --neutrals: #f2efe8;
+  --beige: var(--neutrals);
+  --floral-cream: var(--neutrals);
+  --ecru: var(--neutrals);
+  --clay: var(--neutrals);
+  --natural-clay: var(--neutrals);
+  --kinari: var(--neutrals);
+  --smoky-beige: var(--neutrals);
+  --amber-beige: var(--neutrals);
+  --natural-beige: var(--neutrals);
+  --off-white: #f4f4f4;
+  --white-cliffs: var(--neutrals);
 }
 
 .text--white {
@@ -200,7 +289,10 @@ p {
   padding-bottom: 40px;
 }
 
-.rte p,
+.rte p {
+  margin-bottom: 20px;
+}
+
 .rte h1,
 .rte h2,
 .rte h3,
@@ -950,8 +1042,30 @@ footer {
   height: 100%;
 }
 
-.product__title {
-  margin: 4px 0 12px;
+.product__carousel-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.product__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--black);
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.product__dot.is-active {
+  background: var(--black);
 }
 
 .product__meta {
@@ -962,6 +1076,9 @@ footer {
   max-width: 400px;
   margin: 0 auto;
   padding: var(--margin);
+  position: sticky;
+  top: 250px;
+  align-self: start;
 }
 
 .product__info {
@@ -969,6 +1086,11 @@ footer {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+  margin-bottom: 12px;
+}
+
+.product__description {
+  margin-bottom: 24px;
 }
 
 .product__buttons.available .product__atc-btn--disabled {
@@ -983,7 +1105,7 @@ footer {
 }
 
 .product__variant-title {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .product__variants {
@@ -995,6 +1117,20 @@ footer {
 .product__variant-pills {
   display: flex;
   gap: 8px;
+}
+
+.variant-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: var(--tShort);
+}
+
+.variant-swatch.active {
+  border-color: var(--black);
 }
 
 .variant-pill {
@@ -1044,9 +1180,106 @@ footer {
   padding: 16px;
 }
 
-.product__price {
-  margin-top: 16px;
-  margin-bottom: 28px;
+/* Product Modals */
+.product__modals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 20px 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product__modals-list li {
+  line-height: normal;
+}
+
+.product__modal-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.product__modal-trigger:hover {
+  opacity: 0.6;
+}
+
+.product__modal {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  margin: 16px;
+  width: 480px;
+  height: calc(100vh - 32px);
+  z-index: 9999;
+  transition: right 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--black);
+}
+
+.product__modal.is-open {
+  right: 0;
+}
+
+.product__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.product__modal.is-open .product__modal-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.product__modal-content {
+  position: relative;
+  z-index: 2;
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+}
+
+.product__modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--black);
+  padding: 16px;
+  min-height: 59px;
+}
+
+.product__modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  width: 16px;
+  height: 16px;
+}
+
+.product__modal-close:hover {
+  opacity: 0.6;
+}
+
+.product__modal-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 /* End of Product */
 

@@ -70,7 +70,7 @@ if (stagger.length > 0) {
 
 /* Swiper Initialiser */
 const swiperContainerP = document.getElementsByClassName(
-  'carousel_product'
+  'carousel_product_mobile'
 );
 for (var i = 0; i < swiperContainerP.length; i++) {
   swiperContainerP[i].classList.add('swiperP' + i);

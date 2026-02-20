@@ -29,18 +29,29 @@ class MegaNavigation {
     });
 
     // --- HOVER (DESKTOP ONLY) ---
+    // --- HOVER (DESKTOP ONLY) ---
     if (
       window.matchMedia('(hover: hover) and (pointer: fine)').matches
     ) {
-      this.triggers.forEach(trigger => {
-        trigger.addEventListener('mouseenter', () => {
-          if (this.isMobileOpen) return;
+      this.nav.addEventListener('mouseover', e => {
+        if (this.isMobileOpen) return;
 
-          const handle = trigger.dataset.navTrigger;
+        const navItem = e.target.closest('.nav__item');
+        if (!navItem || !this.nav.contains(navItem)) return;
 
-          this.clearCloseTimeout();
+        this.clearCloseTimeout();
+
+        const trigger = navItem.querySelector('[data-nav-trigger]');
+        const handle = trigger?.dataset.navTrigger;
+        const panel = handle
+          ? document.getElementById(`panel-${handle}`)
+          : null;
+
+        if (panel) {
           this.open(handle);
-        });
+        } else {
+          this.closeAll();
+        }
       });
 
       const panelsContainer =
@@ -253,7 +264,9 @@ class HeaderSearch {
 
   init() {
     this.inputs = document.querySelectorAll('.header__search-input');
-    this.resultsContainers = document.querySelectorAll('[data-predictive-search]');
+    this.resultsContainers = document.querySelectorAll(
+      '[data-predictive-search]'
+    );
 
     if (!this.inputs.length || !this.resultsContainers.length) return;
 
@@ -268,34 +281,34 @@ class HeaderSearch {
 
   async handleInput(e) {
     const query = e.target.value.trim();
-  
+
     if (query.length < 2) {
       this.clearResults();
       return;
     }
-  
+
     if (this.abortController) {
       this.abortController.abort();
     }
-  
+
     this.abortController = new AbortController();
-  
+
     try {
       const response = await fetch(
-        `/search/suggest?q=${encodeURIComponent(query)}&section_id=predictive-search&resources[type]=product&resources[limit]=20`,
+        `/search/suggest?q=${encodeURIComponent(
+          query
+        )}&section_id=predictive-search&resources[type]=product&resources[limit]=20`,
         { signal: this.abortController.signal }
       );
-  
+
       const html = await response.text();
       this.renderResults(html);
-  
     } catch (err) {
       if (err.name !== 'AbortError') {
         console.error('Predictive search error:', err);
       }
     }
   }
-  
 
   renderResults(html) {
     this.resultsContainers.forEach(container => {

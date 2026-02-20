@@ -1,5 +1,19 @@
 <section class="product">
-  <div class="product__carousel swiper-container carousel_product reveal">
+  <div class="product__carousel carousel_product reveal desktop" role="region" aria-label="Product gallery" aria-expanded="false">
+    {% for image in product.images %}
+      <div class="product__carousel-item" id="img-{{ forloop.index0 }}">
+        {% render "media-img", media: image %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="product__carousel-dots desktop">
+    {% for image in product.images %}
+      <button class="product__dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Go to image {{ forloop.index }}"></button>
+    {% endfor %}
+  </div>
+
+  <div class="product__carousel swiper-container carousel_product carousel_product_mobile reveal mobile">
     <div class="swiper-wrapper">
       {%- for image in product.images -%}
         <div class="swiper-slide">
@@ -18,28 +32,21 @@
   </div>
 
   <div class="product__meta">
-    <div class="product__info">
-      {% if product.metafields.custom.subheading != blank %}
-        <p class="caption reveal">{{ product.metafields.custom.subheading }}</p>
-      {% endif %}
+    <div class="product__content">
+      <div class="product__info">
+        <h2 class="product__title reveal">{{- product.title -}}</h2>
 
-      <h2 class="product__title reveal">{{- product.title -}}</h2>
+        <div id="price-{{ section.id }}" class="product__price no-js-hidden reveal">
+          <p id="product__price-sale" class="caption" style="text-decoration: line-through; {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}display: none;{% endunless %}">
+            {{ product.selected_or_first_available_variant.compare_at_price | money }}
+          </p>
 
-      {%- comment -%}
-        {% if product.description != blank %}
-        <div class="richtext reveal">
-        {{- product.description -}}
+          <p id="product__price-og">{{ product.selected_or_first_available_variant.price | money }}</p>
         </div>
-        {% endif %}
-      {%- endcomment -%}
-
-      <div id="price-{{ section.id }}" class="product__price no-js-hidden reveal">
-        <p id="product__price-sale" class="caption" style="text-decoration: line-through; {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}display: none;{% endunless %}">
-          {{ product.selected_or_first_available_variant.compare_at_price | money }}
-        </p>
-
-        <p id="product__price-og">{{ product.selected_or_first_available_variant.price | money }}</p>
       </div>
+      {% if product.metafields.custom.small_description != blank %}
+        <p class="product__description reveal text-fade">{{ product.metafields.custom.small_description }}</p>
+      {% endif %}
     </div>
 
     <form id="product-form" class="product__form" action="/cart/add" method="post">
@@ -52,37 +59,46 @@
         {% if product.variants.size > 1 %}
           {%- for option in product.options_with_values -%}
             <div class="product__variant">
-              <p class="product__variant-title caption">{{ option.name }}:</p>
+              {% if option.name == 'Color' or option.name == 'Colour' %}
+
+                <p class="product__variant-title">
+                  {{ option.name }}:
+                  <span id="active-color-label">
+                    {{ product.selected_or_first_available_variant.option1 }}
+                  </span>
+                </p>
+
+              {% else %}
+
+                <p class="product__variant-title">
+                  {{ option.name }}:
+                </p>
+
+              {% endif %}
 
               <div class="product__variant-pills" data-option-position="{{ option.position }}">
-                {% for value in option.values %}
-                  <button type="button" class="variant-pill caption{% if forloop.first %} active{% endif %}" data-value="{{ value | escape }}" onclick="changeSelect(this)">
-                    {{ value }}
-                  </button>
-                {% endfor %}
-              </div>
 
-              {%- comment -%}
-                <div class="product__variant-select">
-                <select
-                id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-                class=""
-                onchange="changeSelect(this)"
-                >
-                {%- for value in option.values -%}
-                <option
-                class=""
-                value="{{ value | escape }}"
-                aria-label="{{ value | escape }}"
-                >
-                {{- value | escape -}}
-                </option>
-                {%- endfor -%}
-                </select>
-                </div>
-              {%- endcomment -%}
+                {% if option.name == 'Color' or option.name == 'Colour' %}
+
+                  {% for value in option.values %}
+                    {% assign handle = value | handleize %}
+                    <button type="button" class="variant-swatch{% if forloop.first %} active{% endif %}" data-value="{{ value | escape }}" onclick="changeSelect(this)" aria-label="{{ value }}" style="background-color: var(--{{ handle }});"></button>
+                  {% endfor %}
+
+                {% else %}
+
+                  {% for value in option.values %}
+                    <button type="button" class="variant-pill caption{% if forloop.first %} active{% endif %}" data-value="{{ value | escape }}" onclick="changeSelect(this)">
+                      {{ value }}
+                    </button>
+                  {% endfor %}
+
+                {% endif %}
+
+              </div>
             </div>
           {%- endfor -%}
+
         {% endif %}
       </div>
 
@@ -115,15 +131,81 @@
         <div class="product__errors" data-ajax-cart-messages="form"></div>
       </div>
     </form>
+
+    {% if product.metafields.custom.detail_modals != blank %}
+      <div class="product__modals">
+        <ul class="product__modals-list">
+          {% for modal in product.metafields.custom.detail_modals.value %}
+            <li>
+              <button class="product__modal-trigger text-fade text-base" data-modal-target="modal-{{ forloop.index }}">
+                {{ modal.title }}
+              </button>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
   </div>
 
+  {% if product.metafields.custom.detail_modals != blank %}
+    {% for modal in product.metafields.custom.detail_modals.value %}
+      <div id="modal-{{ forloop.index }}" class="product__modal" aria-hidden="true">
+        <div class="product__modal-overlay" data-close-modal></div>
+        <div class="product__modal-content">
+          <div class="product__modal-header">
+            <h2 class="caption">{{ modal.title }}</h2>
+            <button class="product__modal-close button--link" data-close-modal>{% render 'icon-cross' %}</button>
+          </div>
+          <div class="product__modal-body rte">
+            {{ modal.content | metafield_tag }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modalTriggers = document.querySelectorAll('.product__modal-trigger');
+      const modals = document.querySelectorAll('.product__modal');
+      const closeButtons = document.querySelectorAll('[data-close-modal]');
+
+      modalTriggers.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = document.getElementById(btn.dataset.modalTarget);
+          if (target) {
+            target.classList.add('is-open');
+          }
+
+          document.body.classList.add('modal-open');
+        });
+      });
+
+      closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          modals.forEach(m => m.classList.remove('is-open'));
+          document.body.classList.remove('modal-open');
+        });
+      });
+    });
+
     function changeSelect(clickedBtn) {
 
 // Remove 'active' from siblings and add to clicked
       const parentGroup = clickedBtn.closest('.product__variant-pills');
       parentGroup.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
       clickedBtn.classList.add('active');
+
+// Update visible color label
+      const activeColorLabel = document.getElementById('active-color-label');
+
+      if (activeColorLabel) {
+        const isColorGroup = parentGroup.previousElementSibling ?. textContent.toLowerCase().includes('color');
+
+        if (isColorGroup) {
+          activeColorLabel.textContent = clickedBtn.dataset.value;
+        }
+      }
 
 // Get current selected values from all option groups
       const option1 = document.querySelector('[data-option-position="1"] .active') ?. dataset.value || '';
@@ -165,6 +247,49 @@
         priceSale.style.display = "none";
       } priceOg.innerHTML = price;
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousel = document.querySelector('.carousel_product.desktop');
+      const dots = document.querySelectorAll('.product__dot');
+      const items = document.querySelectorAll('.product__carousel-item');
+
+      if (! carousel || ! dots.length) {
+        return;
+      }
+
+// Click → scroll
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const index = dot.dataset.index;
+          const target = document.getElementById(`img-${index}`);
+          if (! target) {
+            return;
+          }
+
+          target.scrollIntoView({behavior: 'smooth', block: 'start'});
+        });
+      });
+
+// Scroll → update active dot
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const index = entry.target.id.replace('img-', '');
+
+            dots.forEach(dot => dot.classList.remove('is-active'));
+            const activeDot = document.querySelector(`.product__dot[data-index="${index}"]`);
+            if (activeDot) {
+              activeDot.classList.add('is-active');
+            }
+          }
+        });
+      }, {
+        root: null,
+        threshold: 0.6
+      });
+
+      items.forEach(item => observer.observe(item));
+    });
   </script>
 </section>
 

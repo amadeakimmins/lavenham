@@ -321,7 +321,7 @@ body.nav-active::before {
    Mobile Layout
 ================================ */
 
-@media (max-width: 990px) {
+@media (max-width: 1024px) {
   .mobile-nav {
     position: fixed;
     inset: 0;

@@ -156,6 +156,8 @@
 
   .product__meta {
     max-width: 100%;
+    position: relative;
+    top: unset;
   }
 
   .product__carousel {
